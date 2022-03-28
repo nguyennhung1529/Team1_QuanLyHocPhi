@@ -29,24 +29,24 @@ namespace QuanLyHocPhi
         /// </summary>
         private void InitializeComponent()
         {
-            this.cbohocky = new System.Windows.Forms.ComboBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cbotinhtrang = new System.Windows.Forms.ComboBox();
-            this.txttkmsv = new System.Windows.Forms.TextBox();
-            this.chktinhtrang = new System.Windows.Forms.CheckBox();
-            this.chkmsv = new System.Windows.Forms.CheckBox();
-            this.chkhocky = new System.Windows.Forms.CheckBox();
-            this.txttknamhoc = new System.Windows.Forms.TextBox();
-            this.chknamhoc = new System.Windows.Forms.CheckBox();
-            this.btntimkiem = new System.Windows.Forms.Button();
-            this.txtnguoicapnhat = new System.Windows.Forms.TextBox();
-            this.txtngaycapnhat = new System.Windows.Forms.TextBox();
-            this.txtconno = new System.Windows.Forms.TextBox();
-            this.txtcandong = new System.Windows.Forms.TextBox();
-            this.txtmiengiam = new System.Windows.Forms.TextBox();
-            this.txtmalop = new System.Windows.Forms.TextBox();
-            this.txtmsv = new System.Windows.Forms.TextBox();
-            this.txtnamhoc = new System.Windows.Forms.TextBox();
+            this.cboTKHocKy = new System.Windows.Forms.ComboBox();
+            this.grpBoxTimKiem = new System.Windows.Forms.GroupBox();
+            this.cboTKTinhTrang = new System.Windows.Forms.ComboBox();
+            this.txtTKMaSV = new System.Windows.Forms.TextBox();
+            this.chkTKTinhTrang = new System.Windows.Forms.CheckBox();
+            this.chkTKMaSV = new System.Windows.Forms.CheckBox();
+            this.chkTKHocKy = new System.Windows.Forms.CheckBox();
+            this.txtTKNamHoc = new System.Windows.Forms.TextBox();
+            this.chkTKNamHoc = new System.Windows.Forms.CheckBox();
+            this.btnTimkiem = new System.Windows.Forms.Button();
+            this.txtNguoiCapNhat = new System.Windows.Forms.TextBox();
+            this.txtNgayCapNhat = new System.Windows.Forms.TextBox();
+            this.txtConNo = new System.Windows.Forms.TextBox();
+            this.txtCanDong = new System.Windows.Forms.TextBox();
+            this.txtMienGiam = new System.Windows.Forms.TextBox();
+            this.txtMaL = new System.Windows.Forms.TextBox();
+            this.txtMaSV = new System.Windows.Forms.TextBox();
+            this.txtNamHoc = new System.Windows.Forms.TextBox();
             this.lblnguoicapnhat = new System.Windows.Forms.Label();
             this.lblngaycapnhat = new System.Windows.Forms.Label();
             this.lblconno = new System.Windows.Forms.Label();
@@ -55,184 +55,184 @@ namespace QuanLyHocPhi
             this.lblmalop = new System.Windows.Forms.Label();
             this.lblmsv = new System.Windows.Forms.Label();
             this.lblhocky = new System.Windows.Forms.Label();
-            this.btnxemchitiet = new System.Windows.Forms.Button();
-            this.txthocky = new System.Windows.Forms.TextBox();
+            this.btnXemchitiet = new System.Windows.Forms.Button();
+            this.txtHocKy = new System.Windows.Forms.TextBox();
             this.lblnamhoc = new System.Windows.Forms.Label();
-            this.dtgthongkehocphi = new System.Windows.Forms.DataGridView();
+            this.DataGVThongKeHocPhi = new System.Windows.Forms.DataGridView();
             this.lbltkhp = new System.Windows.Forms.Label();
             this.btnThoat = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgthongkehocphi)).BeginInit();
+            this.grpBoxTimKiem.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGVThongKeHocPhi)).BeginInit();
             this.SuspendLayout();
             // 
-            // cbohocky
+            // cboTKHocKy
             // 
-            this.cbohocky.FormattingEnabled = true;
-            this.cbohocky.Items.AddRange(new object[] {
+            this.cboTKHocKy.FormattingEnabled = true;
+            this.cboTKHocKy.Items.AddRange(new object[] {
             "1",
             "2",
             "3"});
-            this.cbohocky.Location = new System.Drawing.Point(166, 87);
-            this.cbohocky.Name = "cbohocky";
-            this.cbohocky.Size = new System.Drawing.Size(165, 24);
-            this.cbohocky.TabIndex = 35;
+            this.cboTKHocKy.Location = new System.Drawing.Point(166, 87);
+            this.cboTKHocKy.Name = "cboTKHocKy";
+            this.cboTKHocKy.Size = new System.Drawing.Size(165, 24);
+            this.cboTKHocKy.TabIndex = 35;
             // 
-            // groupBox1
+            // grpBoxTimKiem
             // 
-            this.groupBox1.Controls.Add(this.cbotinhtrang);
-            this.groupBox1.Controls.Add(this.cbohocky);
-            this.groupBox1.Controls.Add(this.txttkmsv);
-            this.groupBox1.Controls.Add(this.chktinhtrang);
-            this.groupBox1.Controls.Add(this.chkmsv);
-            this.groupBox1.Controls.Add(this.chkhocky);
-            this.groupBox1.Controls.Add(this.txttknamhoc);
-            this.groupBox1.Controls.Add(this.chknamhoc);
-            this.groupBox1.Controls.Add(this.btntimkiem);
-            this.groupBox1.Location = new System.Drawing.Point(808, 350);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(350, 287);
-            this.groupBox1.TabIndex = 57;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Tìm kiếm";
+            this.grpBoxTimKiem.Controls.Add(this.cboTKTinhTrang);
+            this.grpBoxTimKiem.Controls.Add(this.cboTKHocKy);
+            this.grpBoxTimKiem.Controls.Add(this.txtTKMaSV);
+            this.grpBoxTimKiem.Controls.Add(this.chkTKTinhTrang);
+            this.grpBoxTimKiem.Controls.Add(this.chkTKMaSV);
+            this.grpBoxTimKiem.Controls.Add(this.chkTKHocKy);
+            this.grpBoxTimKiem.Controls.Add(this.txtTKNamHoc);
+            this.grpBoxTimKiem.Controls.Add(this.chkTKNamHoc);
+            this.grpBoxTimKiem.Controls.Add(this.btnTimkiem);
+            this.grpBoxTimKiem.Location = new System.Drawing.Point(808, 350);
+            this.grpBoxTimKiem.Name = "grpBoxTimKiem";
+            this.grpBoxTimKiem.Size = new System.Drawing.Size(350, 287);
+            this.grpBoxTimKiem.TabIndex = 57;
+            this.grpBoxTimKiem.TabStop = false;
+            this.grpBoxTimKiem.Text = "Tìm kiếm";
             // 
-            // cbotinhtrang
+            // cboTKTinhTrang
             // 
-            this.cbotinhtrang.FormattingEnabled = true;
-            this.cbotinhtrang.Items.AddRange(new object[] {
+            this.cboTKTinhTrang.FormattingEnabled = true;
+            this.cboTKTinhTrang.Items.AddRange(new object[] {
             "Còn nợ",
             "Đã đóng",
             "Dư tiền"});
-            this.cbotinhtrang.Location = new System.Drawing.Point(166, 191);
-            this.cbotinhtrang.Name = "cbotinhtrang";
-            this.cbotinhtrang.Size = new System.Drawing.Size(165, 24);
-            this.cbotinhtrang.TabIndex = 36;
+            this.cboTKTinhTrang.Location = new System.Drawing.Point(166, 191);
+            this.cboTKTinhTrang.Name = "cboTKTinhTrang";
+            this.cboTKTinhTrang.Size = new System.Drawing.Size(165, 24);
+            this.cboTKTinhTrang.TabIndex = 36;
             // 
-            // txttkmsv
+            // txtTKMaSV
             // 
-            this.txttkmsv.Location = new System.Drawing.Point(166, 140);
-            this.txttkmsv.Name = "txttkmsv";
-            this.txttkmsv.Size = new System.Drawing.Size(165, 22);
-            this.txttkmsv.TabIndex = 32;
+            this.txtTKMaSV.Location = new System.Drawing.Point(166, 140);
+            this.txtTKMaSV.Name = "txtTKMaSV";
+            this.txtTKMaSV.Size = new System.Drawing.Size(165, 22);
+            this.txtTKMaSV.TabIndex = 32;
             // 
-            // chktinhtrang
+            // chkTKTinhTrang
             // 
-            this.chktinhtrang.AutoSize = true;
-            this.chktinhtrang.Location = new System.Drawing.Point(47, 192);
-            this.chktinhtrang.Name = "chktinhtrang";
-            this.chktinhtrang.Size = new System.Drawing.Size(99, 21);
-            this.chktinhtrang.TabIndex = 31;
-            this.chktinhtrang.Text = "Tình trạng:";
-            this.chktinhtrang.UseVisualStyleBackColor = true;
+            this.chkTKTinhTrang.AutoSize = true;
+            this.chkTKTinhTrang.Location = new System.Drawing.Point(47, 192);
+            this.chkTKTinhTrang.Name = "chkTKTinhTrang";
+            this.chkTKTinhTrang.Size = new System.Drawing.Size(99, 21);
+            this.chkTKTinhTrang.TabIndex = 31;
+            this.chkTKTinhTrang.Text = "Tình trạng:";
+            this.chkTKTinhTrang.UseVisualStyleBackColor = true;
             // 
-            // chkmsv
+            // chkTKMaSV
             // 
-            this.chkmsv.AutoSize = true;
-            this.chkmsv.Location = new System.Drawing.Point(47, 140);
-            this.chkmsv.Name = "chkmsv";
-            this.chkmsv.Size = new System.Drawing.Size(113, 21);
-            this.chkmsv.TabIndex = 30;
-            this.chkmsv.Text = "Mã sinh viên:";
-            this.chkmsv.UseVisualStyleBackColor = true;
+            this.chkTKMaSV.AutoSize = true;
+            this.chkTKMaSV.Location = new System.Drawing.Point(47, 140);
+            this.chkTKMaSV.Name = "chkTKMaSV";
+            this.chkTKMaSV.Size = new System.Drawing.Size(113, 21);
+            this.chkTKMaSV.TabIndex = 30;
+            this.chkTKMaSV.Text = "Mã sinh viên:";
+            this.chkTKMaSV.UseVisualStyleBackColor = true;
             // 
-            // chkhocky
+            // chkTKHocKy
             // 
-            this.chkhocky.AutoSize = true;
-            this.chkhocky.Location = new System.Drawing.Point(47, 88);
-            this.chkhocky.Name = "chkhocky";
-            this.chkhocky.Size = new System.Drawing.Size(77, 21);
-            this.chkhocky.TabIndex = 29;
-            this.chkhocky.Text = "Học kỳ:";
-            this.chkhocky.UseVisualStyleBackColor = true;
+            this.chkTKHocKy.AutoSize = true;
+            this.chkTKHocKy.Location = new System.Drawing.Point(47, 88);
+            this.chkTKHocKy.Name = "chkTKHocKy";
+            this.chkTKHocKy.Size = new System.Drawing.Size(77, 21);
+            this.chkTKHocKy.TabIndex = 29;
+            this.chkTKHocKy.Text = "Học kỳ:";
+            this.chkTKHocKy.UseVisualStyleBackColor = true;
             // 
-            // txttknamhoc
+            // txtTKNamHoc
             // 
-            this.txttknamhoc.Location = new System.Drawing.Point(166, 36);
-            this.txttknamhoc.Name = "txttknamhoc";
-            this.txttknamhoc.Size = new System.Drawing.Size(165, 22);
-            this.txttknamhoc.TabIndex = 28;
+            this.txtTKNamHoc.Location = new System.Drawing.Point(166, 36);
+            this.txtTKNamHoc.Name = "txtTKNamHoc";
+            this.txtTKNamHoc.Size = new System.Drawing.Size(165, 22);
+            this.txtTKNamHoc.TabIndex = 28;
             // 
-            // chknamhoc
+            // chkTKNamHoc
             // 
-            this.chknamhoc.AutoSize = true;
-            this.chknamhoc.Location = new System.Drawing.Point(47, 36);
-            this.chknamhoc.Name = "chknamhoc";
-            this.chknamhoc.Size = new System.Drawing.Size(90, 21);
-            this.chknamhoc.TabIndex = 27;
-            this.chknamhoc.Text = "Năm học:";
-            this.chknamhoc.UseVisualStyleBackColor = true;
+            this.chkTKNamHoc.AutoSize = true;
+            this.chkTKNamHoc.Location = new System.Drawing.Point(47, 36);
+            this.chkTKNamHoc.Name = "chkTKNamHoc";
+            this.chkTKNamHoc.Size = new System.Drawing.Size(90, 21);
+            this.chkTKNamHoc.TabIndex = 27;
+            this.chkTKNamHoc.Text = "Năm học:";
+            this.chkTKNamHoc.UseVisualStyleBackColor = true;
             // 
-            // btntimkiem
+            // btnTimkiem
             // 
-            this.btntimkiem.Location = new System.Drawing.Point(222, 237);
-            this.btntimkiem.Name = "btntimkiem";
-            this.btntimkiem.Size = new System.Drawing.Size(98, 36);
-            this.btntimkiem.TabIndex = 8;
-            this.btntimkiem.Text = "Tìm kiếm";
-            this.btntimkiem.UseVisualStyleBackColor = true;
+            this.btnTimkiem.Location = new System.Drawing.Point(222, 237);
+            this.btnTimkiem.Name = "btnTimkiem";
+            this.btnTimkiem.Size = new System.Drawing.Size(98, 36);
+            this.btnTimkiem.TabIndex = 8;
+            this.btnTimkiem.Text = "Tìm kiếm";
+            this.btnTimkiem.UseVisualStyleBackColor = true;
             // 
-            // txtnguoicapnhat
+            // txtNguoiCapNhat
             // 
-            this.txtnguoicapnhat.Location = new System.Drawing.Point(711, 292);
-            this.txtnguoicapnhat.Name = "txtnguoicapnhat";
-            this.txtnguoicapnhat.ReadOnly = true;
-            this.txtnguoicapnhat.Size = new System.Drawing.Size(237, 22);
-            this.txtnguoicapnhat.TabIndex = 56;
+            this.txtNguoiCapNhat.Location = new System.Drawing.Point(711, 292);
+            this.txtNguoiCapNhat.Name = "txtNguoiCapNhat";
+            this.txtNguoiCapNhat.ReadOnly = true;
+            this.txtNguoiCapNhat.Size = new System.Drawing.Size(237, 22);
+            this.txtNguoiCapNhat.TabIndex = 56;
             // 
-            // txtngaycapnhat
+            // txtNgayCapNhat
             // 
-            this.txtngaycapnhat.Location = new System.Drawing.Point(711, 251);
-            this.txtngaycapnhat.Name = "txtngaycapnhat";
-            this.txtngaycapnhat.ReadOnly = true;
-            this.txtngaycapnhat.Size = new System.Drawing.Size(237, 22);
-            this.txtngaycapnhat.TabIndex = 55;
+            this.txtNgayCapNhat.Location = new System.Drawing.Point(711, 251);
+            this.txtNgayCapNhat.Name = "txtNgayCapNhat";
+            this.txtNgayCapNhat.ReadOnly = true;
+            this.txtNgayCapNhat.Size = new System.Drawing.Size(237, 22);
+            this.txtNgayCapNhat.TabIndex = 55;
             // 
-            // txtconno
+            // txtConNo
             // 
-            this.txtconno.Location = new System.Drawing.Point(711, 210);
-            this.txtconno.Name = "txtconno";
-            this.txtconno.ReadOnly = true;
-            this.txtconno.Size = new System.Drawing.Size(237, 22);
-            this.txtconno.TabIndex = 54;
+            this.txtConNo.Location = new System.Drawing.Point(711, 210);
+            this.txtConNo.Name = "txtConNo";
+            this.txtConNo.ReadOnly = true;
+            this.txtConNo.Size = new System.Drawing.Size(237, 22);
+            this.txtConNo.TabIndex = 54;
             // 
-            // txtcandong
+            // txtCanDong
             // 
-            this.txtcandong.Location = new System.Drawing.Point(711, 169);
-            this.txtcandong.Name = "txtcandong";
-            this.txtcandong.ReadOnly = true;
-            this.txtcandong.Size = new System.Drawing.Size(237, 22);
-            this.txtcandong.TabIndex = 53;
+            this.txtCanDong.Location = new System.Drawing.Point(711, 169);
+            this.txtCanDong.Name = "txtCanDong";
+            this.txtCanDong.ReadOnly = true;
+            this.txtCanDong.Size = new System.Drawing.Size(237, 22);
+            this.txtCanDong.TabIndex = 53;
             // 
-            // txtmiengiam
+            // txtMienGiam
             // 
-            this.txtmiengiam.Location = new System.Drawing.Point(188, 294);
-            this.txtmiengiam.Name = "txtmiengiam";
-            this.txtmiengiam.ReadOnly = true;
-            this.txtmiengiam.Size = new System.Drawing.Size(332, 22);
-            this.txtmiengiam.TabIndex = 52;
+            this.txtMienGiam.Location = new System.Drawing.Point(188, 294);
+            this.txtMienGiam.Name = "txtMienGiam";
+            this.txtMienGiam.ReadOnly = true;
+            this.txtMienGiam.Size = new System.Drawing.Size(332, 22);
+            this.txtMienGiam.TabIndex = 52;
             // 
-            // txtmalop
+            // txtMaL
             // 
-            this.txtmalop.Location = new System.Drawing.Point(188, 252);
-            this.txtmalop.Name = "txtmalop";
-            this.txtmalop.ReadOnly = true;
-            this.txtmalop.Size = new System.Drawing.Size(332, 22);
-            this.txtmalop.TabIndex = 51;
+            this.txtMaL.Location = new System.Drawing.Point(188, 252);
+            this.txtMaL.Name = "txtMaL";
+            this.txtMaL.ReadOnly = true;
+            this.txtMaL.Size = new System.Drawing.Size(332, 22);
+            this.txtMaL.TabIndex = 51;
             // 
-            // txtmsv
+            // txtMaSV
             // 
-            this.txtmsv.Location = new System.Drawing.Point(188, 211);
-            this.txtmsv.Name = "txtmsv";
-            this.txtmsv.ReadOnly = true;
-            this.txtmsv.Size = new System.Drawing.Size(332, 22);
-            this.txtmsv.TabIndex = 50;
+            this.txtMaSV.Location = new System.Drawing.Point(188, 211);
+            this.txtMaSV.Name = "txtMaSV";
+            this.txtMaSV.ReadOnly = true;
+            this.txtMaSV.Size = new System.Drawing.Size(332, 22);
+            this.txtMaSV.TabIndex = 50;
             // 
-            // txtnamhoc
+            // txtNamHoc
             // 
-            this.txtnamhoc.Location = new System.Drawing.Point(188, 169);
-            this.txtnamhoc.Name = "txtnamhoc";
-            this.txtnamhoc.ReadOnly = true;
-            this.txtnamhoc.Size = new System.Drawing.Size(164, 22);
-            this.txtnamhoc.TabIndex = 48;
+            this.txtNamHoc.Location = new System.Drawing.Point(188, 169);
+            this.txtNamHoc.Name = "txtNamHoc";
+            this.txtNamHoc.ReadOnly = true;
+            this.txtNamHoc.Size = new System.Drawing.Size(164, 22);
+            this.txtNamHoc.TabIndex = 48;
             // 
             // lblnguoicapnhat
             // 
@@ -306,22 +306,22 @@ namespace QuanLyHocPhi
             this.lblhocky.TabIndex = 40;
             this.lblhocky.Text = "Học kỳ:";
             // 
-            // btnxemchitiet
+            // btnXemchitiet
             // 
-            this.btnxemchitiet.Location = new System.Drawing.Point(1030, 238);
-            this.btnxemchitiet.Name = "btnxemchitiet";
-            this.btnxemchitiet.Size = new System.Drawing.Size(98, 36);
-            this.btnxemchitiet.TabIndex = 39;
-            this.btnxemchitiet.Text = "Xem chi tiết";
-            this.btnxemchitiet.UseVisualStyleBackColor = true;
+            this.btnXemchitiet.Location = new System.Drawing.Point(1030, 238);
+            this.btnXemchitiet.Name = "btnXemchitiet";
+            this.btnXemchitiet.Size = new System.Drawing.Size(98, 36);
+            this.btnXemchitiet.TabIndex = 39;
+            this.btnXemchitiet.Text = "Xem chi tiết";
+            this.btnXemchitiet.UseVisualStyleBackColor = true;
             // 
-            // txthocky
+            // txtHocKy
             // 
-            this.txthocky.Location = new System.Drawing.Point(460, 169);
-            this.txthocky.Name = "txthocky";
-            this.txthocky.ReadOnly = true;
-            this.txthocky.Size = new System.Drawing.Size(60, 22);
-            this.txthocky.TabIndex = 49;
+            this.txtHocKy.Location = new System.Drawing.Point(460, 169);
+            this.txtHocKy.Name = "txtHocKy";
+            this.txtHocKy.ReadOnly = true;
+            this.txtHocKy.Size = new System.Drawing.Size(60, 22);
+            this.txtHocKy.TabIndex = 49;
             // 
             // lblnamhoc
             // 
@@ -332,15 +332,15 @@ namespace QuanLyHocPhi
             this.lblnamhoc.TabIndex = 37;
             this.lblnamhoc.Text = "Năm học:";
             // 
-            // dtgthongkehocphi
+            // DataGVThongKeHocPhi
             // 
-            this.dtgthongkehocphi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgthongkehocphi.Location = new System.Drawing.Point(25, 359);
-            this.dtgthongkehocphi.Name = "dtgthongkehocphi";
-            this.dtgthongkehocphi.RowHeadersWidth = 51;
-            this.dtgthongkehocphi.RowTemplate.Height = 24;
-            this.dtgthongkehocphi.Size = new System.Drawing.Size(768, 278);
-            this.dtgthongkehocphi.TabIndex = 38;
+            this.DataGVThongKeHocPhi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGVThongKeHocPhi.Location = new System.Drawing.Point(25, 359);
+            this.DataGVThongKeHocPhi.Name = "DataGVThongKeHocPhi";
+            this.DataGVThongKeHocPhi.RowHeadersWidth = 51;
+            this.DataGVThongKeHocPhi.RowTemplate.Height = 24;
+            this.DataGVThongKeHocPhi.Size = new System.Drawing.Size(768, 278);
+            this.DataGVThongKeHocPhi.TabIndex = 38;
             // 
             // lbltkhp
             // 
@@ -367,15 +367,15 @@ namespace QuanLyHocPhi
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1182, 693);
             this.Controls.Add(this.btnThoat);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.txtnguoicapnhat);
-            this.Controls.Add(this.txtngaycapnhat);
-            this.Controls.Add(this.txtconno);
-            this.Controls.Add(this.txtcandong);
-            this.Controls.Add(this.txtmiengiam);
-            this.Controls.Add(this.txtmalop);
-            this.Controls.Add(this.txtmsv);
-            this.Controls.Add(this.txtnamhoc);
+            this.Controls.Add(this.grpBoxTimKiem);
+            this.Controls.Add(this.txtNguoiCapNhat);
+            this.Controls.Add(this.txtNgayCapNhat);
+            this.Controls.Add(this.txtConNo);
+            this.Controls.Add(this.txtCanDong);
+            this.Controls.Add(this.txtMienGiam);
+            this.Controls.Add(this.txtMaL);
+            this.Controls.Add(this.txtMaSV);
+            this.Controls.Add(this.txtNamHoc);
             this.Controls.Add(this.lblnguoicapnhat);
             this.Controls.Add(this.lblngaycapnhat);
             this.Controls.Add(this.lblconno);
@@ -384,16 +384,16 @@ namespace QuanLyHocPhi
             this.Controls.Add(this.lblmalop);
             this.Controls.Add(this.lblmsv);
             this.Controls.Add(this.lblhocky);
-            this.Controls.Add(this.btnxemchitiet);
-            this.Controls.Add(this.txthocky);
+            this.Controls.Add(this.btnXemchitiet);
+            this.Controls.Add(this.txtHocKy);
             this.Controls.Add(this.lblnamhoc);
-            this.Controls.Add(this.dtgthongkehocphi);
+            this.Controls.Add(this.DataGVThongKeHocPhi);
             this.Controls.Add(this.lbltkhp);
             this.Name = "FrmThongKeHocPhi_NV";
             this.Text = "FrmThongKeHocPhi_NV";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgthongkehocphi)).EndInit();
+            this.grpBoxTimKiem.ResumeLayout(false);
+            this.grpBoxTimKiem.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGVThongKeHocPhi)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -401,24 +401,24 @@ namespace QuanLyHocPhi
 
         #endregion
 
-        private System.Windows.Forms.ComboBox cbohocky;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox cbotinhtrang;
-        private System.Windows.Forms.TextBox txttkmsv;
-        private System.Windows.Forms.CheckBox chktinhtrang;
-        private System.Windows.Forms.CheckBox chkmsv;
-        private System.Windows.Forms.CheckBox chkhocky;
-        private System.Windows.Forms.TextBox txttknamhoc;
-        private System.Windows.Forms.CheckBox chknamhoc;
-        private System.Windows.Forms.Button btntimkiem;
-        private System.Windows.Forms.TextBox txtnguoicapnhat;
-        private System.Windows.Forms.TextBox txtngaycapnhat;
-        private System.Windows.Forms.TextBox txtconno;
-        private System.Windows.Forms.TextBox txtcandong;
-        private System.Windows.Forms.TextBox txtmiengiam;
-        private System.Windows.Forms.TextBox txtmalop;
-        private System.Windows.Forms.TextBox txtmsv;
-        private System.Windows.Forms.TextBox txtnamhoc;
+        private System.Windows.Forms.ComboBox cboTKHocKy;
+        private System.Windows.Forms.GroupBox grpBoxTimKiem;
+        private System.Windows.Forms.ComboBox cboTKTinhTrang;
+        private System.Windows.Forms.TextBox txtTKMaSV;
+        private System.Windows.Forms.CheckBox chkTKTinhTrang;
+        private System.Windows.Forms.CheckBox chkTKMaSV;
+        private System.Windows.Forms.CheckBox chkTKHocKy;
+        private System.Windows.Forms.TextBox txtTKNamHoc;
+        private System.Windows.Forms.CheckBox chkTKNamHoc;
+        private System.Windows.Forms.Button btnTimkiem;
+        private System.Windows.Forms.TextBox txtNguoiCapNhat;
+        private System.Windows.Forms.TextBox txtNgayCapNhat;
+        private System.Windows.Forms.TextBox txtConNo;
+        private System.Windows.Forms.TextBox txtCanDong;
+        private System.Windows.Forms.TextBox txtMienGiam;
+        private System.Windows.Forms.TextBox txtMaL;
+        private System.Windows.Forms.TextBox txtMaSV;
+        private System.Windows.Forms.TextBox txtNamHoc;
         private System.Windows.Forms.Label lblnguoicapnhat;
         private System.Windows.Forms.Label lblngaycapnhat;
         private System.Windows.Forms.Label lblconno;
@@ -427,10 +427,10 @@ namespace QuanLyHocPhi
         private System.Windows.Forms.Label lblmalop;
         private System.Windows.Forms.Label lblmsv;
         private System.Windows.Forms.Label lblhocky;
-        private System.Windows.Forms.Button btnxemchitiet;
-        private System.Windows.Forms.TextBox txthocky;
+        private System.Windows.Forms.Button btnXemchitiet;
+        private System.Windows.Forms.TextBox txtHocKy;
         private System.Windows.Forms.Label lblnamhoc;
-        private System.Windows.Forms.DataGridView dtgthongkehocphi;
+        private System.Windows.Forms.DataGridView DataGVThongKeHocPhi;
         private System.Windows.Forms.Label lbltkhp;
         private System.Windows.Forms.Button btnThoat;
     }
