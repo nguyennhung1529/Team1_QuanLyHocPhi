@@ -61,10 +61,19 @@ create table SINH_VIEN(
 	Sdt char(10) not null,
 	Mail varchar(255) not null,
 	MaL char(10) not null,
-	MaDT char(10) not null,
+	-- MaDT char(10) not null,
 	Status bit not null default 1,
 	constraint fk_sinhvien_mal foreign key (MaL) references LOP(MaL),
-	constraint fk_sinhvien_madt foreign key (MaDT) references DOI_TUONG(MaDT) 
+	-- constraint fk_sinhvien_madt foreign key (MaDT) references DOI_TUONG(MaDT) 
+);
+
+-- create table 'CT_DOI_TUONG'
+create table CT_DOI_TUONG(
+	NamHoc char(10) not null,
+	MSV char(10) not null foreign key references SINH_VIEN(MSV),
+	MaDT Char(10) not null foreign key references DOI_TUONG(MaDT),
+	Status Bit not null default 1,
+	constraint pk_ctdoituong primary key(NamHoc, MSV)
 );
 
 -- create table 'HOC_TAP'
@@ -92,6 +101,8 @@ create table BIEN_LAI(
 	MaBL char(10) not null primary key,
 	TenBL nvarchar(50) not null unique,
 	MSV char(10) not null,
+	NamHoc char(10) not null default '2021-2022',
+	HocKy char(5) not null default '1',
 	TienNop decimal(12,0) not null,
 	NgayNop date not null,
 	Mota Ntext null,
@@ -101,6 +112,8 @@ create table BIEN_LAI(
 	constraint fk_bienlai_msv foreign key (MSV) references SINH_VIEN(MSV),
 	constraint fk_bienlai_mans foreign key (MaNguoiCapNhat) references NHAN_SU(MaNS)
 );
+
+
 -- drop table [USER];
 create table [USER](
 	UserID int not null identity(1,1) primary key,
@@ -159,29 +172,40 @@ insert into HOC_PHAN (MaHP, TenHP, SoTC, LopHP, HocKy, NamHoc) values ('HP016',N
 insert into HOC_PHAN (MaHP, TenHP, SoTC, LopHP, HocKy, NamHoc) values ('HP017',N'Xử lý ảnh',3,'01','2','2022');
 insert into HOC_PHAN (MaHP, TenHP, SoTC, LopHP, HocKy, NamHoc) values ('HP018',N'Trí tuệ nhân tạo',3,'01','2','2022');
 -- select * from HOC_PHAN
+update HOC_PHAN set NamHoc = '2020-2021' where NamHoc = '2021'
+update HOC_PHAN set NamHoc = '2021-2022' where NamHoc = '2022'
 
 -- insert table 'DOI_TUONG'
 insert into DOI_TUONG (MaDT, TenDT, MucGiam, Mota)
 values
-	('DT001',N'Sinh viên bình thường',0,''),
+	('DT001',N'Sinh viên gia đình hộ nghèo',0.5,''),
 	('DT002',N'Sinh viên có hoàn cảnh khó khăn',0.7,''),
-	('DT003',N'Sinh viên khuyết tật',0.9,'');
+	('DT003',N'Sinh viên khuyết tật',0.9,''),
+	('DT004',N'Sinh viên có gia đình là thương binh liệt sĩ',1,'');
 -- select * from DOI_TUONG;
 
 -- insert table 'SINH_VIEN'
-insert into SINH_VIEN (MSV, HoTen, GioiTinh, NgaySinh, DiaChi, Sdt, Mail, MaL, MaDT) 
+insert into SINH_VIEN (MSV, HoTen, GioiTinh, NgaySinh, DiaChi, Sdt, Mail, MaL) 
 values 
-	('SV001', N'Nguyễn Bình An', 1,'2001-08-01', N'213 Trần Đại Nghĩa', '1234567891','hot@gmail.com', 'L001','DT001'),
-	('SV002', N'Nguyễn Minh Châu', 1,'2001-05-01', N'213 Trần Đại Nghĩa', '1334567891','chau@gmail.com', 'L001','DT001'),
-	('SV003', N'Đỗ Khánh An', 0,'2000-01-01', N'123 Ngọc Khánh', '2234567891','an@gmail.com', 'L002','DT001'),
-	('SV004', N'Bùi Văn Lâm', 0,'2001-05-01', N'213 Trần Đại Nghĩa', '1334567877','lam@gmail.com', 'L003','DT002'),
-	('SV005', N'Nguyễn Văn Chính', 0,'2002-02-01', N'124 Chùa Bộc', '1334567823','chinh@gmail.com', 'L002','DT002'),
-	('SV006', N'Nguyễn Hải An', 1,'2001-05-01', N'213 Trần Đại Nghĩa', '4434567891','tt@gmail.com', 'L001','DT001'),
-	('SV007', N'Đỗ Tấn Phát', 0,'2001-05-09', N'213 Trần Đại Nghĩa', '1312367891','phat@gmail.com', 'L003','DT002'),
-	('SV008', N'Nguyễn Thị Linh', 1,'2001-10-01', N'213 Trần Đại Nghĩa', '1134567891','linh@gmail.com', 'L004','DT001'),
-	('SV009', N'Nguyễn Hải An', 1,'2001-05-07', N'213 Trần Đại Nghĩa', '1330067891','an@gmail.com', 'L005','DT002'),
-	('SV010', N'Nguyễn Tuyết Ngân', 1,'2001-12-01', N'213 Trần Đại Nghĩa', '0034567891','ngan@gmail.com', 'L006','DT001');
+	('SV001', N'Nguyễn Bình An', 1,'2001-08-01', N'213 Trần Đại Nghĩa', '1234567891','hot@gmail.com', 'L001'),
+	('SV002', N'Nguyễn Minh Châu', 1,'2001-05-01', N'213 Trần Đại Nghĩa', '1334567891','chau@gmail.com', 'L001'),
+	('SV003', N'Đỗ Khánh An', 0,'2000-01-01', N'123 Ngọc Khánh', '2234567891','an@gmail.com', 'L002'),
+	('SV004', N'Bùi Văn Lâm', 0,'2001-05-01', N'213 Trần Đại Nghĩa', '1334567877','lam@gmail.com', 'L003'),
+	('SV005', N'Nguyễn Văn Chính', 0,'2002-02-01', N'124 Chùa Bộc', '1334567823','chinh@gmail.com', 'L002'),
+	('SV006', N'Nguyễn Hải An', 1,'2001-05-01', N'213 Trần Đại Nghĩa', '4434567891','tt@gmail.com', 'L001'),
+	('SV007', N'Đỗ Tấn Phát', 0,'2001-05-09', N'213 Trần Đại Nghĩa', '1312367891','phat@gmail.com', 'L003'),
+	('SV008', N'Nguyễn Thị Linh', 1,'2001-10-01', N'213 Trần Đại Nghĩa', '1134567891','linh@gmail.com', 'L004'),
+	('SV009', N'Nguyễn Hải An', 1,'2001-05-07', N'213 Trần Đại Nghĩa', '1330067891','an@gmail.com', 'L005'),
+	('SV010', N'Nguyễn Tuyết Ngân', 1,'2001-12-01', N'213 Trần Đại Nghĩa', '0034567891','ngan@gmail.com', 'L006');
 -- select * from SINH_VIEN;
+
+-- insert table 'CT_DOI_TUONG'
+insert into CT_DOI_TUONG (MaDT, MSV, NamHoc)
+values
+	('DT001', 'SV001', '2020-2021'),
+	('DT001', 'SV001', '2021-2022'),
+	('DT002', 'SV002', '2021-2022');
+-- select * from CT_DOI_TUONG;
 
 -- insert table 'HOC_TAP'
 insert into HOC_TAP (MSV, MaHP)
@@ -262,3 +286,4 @@ values
 --insert into CT_BIEN_LAI (MaBL, MaHP, SoTien) values ('BL002','HP005',1275000);
 --insert into CT_BIEN_LAI (MaBL, MaHP, SoTien) values ('BL002','HP002',1250000);
 ---- select * from CT_BIEN_LAI
+
