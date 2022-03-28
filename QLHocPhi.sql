@@ -286,4 +286,3 @@ values
 --insert into CT_BIEN_LAI (MaBL, MaHP, SoTien) values ('BL002','HP005',1275000);
 --insert into CT_BIEN_LAI (MaBL, MaHP, SoTien) values ('BL002','HP002',1250000);
 ---- select * from CT_BIEN_LAI
-
