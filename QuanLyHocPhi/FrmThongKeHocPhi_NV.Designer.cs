@@ -40,7 +40,6 @@ namespace QuanLyHocPhi
             this.chkTKNamHoc = new System.Windows.Forms.CheckBox();
             this.btnTimkiem = new System.Windows.Forms.Button();
             this.txtNguoiCapNhat = new System.Windows.Forms.TextBox();
-            this.txtNgayCapNhat = new System.Windows.Forms.TextBox();
             this.txtConNo = new System.Windows.Forms.TextBox();
             this.txtCanDong = new System.Windows.Forms.TextBox();
             this.txtMienGiam = new System.Windows.Forms.TextBox();
@@ -58,11 +57,12 @@ namespace QuanLyHocPhi
             this.btnXemchitiet = new System.Windows.Forms.Button();
             this.txtHocKy = new System.Windows.Forms.TextBox();
             this.lblnamhoc = new System.Windows.Forms.Label();
-            this.DataGVThongKeHocPhi = new System.Windows.Forms.DataGridView();
+            this.dataGVThongKeHocPhi = new System.Windows.Forms.DataGridView();
             this.lbltkhp = new System.Windows.Forms.Label();
             this.btnThoat = new System.Windows.Forms.Button();
+            this.txtNgayCapNhat = new System.Windows.Forms.TextBox();
             this.grpBoxTimKiem.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DataGVThongKeHocPhi)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGVThongKeHocPhi)).BeginInit();
             this.SuspendLayout();
             // 
             // cboTKHocKy
@@ -177,14 +177,6 @@ namespace QuanLyHocPhi
             this.txtNguoiCapNhat.ReadOnly = true;
             this.txtNguoiCapNhat.Size = new System.Drawing.Size(237, 22);
             this.txtNguoiCapNhat.TabIndex = 56;
-            // 
-            // txtNgayCapNhat
-            // 
-            this.txtNgayCapNhat.Location = new System.Drawing.Point(711, 251);
-            this.txtNgayCapNhat.Name = "txtNgayCapNhat";
-            this.txtNgayCapNhat.ReadOnly = true;
-            this.txtNgayCapNhat.Size = new System.Drawing.Size(237, 22);
-            this.txtNgayCapNhat.TabIndex = 55;
             // 
             // txtConNo
             // 
@@ -332,15 +324,15 @@ namespace QuanLyHocPhi
             this.lblnamhoc.TabIndex = 37;
             this.lblnamhoc.Text = "Năm học:";
             // 
-            // DataGVThongKeHocPhi
+            // dataGVThongKeHocPhi
             // 
-            this.DataGVThongKeHocPhi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DataGVThongKeHocPhi.Location = new System.Drawing.Point(25, 359);
-            this.DataGVThongKeHocPhi.Name = "DataGVThongKeHocPhi";
-            this.DataGVThongKeHocPhi.RowHeadersWidth = 51;
-            this.DataGVThongKeHocPhi.RowTemplate.Height = 24;
-            this.DataGVThongKeHocPhi.Size = new System.Drawing.Size(768, 278);
-            this.DataGVThongKeHocPhi.TabIndex = 38;
+            this.dataGVThongKeHocPhi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGVThongKeHocPhi.Location = new System.Drawing.Point(25, 359);
+            this.dataGVThongKeHocPhi.Name = "dataGVThongKeHocPhi";
+            this.dataGVThongKeHocPhi.RowHeadersWidth = 51;
+            this.dataGVThongKeHocPhi.RowTemplate.Height = 24;
+            this.dataGVThongKeHocPhi.Size = new System.Drawing.Size(768, 278);
+            this.dataGVThongKeHocPhi.TabIndex = 38;
             // 
             // lbltkhp
             // 
@@ -360,6 +352,15 @@ namespace QuanLyHocPhi
             this.btnThoat.TabIndex = 58;
             this.btnThoat.Text = "Thoát";
             this.btnThoat.UseVisualStyleBackColor = true;
+            this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
+            // 
+            // txtNgayCapNhat
+            // 
+            this.txtNgayCapNhat.Location = new System.Drawing.Point(711, 251);
+            this.txtNgayCapNhat.Name = "txtNgayCapNhat";
+            this.txtNgayCapNhat.ReadOnly = true;
+            this.txtNgayCapNhat.Size = new System.Drawing.Size(237, 22);
+            this.txtNgayCapNhat.TabIndex = 55;
             // 
             // FrmThongKeHocPhi_NV
             // 
@@ -387,13 +388,14 @@ namespace QuanLyHocPhi
             this.Controls.Add(this.btnXemchitiet);
             this.Controls.Add(this.txtHocKy);
             this.Controls.Add(this.lblnamhoc);
-            this.Controls.Add(this.DataGVThongKeHocPhi);
+            this.Controls.Add(this.dataGVThongKeHocPhi);
             this.Controls.Add(this.lbltkhp);
             this.Name = "FrmThongKeHocPhi_NV";
             this.Text = "FrmThongKeHocPhi_NV";
+            this.Load += new System.EventHandler(this.FrmThongKeHocPhi_NV_Load);
             this.grpBoxTimKiem.ResumeLayout(false);
             this.grpBoxTimKiem.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DataGVThongKeHocPhi)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGVThongKeHocPhi)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -412,7 +414,6 @@ namespace QuanLyHocPhi
         private System.Windows.Forms.CheckBox chkTKNamHoc;
         private System.Windows.Forms.Button btnTimkiem;
         private System.Windows.Forms.TextBox txtNguoiCapNhat;
-        private System.Windows.Forms.TextBox txtNgayCapNhat;
         private System.Windows.Forms.TextBox txtConNo;
         private System.Windows.Forms.TextBox txtCanDong;
         private System.Windows.Forms.TextBox txtMienGiam;
@@ -430,8 +431,9 @@ namespace QuanLyHocPhi
         private System.Windows.Forms.Button btnXemchitiet;
         private System.Windows.Forms.TextBox txtHocKy;
         private System.Windows.Forms.Label lblnamhoc;
-        private System.Windows.Forms.DataGridView DataGVThongKeHocPhi;
+        private System.Windows.Forms.DataGridView dataGVThongKeHocPhi;
         private System.Windows.Forms.Label lbltkhp;
         private System.Windows.Forms.Button btnThoat;
+        private System.Windows.Forms.TextBox txtNgayCapNhat;
     }
 }
