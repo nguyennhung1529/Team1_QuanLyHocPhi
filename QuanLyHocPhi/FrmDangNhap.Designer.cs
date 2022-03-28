@@ -30,8 +30,8 @@ namespace QuanLyHocPhi
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.lblTênDN = new System.Windows.Forms.Label();
-            this.lblDangNhap = new System.Windows.Forms.Label();
+            this.lblTenDN = new System.Windows.Forms.Label();
+            this.lblTitleDangNhap = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.radNS = new System.Windows.Forms.RadioButton();
             this.radSV = new System.Windows.Forms.RadioButton();
@@ -42,28 +42,28 @@ namespace QuanLyHocPhi
             this.lblMatKhau = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // lblTênDN
+            // lblTenDN
             // 
-            this.lblTênDN.AutoSize = true;
-            this.lblTênDN.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.lblTênDN.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblTênDN.Location = new System.Drawing.Point(183, 216);
-            this.lblTênDN.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblTênDN.Name = "lblTênDN";
-            this.lblTênDN.Size = new System.Drawing.Size(151, 25);
-            this.lblTênDN.TabIndex = 10;
-            this.lblTênDN.Text = "Tên đăng nhập:";
+            this.lblTenDN.AutoSize = true;
+            this.lblTenDN.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.lblTenDN.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lblTenDN.Location = new System.Drawing.Point(183, 216);
+            this.lblTenDN.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTenDN.Name = "lblTenDN";
+            this.lblTenDN.Size = new System.Drawing.Size(151, 25);
+            this.lblTenDN.TabIndex = 10;
+            this.lblTenDN.Text = "Tên đăng nhập:";
             // 
-            // lblDangNhap
+            // lblTitleDangNhap
             // 
-            this.lblDangNhap.AutoSize = true;
-            this.lblDangNhap.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDangNhap.Location = new System.Drawing.Point(190, 104);
-            this.lblDangNhap.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblDangNhap.Name = "lblDangNhap";
-            this.lblDangNhap.Size = new System.Drawing.Size(686, 39);
-            this.lblDangNhap.TabIndex = 9;
-            this.lblDangNhap.Text = "TRƯỜNG ĐẠI HỌC KINH TẾ QUỐC DÂN";
+            this.lblTitleDangNhap.AutoSize = true;
+            this.lblTitleDangNhap.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitleDangNhap.Location = new System.Drawing.Point(190, 104);
+            this.lblTitleDangNhap.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTitleDangNhap.Name = "lblTitleDangNhap";
+            this.lblTitleDangNhap.Size = new System.Drawing.Size(686, 39);
+            this.lblTitleDangNhap.TabIndex = 9;
+            this.lblTitleDangNhap.Text = "TRƯỜNG ĐẠI HỌC KINH TẾ QUỐC DÂN";
             // 
             // radNS
             // 
@@ -81,6 +81,7 @@ namespace QuanLyHocPhi
             // radSV
             // 
             this.radSV.AutoSize = true;
+            this.radSV.Checked = true;
             this.radSV.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.radSV.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.radSV.Location = new System.Drawing.Point(396, 332);
@@ -88,6 +89,7 @@ namespace QuanLyHocPhi
             this.radSV.Name = "radSV";
             this.radSV.Size = new System.Drawing.Size(114, 29);
             this.radSV.TabIndex = 16;
+            this.radSV.TabStop = true;
             this.radSV.Text = "Sinh viên";
             this.radSV.UseVisualStyleBackColor = true;
             // 
@@ -103,6 +105,7 @@ namespace QuanLyHocPhi
             this.btnThoat.TabIndex = 15;
             this.btnThoat.Text = "Thoát";
             this.btnThoat.UseVisualStyleBackColor = false;
+            this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
             // btnDN
             // 
@@ -116,6 +119,7 @@ namespace QuanLyHocPhi
             this.btnDN.TabIndex = 14;
             this.btnDN.Text = "Đăng nhập";
             this.btnDN.UseVisualStyleBackColor = false;
+            this.btnDN.Click += new System.EventHandler(this.btnDN_Click);
             // 
             // txtMatKhau
             // 
@@ -152,8 +156,8 @@ namespace QuanLyHocPhi
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 553);
-            this.Controls.Add(this.lblTênDN);
-            this.Controls.Add(this.lblDangNhap);
+            this.Controls.Add(this.lblTenDN);
+            this.Controls.Add(this.lblTitleDangNhap);
             this.Controls.Add(this.radNS);
             this.Controls.Add(this.radSV);
             this.Controls.Add(this.btnThoat);
@@ -170,8 +174,8 @@ namespace QuanLyHocPhi
 
         #endregion
 
-        private System.Windows.Forms.Label lblTênDN;
-        private System.Windows.Forms.Label lblDangNhap;
+        private System.Windows.Forms.Label lblTenDN;
+        private System.Windows.Forms.Label lblTitleDangNhap;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.RadioButton radNS;
         private System.Windows.Forms.RadioButton radSV;
