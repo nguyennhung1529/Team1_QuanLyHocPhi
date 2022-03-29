@@ -1,5 +1,14 @@
-﻿-- create database QLHocPhi;
-use QLHocPhi;
+﻿-- create database QuanLyHocPhi;
+use QuanLyHocPhi;
+
+-- create table 'KY_HOC'
+create table KY_HOC(
+	MaKyHoc char(10) not null primary key,
+	TenKyHoc nvarchar(30) not null,
+	NamHoc char(10) not null,
+	HocKy char(5) not null,
+	Status bit not null default 1
+);
 
 -- create table 'KHOA_VIEN'
 create table KHOA_VIEN(
@@ -37,9 +46,9 @@ create table HOC_PHAN(
 	TenHP nvarchar(60) not null,
 	SoTC tinyint not null,
 	LopHP char(5) not null,
-	HocKy char(10) not null,
-	NamHoc char(10) not null,
-	Status bit not null default 1
+	MaKyHoc char(10) not null,
+	Status bit not null default 1,
+	constraint fk_hocphan_kyhoc foreign key (MaKyHoc) references KY_HOC(MaKyHoc)
 );
 
 -- create table 'DOI_TUONG'
@@ -69,11 +78,11 @@ create table SINH_VIEN(
 
 -- create table 'CT_DOI_TUONG'
 create table CT_DOI_TUONG(
-	NamHoc char(10) not null,
+	MaKyHoc char(10) not null foreign key references KY_HOC(MaKyHoc),
 	MSV char(10) not null foreign key references SINH_VIEN(MSV),
 	MaDT Char(10) not null foreign key references DOI_TUONG(MaDT),
 	Status Bit not null default 1,
-	constraint pk_ctdoituong primary key(NamHoc, MSV)
+	constraint pk_ctdoituong primary key(MaKyHoc, MSV)
 );
 
 -- create table 'HOC_TAP'
@@ -101,8 +110,7 @@ create table BIEN_LAI(
 	MaBL char(10) not null primary key,
 	TenBL nvarchar(50) not null unique,
 	MSV char(10) not null,
-	NamHoc char(10) not null default '2021-2022',
-	HocKy char(5) not null default '1',
+	MaKyHoc char(10) not null,
 	TienNop decimal(12,0) not null,
 	NgayNop date not null,
 	Mota Ntext null,
@@ -122,6 +130,27 @@ create table [USER](
 	Status Bit NOT NULL
 );
 
+-- create table 'KY_HOC_PHI'
+create table KY_HOC_PHI(
+	MaKyHP char(10) not null primary key,
+	MaKyHoc char(10) not null,
+	MSV char(10) not null,
+	HocPhi decimal (12,0) not null default 0,
+	DaDong decimal (12,0) not null default 0,
+	constraint pk_kyhocphi_kyhoc foreign key (MaKyHoc) references KY_HOC(MaKyHoc),
+	constraint fk_kyhocphi_msv foreign key (MSV) references SINH_VIEN(MSV)
+);
+
+-- create table 'CT_HOC_PHI'
+create table CT_HOC_PHI(
+	MaKyHP char(10) not null foreign key (MaKyHP) references KY_HOC_PHI(MaKyHP),
+	MaHP char(10) not null foreign key (MaHP) references HOC_PHAN(MaHP),
+	TienHoc decimal (12,0) not null,
+	TienNop decimal (12,0) not null default 0,
+	NgayNop date not null,
+	constraint pk_cthocphi primary key(MaKyHP, MaHP)
+);
+
 ---- create table 'CT_BIEN_LAI'
 --create table CT_BIEN_LAI(
 --	MaBL char(10) not null foreign key (MaBL) references BIEN_LAI(MaBL),
@@ -131,6 +160,17 @@ create table [USER](
 --);
 
 -- ---------------------------------------------
+-- insert table 'KY_HOC'
+insert into KY_HOC(MaKyHoc, TenKyHoc, NamHoc, HocKy) 
+values 
+	('MKH001', N'Năm 2020-2021, Học kỳ 1', '2020-2021', '1'),
+	('MKH002', N'Năm 2020-2021, Học kỳ 2', '2020-2021', '2'),
+	('MKH003', N'Năm 2020-2021, Học kỳ 3', '2020-2021', '3'),
+	('MKH004', N'Năm 2021-2022, Học kỳ 1', '2020-2021', '1'),
+	('MKH005', N'Năm 2021-2022, Học kỳ 2', '2020-2021', '2'),
+	('MKH006', N'Năm 2021-2022, Học kỳ 3', '2020-2021', '3');
+-- select * from KY_HOC;
+
 -- insert table 'KHOA_VIEN'
 insert into KHOA_VIEN (MaKh, TenKh, DiaChi, Sdt, Status) values ('KH001', N'Khoa học máy tính', N'Phòng 1001', '093784186', 1);
 insert into KHOA_VIEN (MaKh, TenKh, DiaChi, Sdt, Status) values ('KH002', N'Công nghệ thông tin', N'Phòng 1003', '093784186', 1);
@@ -153,27 +193,27 @@ Insert into LOP (MaL, TenL, SiSo, MaKh, MaTT) values ('L006', N'Hệ thống th�
 -- select * from LOP;
 
 -- insert table 'HOC_PHAN'
-insert into HOC_PHAN (MaHP, TenHP, SoTC, LopHP, HocKy, NamHoc) values ('HP001',N'Quản trị mạng',3,'01','2','2022');
-insert into HOC_PHAN (MaHP, TenHP, SoTC, LopHP, HocKy, NamHoc) values ('HP002',N'Dữ liệu phi cấu trúc',3,'01','1','2021');
-insert into HOC_PHAN (MaHP, TenHP, SoTC, LopHP, HocKy, NamHoc) values ('HP003',N'Mạng máy tính và truyền số liệu',3,'01','1','2021');
-insert into HOC_PHAN (MaHP, TenHP, SoTC, LopHP, HocKy, NamHoc) values ('HP004',N'Lập trình ứng dụng',3,'01','1','2021');
-insert into HOC_PHAN (MaHP, TenHP, SoTC, LopHP, HocKy, NamHoc) values ('HP005',N'Đại số',3,'01','2','2022');
-insert into HOC_PHAN (MaHP, TenHP, SoTC, LopHP, HocKy, NamHoc) values ('HP006',N'Giải tích',3,'01','2','2022');
-insert into HOC_PHAN (MaHP, TenHP, SoTC, LopHP, HocKy, NamHoc) values ('HP007',N'Vật lý đại cương',3,'01','2','2022');
-insert into HOC_PHAN (MaHP, TenHP, SoTC, LopHP, HocKy, NamHoc) values ('HP008',N'Cơ sở lập trình',3,'01','2','2022');
-insert into HOC_PHAN (MaHP, TenHP, SoTC, LopHP, HocKy, NamHoc) values ('HP009',N'Cấu trúc dữ liệu và giải thuật',3,'01','2','2022');
-insert into HOC_PHAN (MaHP, TenHP, SoTC, LopHP, HocKy, NamHoc) values ('HP010',N'Cơ sở dữ liệu',3,'01','2','2022');
-insert into HOC_PHAN (MaHP, TenHP, SoTC, LopHP, HocKy, NamHoc) values ('HP011',N'Hệ điều hành',3,'01','2','2022');
-insert into HOC_PHAN (MaHP, TenHP, SoTC, LopHP, HocKy, NamHoc) values ('HP012',N'Kiến trúc máy tính',3,'01','2','2022');
-insert into HOC_PHAN (MaHP, TenHP, SoTC, LopHP, HocKy, NamHoc) values ('HP013',N'Phân tích thiết kế hệ thống',3,'01','2','2022');
-insert into HOC_PHAN (MaHP, TenHP, SoTC, LopHP, HocKy, NamHoc) values ('HP014',N'Lập trình hướng đối tượng',3,'01','2','2022');
-insert into HOC_PHAN (MaHP, TenHP, SoTC, LopHP, HocKy, NamHoc) values ('HP015',N'Hệ hỗ trợ ra quyết định',3,'01','2','2022');
-insert into HOC_PHAN (MaHP, TenHP, SoTC, LopHP, HocKy, NamHoc) values ('HP016',N'Kỹ nghệ phần mềm',3,'01','2','2022');
-insert into HOC_PHAN (MaHP, TenHP, SoTC, LopHP, HocKy, NamHoc) values ('HP017',N'Xử lý ảnh',3,'01','2','2022');
-insert into HOC_PHAN (MaHP, TenHP, SoTC, LopHP, HocKy, NamHoc) values ('HP018',N'Trí tuệ nhân tạo',3,'01','2','2022');
+insert into HOC_PHAN (MaHP, TenHP, SoTC, LopHP, MaKyHoc) 
+values 
+	('HP001',N'Quản trị mạng',3,'01','MKH001'),
+	('HP002',N'Dữ liệu phi cấu trúc',3,'01','MKH001'),
+	('HP003',N'Mạng máy tính và truyền số liệu',3,'01','MKH001'),
+	('HP004',N'Lập trình ứng dụng',3,'01','MKH001'),
+	('HP005',N'Đại số',3,'01','MKH002'),
+	('HP006',N'Giải tích',3,'01','MKH002'),
+	('HP007',N'Vật lý đại cương',3,'01','MKH002'),
+	('HP008',N'Cơ sở lập trình',3,'01','MKH002'),
+	('HP009',N'Cấu trúc dữ liệu và giải thuật',3,'01','MKH002'),
+	('HP010',N'Cơ sở dữ liệu',3,'01','MKH002'),
+	('HP011',N'Hệ điều hành',3,'01','MKH004'),
+	('HP012',N'Kiến trúc máy tính',3,'01','MKH004'),
+	('HP013',N'Phân tích thiết kế hệ thống',3,'01','MKH004'),
+	('HP014',N'Lập trình hướng đối tượng',3,'01','MKH004'),
+	('HP015',N'Hệ hỗ trợ ra quyết định',3,'01','MKH005'),
+	('HP016',N'Kỹ nghệ phần mềm',3,'01','MKH005'),
+	('HP017',N'Xử lý ảnh',3,'01','MKH005'),
+	('HP018',N'Trí tuệ nhân tạo',3,'01','MKH005');
 -- select * from HOC_PHAN
-update HOC_PHAN set NamHoc = '2020-2021' where NamHoc = '2021'
-update HOC_PHAN set NamHoc = '2021-2022' where NamHoc = '2022'
 
 -- insert table 'DOI_TUONG'
 insert into DOI_TUONG (MaDT, TenDT, MucGiam, Mota)
@@ -201,68 +241,123 @@ values
 -- select * from SINH_VIEN;
 
 -- insert table 'CT_DOI_TUONG'
-insert into CT_DOI_TUONG (MaDT, MSV, NamHoc)
+insert into CT_DOI_TUONG (MaDT, MSV, MaKyHoc)
 values
-	('DT001', 'SV001', '2020-2021'),
-	('DT001', 'SV001', '2021-2022'),
-	('DT002', 'SV002', '2021-2022');
+	('DT001', 'SV001', 'MKH001'),
+	('DT001', 'SV001', 'MKH002'),
+	('DT001', 'SV001', 'MKH003'),
+	('DT001', 'SV001', 'MKH004'),
+	('DT001', 'SV001', 'MKH005'),
+	('DT002', 'SV001', 'MKH006'),
+	('DT002', 'SV002', 'MKH004'),
+	('DT002', 'SV002', 'MKH005'),
+	('DT002', 'SV002', 'MKH006');
 
-insert into CT_DOI_TUONG (NamHoc, MSV, MaDT)
+insert into CT_DOI_TUONG (MaKyHoc, MSV, MaDT)
 values
-	('2020-2021', 'SV002', 'DT000'),
-	('2020-2021', 'SV003', 'DT000'),
-	('2020-2021', 'SV004', 'DT000'),
-	('2020-2021', 'SV005', 'DT000'),
-	('2020-2021', 'SV006', 'DT000'),
-	('2020-2021', 'SV007', 'DT000'),
-	('2020-2021', 'SV008', 'DT000'),
-	('2020-2021', 'SV009', 'DT000'),
-	('2020-2021', 'SV010', 'DT000'),
-	('2021-2022', 'SV003', 'DT000'),
-	('2021-2022', 'SV004', 'DT000'),
-	('2021-2022', 'SV005', 'DT000'),
-	('2021-2022', 'SV006', 'DT000'),
-	('2021-2022', 'SV007', 'DT000'),
-	('2021-2022', 'SV008', 'DT000'),
-	('2021-2022', 'SV009', 'DT000'),
-	('2021-2022', 'SV010', 'DT000');
+	('MKH001', 'SV002', 'DT000'),
+	('MKH001', 'SV003', 'DT000'),
+	('MKH001', 'SV004', 'DT000'),
+	('MKH001', 'SV005', 'DT000'),
+	('MKH001', 'SV006', 'DT000'),
+	('MKH001', 'SV007', 'DT000'),
+	('MKH001', 'SV008', 'DT000'),
+	('MKH001', 'SV009', 'DT000'),
+	('MKH001', 'SV010', 'DT000'),
+	('MKH002', 'SV002', 'DT000'),
+	('MKH002', 'SV003', 'DT000'),
+	('MKH002', 'SV004', 'DT000'),
+	('MKH002', 'SV005', 'DT000'),
+	('MKH002', 'SV006', 'DT000'),
+	('MKH002', 'SV007', 'DT000'),
+	('MKH002', 'SV008', 'DT000'),
+	('MKH002', 'SV009', 'DT000'),
+	('MKH002', 'SV010', 'DT000'),
+	('MKH003', 'SV002', 'DT000'),
+	('MKH003', 'SV003', 'DT000'),
+	('MKH003', 'SV004', 'DT000'),
+	('MKH003', 'SV005', 'DT000'),
+	('MKH003', 'SV006', 'DT000'),
+	('MKH003', 'SV007', 'DT000'),
+	('MKH003', 'SV008', 'DT000'),
+	('MKH003', 'SV009', 'DT000'),
+	('MKH003', 'SV010', 'DT000'),
+	('MKH004', 'SV003', 'DT000'),
+	('MKH004', 'SV004', 'DT000'),
+	('MKH004', 'SV005', 'DT000'),
+	('MKH004', 'SV006', 'DT000'),
+	('MKH004', 'SV007', 'DT000'),
+	('MKH004', 'SV008', 'DT000'),
+	('MKH004', 'SV009', 'DT000'),
+	('MKH004', 'SV010', 'DT000'),
+	('MKH005', 'SV003', 'DT000'),
+	('MKH005', 'SV004', 'DT000'),
+	('MKH005', 'SV005', 'DT000'),
+	('MKH005', 'SV006', 'DT000'),
+	('MKH005', 'SV007', 'DT000'),
+	('MKH005', 'SV008', 'DT000'),
+	('MKH005', 'SV009', 'DT000'),
+	('MKH005', 'SV010', 'DT000'),
+	('MKH006', 'SV003', 'DT000'),
+	('MKH006', 'SV004', 'DT000'),
+	('MKH006', 'SV005', 'DT000'),
+	('MKH006', 'SV006', 'DT000'),
+	('MKH006', 'SV007', 'DT000'),
+	('MKH006', 'SV008', 'DT000'),
+	('MKH006', 'SV009', 'DT000'),
+	('MKH006', 'SV010', 'DT000');
 -- select * from CT_DOI_TUONG;
 
 -- insert table 'HOC_TAP'
 insert into HOC_TAP (MSV, MaHP)
 values 
 	('SV001', 'HP001'), 
+	('SV001', 'HP002'), 
 	('SV001', 'HP003'),
+	('SV001', 'HP005'),
+	('SV001', 'HP006'),
 	('SV001', 'HP011'),
-	('SV001', 'HP015'),
-	('SV002', 'HP001'),
-	('SV002', 'HP005'),
-	('SV002', 'HP002'),
-	('SV003', 'HP001'),
-	('SV003', 'HP006'),
-	('SV003', 'HP009'),
-	('SV004', 'HP001'),
-	('SV004', 'HP007'),
-	('SV004', 'HP009'),
-	('SV005', 'HP002'),
-	('SV005', 'HP009'),
-	('SV005', 'HP017'),
-	('SV006', 'HP003'),
+	('SV001', 'HP012'),
+	('SV001', 'HP018'),
+	('SV002', 'HP016'),
+	('SV002', 'HP017'),
+	('SV002', 'HP018'),
+	('SV003', 'HP015'),
+	('SV003', 'HP016'),
+	('SV003', 'HP017'),
+	('SV004', 'HP013'),
+	('SV004', 'HP014'),
+	('SV004', 'HP018'),
+	('SV005', 'HP012'),
+	('SV005', 'HP013'),
+	('SV005', 'HP014'),
+	('SV006', 'HP001'),
+	('SV006', 'HP004'),
+	('SV006', 'HP005'),
+	('SV006', 'HP010'),
+	('SV006', 'HP011'),
 	('SV006', 'HP014'),
-	('SV006', 'HP007'),
-	('SV007', 'HP001'),
-	('SV007', 'HP007'),
-	('SV008', 'HP010'),
-	('SV008', 'HP003'),
-	('SV008', 'HP007'),
-	('SV008', 'HP009'),
-	('SV009', 'HP001'),
-	('SV009', 'HP002'),
+	('SV006', 'HP015'),
+	('SV006', 'HP017'),
+	('SV007', 'HP017'),
+	('SV007', 'HP018'),
+	('SV008', 'HP012'),
+	('SV008', 'HP013'),
+	('SV008', 'HP016'),
+	('SV008', 'HP017'),
+	('SV009', 'HP017'),
+	('SV009', 'HP018'),
 	('SV010', 'HP001'),
 	('SV010', 'HP002'),
 	('SV010', 'HP003'),
-	('SV010', 'HP013'),
-	('SV010', 'HP018'); 
+	('SV010', 'HP005'),
+	('SV010', 'HP010'),
+	('SV010', 'HP011'), 
+	('SV010', 'HP012'), 
+	('SV010', 'HP013'), 
+	('SV010', 'HP015'), 
+	('SV010', 'HP016'), 
+	('SV010', 'HP017');
 -- select * from HOC_TAP;
 
 -- insert table 'NHAN_SU'
@@ -275,8 +370,24 @@ values
 -- select * from NHAN_SU;
 
 -- insert table 'BIEN_LAI'
-insert into BIEN_LAI (MaBL, TenBL, MSV, TienNop, NgayNop, Mota, NgayCapNhat, MaNguoiCapNhat, Status) values ('BL001', N'001 Trả tiền học phí kì 1', 'SV001', 5100000, '2022-01-05', N'Sinh viên 001', '2022-01-05', 'NS001', 1);
-insert into BIEN_LAI (MaBL, TenBL, MSV, TienNop, NgayNop, Mota, NgayCapNhat, MaNguoiCapNhat, Status) values ('BL002', N'002 Trả tiền học phí kì 1', 'SV002', 3800000, '2022-01-05', N'Sinh viên 002', '2022-01-05', 'NS001', 1);
+insert into BIEN_LAI (MaBL, TenBL, MSV, TienNop, NgayNop, Mota, NgayCapNhat, MaNguoiCapNhat, MaKyHoc) 
+values 
+	('BL001', N'001 Trả tiền học phí kì 1 năm 2020-2021', 'SV001', 4000000, '2020-06-05', N'Sinh viên 001', '2020-06-05', 'NS001', 'MKH001'),
+	('BL002', N'002 Trả tiền học phí kì 2 năm 2020-2021', 'SV001', 3000000, '2021-04-05', N'Sinh viên 001', '2021-04-05', 'NS001', 'MKH002'),
+	('BL003', N'003 Trả tiền học phí kì 1 năm 2021-2022', 'SV001', 2550000, '2021-06-05', N'Sinh viên 001', '2021-06-05', 'NS001', 'MKH004'),
+	('BL004', N'004 Trả tiền học phí kì 2 năm 2021-2022', 'SV001', 1275000, '2022-04-05', N'Sinh viên 001', '2022-04-05', 'NS001', 'MKH005'),
+	('BL005', N'005 Trả tiền học phí kì 2 năm 2021-2022', 'SV002', 3800000, '2022-04-05', N'Sinh viên 002', '2022-04-05', 'NS002', 'MKH005'),
+	('BL006', N'006 Trả tiền học phí kì 2 năm 2021-2022', 'SV003', 3800000, '2022-04-05', N'Sinh viên 003', '2022-04-05', 'NS003', 'MKH005'),
+	('BL007', N'007 Trả tiền học phí kì 1 năm 2021-2022', 'SV004', 3800000, '2021-06-05', N'Sinh viên 004', '2021-06-05', 'NS004', 'MKH004'),
+	('BL008', N'008 Trả tiền học phí kì 2 năm 2021-2022', 'SV004', 1500000, '2022-04-05', N'Sinh viên 004', '2022-04-05', 'NS004', 'MKH005'),
+	('BL009', N'009 Trả tiền học phí kì 1 năm 2021-2022', 'SV005', 4000000, '2021-06-05', N'Sinh viên 005', '2021-06-05', 'NS004', 'MKH004'),
+	('BL010', N'010 Trả tiền học phí kì 1 năm 2020-2021', 'SV006', 2550000, '2020-06-05', N'Sinh viên 006', '2020-06-05', 'NS004', 'MKH001'),
+	('BL011', N'011 Trả tiền học phí kì 2 năm 2020-2021', 'SV006', 2550000, '2021-04-05', N'Sinh viên 006', '2021-04-05', 'NS004', 'MKH002'),
+	('BL012', N'012 Trả tiền học phí kì 1 năm 2021-2022', 'SV006', 2550000, '2021-06-05', N'Sinh viên 006', '2021-06-05', 'NS003', 'MKH004'),
+	('BL013', N'013 Trả tiền học phí kì 1 năm 2021-2022', 'SV008', 3150000, '2021-06-05', N'Sinh viên 006', '2021-06-05', 'NS003', 'MKH004'),
+	('BL014', N'014 Trả tiền học phí kì 1 năm 2020-2021', 'SV010', 6000000, '2020-06-05', N'Sinh viên 001', '2020-06-05', 'NS002', 'MKH001'),
+	('BL015', N'015 Trả tiền học phí kì 2 năm 2020-2021', 'SV010', 5600000, '2021-04-05', N'Sinh viên 001', '2021-04-05', 'NS002', 'MKH002'),
+	('BL016', N'016 Trả tiền học phí kì 1 năm 2021-2022', 'SV010', 5625000, '2021-06-05', N'Sinh viên 001', '2021-06-05', 'NS002', 'MKH004');
 -- select * from BIEN_LAI;
 
 -- insert table 'USER'
