@@ -132,7 +132,7 @@ create table [USER](
 
 -- create table 'KY_HOC_PHI'
 create table KY_HOC_PHI(
-	MaKyHP char(10) not null primary key,
+	MaKyHP int not null identity(1,1) primary key,
 	MaKyHoc char(10) not null,
 	MSV char(10) not null,
 	HocPhi decimal (12,0) not null default 0,
@@ -143,7 +143,7 @@ create table KY_HOC_PHI(
 
 -- create table 'CT_HOC_PHI'
 create table CT_HOC_PHI(
-	MaKyHP char(10) not null foreign key (MaKyHP) references KY_HOC_PHI(MaKyHP),
+	MaKyHP int not null foreign key (MaKyHP) references KY_HOC_PHI(MaKyHP),
 	MaHP char(10) not null foreign key (MaHP) references HOC_PHAN(MaHP),
 	TienHoc decimal (12,0) not null,
 	TienNop decimal (12,0) not null default 0,
