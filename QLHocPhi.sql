@@ -178,6 +178,7 @@ update HOC_PHAN set NamHoc = '2021-2022' where NamHoc = '2022'
 -- insert table 'DOI_TUONG'
 insert into DOI_TUONG (MaDT, TenDT, MucGiam, Mota)
 values
+	('DT000',N'Sinh viên bình thường',0,''),
 	('DT001',N'Sinh viên gia đình hộ nghèo',0.5,''),
 	('DT002',N'Sinh viên có hoàn cảnh khó khăn',0.7,''),
 	('DT003',N'Sinh viên khuyết tật',0.9,''),
@@ -205,6 +206,26 @@ values
 	('DT001', 'SV001', '2020-2021'),
 	('DT001', 'SV001', '2021-2022'),
 	('DT002', 'SV002', '2021-2022');
+
+insert into CT_DOI_TUONG (NamHoc, MSV, MaDT)
+values
+	('2020-2021', 'SV002', 'DT000'),
+	('2020-2021', 'SV003', 'DT000'),
+	('2020-2021', 'SV004', 'DT000'),
+	('2020-2021', 'SV005', 'DT000'),
+	('2020-2021', 'SV006', 'DT000'),
+	('2020-2021', 'SV007', 'DT000'),
+	('2020-2021', 'SV008', 'DT000'),
+	('2020-2021', 'SV009', 'DT000'),
+	('2020-2021', 'SV010', 'DT000'),
+	('2021-2022', 'SV003', 'DT000'),
+	('2021-2022', 'SV004', 'DT000'),
+	('2021-2022', 'SV005', 'DT000'),
+	('2021-2022', 'SV006', 'DT000'),
+	('2021-2022', 'SV007', 'DT000'),
+	('2021-2022', 'SV008', 'DT000'),
+	('2021-2022', 'SV009', 'DT000'),
+	('2021-2022', 'SV010', 'DT000');
 -- select * from CT_DOI_TUONG;
 
 -- insert table 'HOC_TAP'
