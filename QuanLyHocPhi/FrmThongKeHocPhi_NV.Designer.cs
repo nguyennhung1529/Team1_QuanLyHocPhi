@@ -88,7 +88,7 @@ namespace QuanLyHocPhi
             this.grpBoxTimKiem.Controls.Add(this.txtTKNamHoc);
             this.grpBoxTimKiem.Controls.Add(this.chkTKNamHoc);
             this.grpBoxTimKiem.Controls.Add(this.btnTimkiem);
-            this.grpBoxTimKiem.Location = new System.Drawing.Point(808, 350);
+            this.grpBoxTimKiem.Location = new System.Drawing.Point(820, 350);
             this.grpBoxTimKiem.Name = "grpBoxTimKiem";
             this.grpBoxTimKiem.Size = new System.Drawing.Size(350, 287);
             this.grpBoxTimKiem.TabIndex = 57;
@@ -327,11 +327,11 @@ namespace QuanLyHocPhi
             // dataGVThongKeHocPhi
             // 
             this.dataGVThongKeHocPhi.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGVThongKeHocPhi.Location = new System.Drawing.Point(25, 359);
+            this.dataGVThongKeHocPhi.Location = new System.Drawing.Point(12, 359);
             this.dataGVThongKeHocPhi.Name = "dataGVThongKeHocPhi";
             this.dataGVThongKeHocPhi.RowHeadersWidth = 51;
             this.dataGVThongKeHocPhi.RowTemplate.Height = 24;
-            this.dataGVThongKeHocPhi.Size = new System.Drawing.Size(768, 278);
+            this.dataGVThongKeHocPhi.Size = new System.Drawing.Size(802, 278);
             this.dataGVThongKeHocPhi.TabIndex = 38;
             // 
             // lbltkhp
