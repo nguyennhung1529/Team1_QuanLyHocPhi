@@ -32,39 +32,39 @@ AS
 	BEGIN
 		SELECT DISTINCT *
 		FROM VW_TongQuatHocPhi
-		WHERE ([Năm học] = @NamHoc OR @NamHoc = null)
-		AND ([Học kỳ] = @HocKy OR @HocKy = null)
-		AND ([MSV] = @MSV OR @MSV = null)
-		AND ([Còn nợ] > 0 OR @TinhTang = null)
+		WHERE ([Năm học] = @NamHoc OR @NamHoc = '')
+		AND ([Học kỳ] = @HocKy OR @HocKy = '')
+		AND ([MSV] = @MSV OR @MSV = '')
+		AND ([Còn nợ] > 0 OR @TinhTang = '')
 	END
 	ELSE IF @TinhTang = N'Đã đóng'
 	BEGIN
 		SELECT DISTINCT *
 		FROM VW_TongQuatHocPhi
-		WHERE ([Năm học] = @NamHoc OR @NamHoc = null)
-		AND ([Học kỳ] = @HocKy OR @HocKy = null)
-		AND ([MSV] = @MSV OR @MSV = null)
-		AND ([Còn nợ] <= 0 OR @TinhTang = null)
+		WHERE ([Năm học] = @NamHoc OR @NamHoc = '')
+		AND ([Học kỳ] = @HocKy OR @HocKy = '')
+		AND ([MSV] = @MSV OR @MSV = '')
+		AND ([Còn nợ] <= 0 OR @TinhTang = '')
 	END
 	ELSE IF @TinhTang = N'Dư tiền'
 	BEGIN
 		SELECT DISTINCT *
 		FROM VW_TongQuatHocPhi
-		WHERE ([Năm học] = @NamHoc OR @NamHoc = null)
-		AND ([Học kỳ] = @HocKy OR @HocKy = null)
-		AND ([MSV] = @MSV OR @MSV = null)
-		AND ([Còn nợ] < 0 OR @TinhTang = null)
+		WHERE ([Năm học] = @NamHoc OR @NamHoc = '')
+		AND ([Học kỳ] = @HocKy OR @HocKy = '')
+		AND ([MSV] = @MSV OR @MSV = '')
+		AND ([Còn nợ] < 0 OR @TinhTang = '')
 	END
-	ELSE IF @TinhTang = null
+	ELSE IF @TinhTang = ''
 	BEGIN
 		SELECT DISTINCT *
 		FROM VW_TongQuatHocPhi
-		WHERE ([Năm học] = @NamHoc OR @NamHoc = null)
-		AND ([Học kỳ] = @HocKy OR @HocKy = null)
-		AND ([MSV] = @MSV OR @MSV = null)
-	END
+		WHERE ([Năm học] = @NamHoc OR @NamHoc = '')
+		AND ([Học kỳ] = @HocKy OR @HocKy = '')
+		AND ([MSV] = @MSV OR @MSV = '')
+	END;
 GO;
-EXEC SP_TIMKIEM_TongQuatHocPhi '2020-2021', '1', 'null', N'Đã đóng';
+EXEC SP_TIMKIEM_TongQuatHocPhi '2020-2021', '', '', N'';
 GO;
 -- View tổng quát tình trạng học phí của các sinh viên
 -- vw_TinhTrangHP (NamHoc, HocKy, MSV, HocPhi, MienGiam, CanDong, DaDong, ConNo)
