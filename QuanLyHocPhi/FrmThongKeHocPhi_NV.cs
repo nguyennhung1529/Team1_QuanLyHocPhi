@@ -124,6 +124,7 @@ namespace QuanLyHocPhi
             string sql_tk = string.Format("EXEC SP_TIMKIEM_TongQuatHocPhi '{0}', '{1}', '{2}', N'{3}'", NamHoc, HocKy, MaSV, TinhTrang);
             dta = ketnoi.Lay_DuLieu(sql_tk);
             dataGVThongKeHocPhi.DataSource = dta;
+            HienThi_DuLieu();
         }
     }
 }
