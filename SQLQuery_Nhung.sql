@@ -1,11 +1,70 @@
-﻿use QLHocPhi;
+﻿use QuanLyHocPhi;
 GO;
-SELECT *
-FROM 
-
-
-
-
+-- tạo View cho form Tổng quát học phí sinh viên
+CREATE VIEW VW_TongQuatHocPhi
+AS
+	SELECT DISTINCT KY_HOC.NamHoc AS 'Năm học',
+		KY_HOC.HocKy AS 'Học kỳ',
+		KY_HOC_PHI.MSV AS 'MSV',
+		SINH_VIEN.MaL AS 'Mã lớp',
+		DOI_TUONG.MucGiam AS 'Mức giảm',
+		KY_HOC_PHI.CanDong AS 'Cần đóng',
+		(KY_HOC_PHI.CanDong - KY_HOC_PHI.DaDong) AS 'Còn nợ'
+	FROM KY_HOC_PHI
+		JOIN KY_HOC ON KY_HOC.MaKyHoc = KY_HOC_PHI.MaKyHoc
+		JOIN SINH_VIEN ON SINH_VIEN.MSV = KY_HOC_PHI.MSV
+		JOIN CT_DOI_TUONG ON CT_DOI_TUONG.MSV = SINH_VIEN.MSV
+		JOIN DOI_TUONG ON DOI_TUONG.MaDT = CT_DOI_TUONG.MaDT;
+GO;
+SELECT * FROM VW_TongQuatHocPhi;
+SELECT * FROM KY_HOC;
+SELECT DISTINCT NamHoc FROM KY_HOC;
+SELECT DISTINCT HocKy FROM KY_HOC;
+GO;
+-- tạo Procedure cho thao tác tìm kiếm tổng quát học phí
+CREATE PROC SP_TIMKIEM_TongQuatHocPhi
+	@NamHoc char(10),
+	@HocKy char(5),
+	@MSV char(10),
+	@TinhTang nvarchar(20)
+AS
+	IF @TinhTang = N'Còn nợ'
+	BEGIN
+		SELECT DISTINCT *
+		FROM VW_TongQuatHocPhi
+		WHERE ([Năm học] = @NamHoc OR @NamHoc = null)
+		AND ([Học kỳ] = @HocKy OR @HocKy = null)
+		AND ([MSV] = @MSV OR @MSV = null)
+		AND ([Còn nợ] > 0 OR @TinhTang = null)
+	END
+	ELSE IF @TinhTang = N'Đã đóng'
+	BEGIN
+		SELECT DISTINCT *
+		FROM VW_TongQuatHocPhi
+		WHERE ([Năm học] = @NamHoc OR @NamHoc = null)
+		AND ([Học kỳ] = @HocKy OR @HocKy = null)
+		AND ([MSV] = @MSV OR @MSV = null)
+		AND ([Còn nợ] <= 0 OR @TinhTang = null)
+	END
+	ELSE IF @TinhTang = N'Dư tiền'
+	BEGIN
+		SELECT DISTINCT *
+		FROM VW_TongQuatHocPhi
+		WHERE ([Năm học] = @NamHoc OR @NamHoc = null)
+		AND ([Học kỳ] = @HocKy OR @HocKy = null)
+		AND ([MSV] = @MSV OR @MSV = null)
+		AND ([Còn nợ] < 0 OR @TinhTang = null)
+	END
+	ELSE IF @TinhTang = null
+	BEGIN
+		SELECT DISTINCT *
+		FROM VW_TongQuatHocPhi
+		WHERE ([Năm học] = @NamHoc OR @NamHoc = null)
+		AND ([Học kỳ] = @HocKy OR @HocKy = null)
+		AND ([MSV] = @MSV OR @MSV = null)
+	END
+GO;
+EXEC SP_TIMKIEM_TongQuatHocPhi '2020-2021', '1', 'null', N'Đã đóng';
 GO;
 -- View tổng quát tình trạng học phí của các sinh viên
 -- vw_TinhTrangHP (NamHoc, HocKy, MSV, HocPhi, MienGiam, CanDong, DaDong, ConNo)

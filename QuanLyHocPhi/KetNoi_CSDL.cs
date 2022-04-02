@@ -18,7 +18,7 @@ namespace QuanLyHocPhi
 
         public void KetNoi_DuLieu()
         {
-            string strKetNoi = @"Data Source=MSI\;Initial Catalog=QLHocPhi;Integrated Security=True";
+            string strKetNoi = @"Data Source=MSI\;Initial Catalog=QuanLyHocPhi;Integrated Security=True";
             cnn = new SqlConnection(strKetNoi);
             cnn.Open();
         }
