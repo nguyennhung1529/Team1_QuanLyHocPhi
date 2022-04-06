@@ -16,6 +16,10 @@ BIEN LAI => DUYỆT
 
 
 
+- Khi INSERT KY_HOC_PHI 
+	=> EXEC PROCEDURE sp_update_CTHP
+- Khi UPDATE KY_HOC_PHI
+	=> EXEC PROCEDURE sp_update_CTHP
 
 
 

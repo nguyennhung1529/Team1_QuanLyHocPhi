@@ -1,4 +1,5 @@
 ﻿use QuanLyHocPhi;
+-- ============================ PROCEDURE ============================ --
 -- Tạo thủ tục PROCEDURE thực hiện cập nhật giá trị CT_HOC_PHI.ConNo
 GO;
 CREATE PROCEDURE sp_update_CTHP
@@ -46,29 +47,9 @@ BEGIN
 	CLOSE cursorCTHP;
 	DEALLOCATE cursorCTHP;
 END;
-GO;
--- tạo View cho form Tổng quát học phí sinh viên
-CREATE VIEW VW_TongQuatHocPhi
-AS
-	SELECT DISTINCT KY_HOC.NamHoc AS 'Năm học',
-		KY_HOC.HocKy AS 'Học kỳ',
-		KY_HOC_PHI.MSV AS 'MSV',
-		SINH_VIEN.MaL AS 'Mã lớp',
-		DOI_TUONG.MucGiam AS 'Mức giảm',
-		KY_HOC_PHI.CanDong AS 'Cần đóng',
-		(KY_HOC_PHI.CanDong - KY_HOC_PHI.DaDong) AS 'Còn nợ'
-	FROM KY_HOC_PHI
-		JOIN KY_HOC ON KY_HOC.MaKyHoc = KY_HOC_PHI.MaKyHoc
-		JOIN SINH_VIEN ON SINH_VIEN.MSV = KY_HOC_PHI.MSV
-		JOIN CT_DOI_TUONG ON CT_DOI_TUONG.MSV = SINH_VIEN.MSV
-		JOIN DOI_TUONG ON DOI_TUONG.MaDT = CT_DOI_TUONG.MaDT;
-GO;
-SELECT * FROM VW_TongQuatHocPhi;
-SELECT * FROM KY_HOC;
-SELECT DISTINCT NamHoc FROM KY_HOC;
-SELECT DISTINCT HocKy FROM KY_HOC;
-GO;
+
 -- tạo Procedure cho thao tác tìm kiếm tổng quát học phí
+GO;
 CREATE PROC SP_TIMKIEM_TongQuatHocPhi
 	@NamHoc char(10),
 	@HocKy char(5),
@@ -112,7 +93,118 @@ AS
 	END;
 GO;
 EXEC SP_TIMKIEM_TongQuatHocPhi '2020-2021', '', '', N'';
+
+-- tạo Procedure cho thao tác tìm kiếm chi tiết học phí theo năm học, học kỳ, msv, tình trạng
 GO;
+CREATE PROC SP_TIMKIEM_ChiTietHocPhi
+	@NamHoc char(10),
+	@HocKy char(5),
+	@MSV char(10),
+	@TinhTang nvarchar(20)
+AS
+	IF @TinhTang = N'Còn nợ'
+	BEGIN
+		SELECT  
+			A.MaKyHP, A.MSV, A.HoTen, A.MaL, A.MaHP, A.TenHP, A.TienHoc, 
+			A.MucGiam, A.CanDong, A.ConNo, A.NgayNop
+		FROM VW_ChiTietHocPhi AS A
+			JOIN KY_HOC_PHI ON KY_HOC_PHI.MaKyHP = A.MaKyHP
+			JOIN KY_HOC ON KY_HOC.MaKyHoc = KY_HOC_PHI.MaKyHoc
+		WHERE (KY_HOC.NamHoc = @NamHoc OR @NamHoc = '')
+		AND (KY_HOC.HocKy = @HocKy OR @HocKy = '')
+		AND (A.MSV = @MSV OR @MSV = '')
+		AND (A.ConNo > 0 OR @TinhTang = '');
+	END
+	ELSE IF @TinhTang = N'Đã đóng'
+	BEGIN
+		SELECT  
+			A.MaKyHP, A.MSV, A.HoTen, A.MaL, A.MaHP, A.TenHP, A.TienHoc, 
+			A.MucGiam, A.CanDong, A.ConNo, A.NgayNop
+		FROM VW_ChiTietHocPhi AS A
+			JOIN KY_HOC_PHI ON KY_HOC_PHI.MaKyHP = A.MaKyHP
+			JOIN KY_HOC ON KY_HOC.MaKyHoc = KY_HOC_PHI.MaKyHoc
+		WHERE (KY_HOC.NamHoc = @NamHoc OR @NamHoc = '')
+		AND (KY_HOC.HocKy = @HocKy OR @HocKy = '')
+		AND (A.MSV = @MSV OR @MSV = '')
+		AND (A.ConNo <= 0 OR @TinhTang = '');
+	END
+	ELSE IF @TinhTang = N'Dư tiền'
+	BEGIN
+		SELECT  
+			A.MaKyHP, A.MSV, A.HoTen, A.MaL, A.MaHP, A.TenHP, A.TienHoc, 
+			A.MucGiam, A.CanDong, A.ConNo, A.NgayNop
+		FROM VW_ChiTietHocPhi AS A
+			JOIN KY_HOC_PHI ON KY_HOC_PHI.MaKyHP = A.MaKyHP
+			JOIN KY_HOC ON KY_HOC.MaKyHoc = KY_HOC_PHI.MaKyHoc
+		WHERE (KY_HOC.NamHoc = @NamHoc OR @NamHoc = '')
+		AND (KY_HOC.HocKy = @HocKy OR @HocKy = '')
+		AND (A.MSV = @MSV OR @MSV = '')
+		AND (A.ConNo < 0 OR @TinhTang = '');
+	END
+	ELSE IF @TinhTang = ''
+	BEGIN
+		SELECT  
+			A.MaKyHP, A.MSV, A.HoTen, A.MaL, A.MaHP, A.TenHP, A.TienHoc, 
+			A.MucGiam, A.CanDong, A.ConNo, A.NgayNop
+		FROM VW_ChiTietHocPhi AS A
+			JOIN KY_HOC_PHI ON KY_HOC_PHI.MaKyHP = A.MaKyHP
+			JOIN KY_HOC ON KY_HOC.MaKyHoc = KY_HOC_PHI.MaKyHoc
+		WHERE (KY_HOC.NamHoc = @NamHoc OR @NamHoc = '')
+		AND (KY_HOC.HocKy = @HocKy OR @HocKy = '')
+		AND (A.MSV = @MSV OR @MSV = '')
+		AND (A.MSV = @MSV OR @MSV = '');
+	END;
+GO;
+EXEC SP_TIMKIEM_ChiTietHocPhi '2020-2021', '', 'SV001', N'';
+-- ============================ VIEW ============================ --
+-- tạo View cho form Tổng quát học phí sinh viên
+GO;
+CREATE VIEW VW_TongQuatHocPhi
+AS
+	SELECT DISTINCT KY_HOC.NamHoc AS 'Năm học',
+		KY_HOC.HocKy AS 'Học kỳ',
+		KY_HOC_PHI.MSV AS 'MSV',
+		SINH_VIEN.MaL AS 'Mã lớp',
+		DOI_TUONG.MucGiam AS 'Mức giảm',
+		KY_HOC_PHI.CanDong AS 'Cần đóng',
+		(KY_HOC_PHI.CanDong - KY_HOC_PHI.DaDong) AS 'Còn nợ'
+	FROM KY_HOC_PHI
+		JOIN KY_HOC ON KY_HOC.MaKyHoc = KY_HOC_PHI.MaKyHoc
+		JOIN SINH_VIEN ON SINH_VIEN.MSV = KY_HOC_PHI.MSV
+		JOIN CT_DOI_TUONG ON CT_DOI_TUONG.MSV = SINH_VIEN.MSV
+		JOIN DOI_TUONG ON DOI_TUONG.MaDT = CT_DOI_TUONG.MaDT;
+GO;
+SELECT * FROM VW_TongQuatHocPhi;
+SELECT * FROM KY_HOC;
+SELECT DISTINCT NamHoc FROM KY_HOC;
+SELECT DISTINCT HocKy FROM KY_HOC;
+
+-- tạo View cho form chi tiết học phí sinh viên
+GO;
+CREATE VIEW VW_ChiTietHocPhi
+AS
+	SELECT 
+		CT_HOC_PHI.MaKyHP,
+		SINH_VIEN.MSV,
+		SINH_VIEN.HoTen,
+		SINH_VIEN.MaL,
+		CT_HOC_PHI.MaHP,
+		HOC_PHAN.TenHP,
+		CT_HOC_PHI.TienHoc,
+		DOI_TUONG.MucGiam,
+		CT_HOC_PHI.CanDong,
+		CT_HOC_PHI.ConNo,
+		CT_HOC_PHI.NgayNop
+	FROM CT_HOC_PHI
+		JOIN KY_HOC_PHI ON KY_HOC_PHI.MaKyHP = CT_HOC_PHI.MaKyHP
+		JOIN SINH_VIEN ON SINH_VIEN.MSV = KY_HOC_PHI.MSV
+		JOIN HOC_PHAN ON HOC_PHAN.MaHP = CT_HOC_PHI.MaHP
+		JOIN CT_DOI_TUONG ON CT_DOI_TUONG.MSV = SINH_VIEN.MSV
+		JOIN DOI_TUONG ON DOI_TUONG.MaDT = CT_DOI_TUONG.MaDT
+	WHERE KY_HOC_PHI.MaKyHoc = HOC_PHAN.MaKyHoc
+	AND KY_HOC_PHI.MaKyHoc = CT_DOI_TUONG.MaKyHoc
+
+-- ============================ TRIGGER ============================ --
 ---- TẠO TRIGGER CHO BẢNG BIEN_LAI (tác động đến bảng KY_HOC_PHI)
 --- Khi INSERT BIEN_LAI (chỉ có thể insert biên lai trong năm mà nhà trường đang mở 
 --tức năm hiện tại)
@@ -122,6 +214,7 @@ GO;
 --     	-- Cập nhật bản ghi có KY_HOC_PHI.MaKyHoc = BIEN_LAI.MaKyHoc:
 --	if BIEN_LAI.MaKyHoc = MAX(KY_HOC.MaHocKy): -- luôn đúng
 --	   DaDong = DaDong + BIEN_LAI.TienNop;
+GO;
 CREATE TRIGGER trg_Insert_BienLai ON BIEN_LAI
 AFTER INSERT AS
 BEGIN
