@@ -120,7 +120,8 @@ create table BIEN_LAI(
 	constraint fk_bienlai_msv foreign key (MSV) references SINH_VIEN(MSV),
 	constraint fk_bienlai_mans foreign key (MaNguoiCapNhat) references NHAN_SU(MaNS)
 );
-
+ALTER TABLE BIEN_LAI
+ALTER COLUMN MaNguoiCapNhat char(10) null;
 
 -- drop table [USER];
 create table [USER](
@@ -371,24 +372,24 @@ values
 -- select * from NHAN_SU;
 
 -- insert table 'BIEN_LAI'
-insert into BIEN_LAI (MaBL, TenBL, MSV, TienNop, NgayNop, Mota, NgayCapNhat, MaNguoiCapNhat, MaKyHoc) 
+insert into BIEN_LAI (MaBL, TenBL, MSV, TienNop, NgayNop, Mota, NgayCapNhat, MaNguoiCapNhat, MaKyHoc, Status) 
 values 
-	('BL001', N'001 Trả tiền học phí kì 1 năm 2020-2021', 'SV001', 4000000, '2020-06-05', N'Sinh viên 001', '2020-06-05', 'NS001', 'MKH001'),
-	('BL002', N'002 Trả tiền học phí kì 2 năm 2020-2021', 'SV001', 3000000, '2021-04-05', N'Sinh viên 001', '2021-04-05', 'NS001', 'MKH002'),
-	('BL003', N'003 Trả tiền học phí kì 1 năm 2021-2022', 'SV001', 2550000, '2021-06-05', N'Sinh viên 001', '2021-06-05', 'NS001', 'MKH004'),
-	('BL004', N'004 Trả tiền học phí kì 2 năm 2021-2022', 'SV001', 1275000, '2022-04-05', N'Sinh viên 001', '2022-04-05', 'NS001', 'MKH005'),
-	('BL005', N'005 Trả tiền học phí kì 2 năm 2021-2022', 'SV002', 3800000, '2022-04-05', N'Sinh viên 002', '2022-04-05', 'NS002', 'MKH005'),
-	('BL006', N'006 Trả tiền học phí kì 2 năm 2021-2022', 'SV003', 3800000, '2022-04-05', N'Sinh viên 003', '2022-04-05', 'NS003', 'MKH005'),
-	('BL007', N'007 Trả tiền học phí kì 1 năm 2021-2022', 'SV004', 3800000, '2021-06-05', N'Sinh viên 004', '2021-06-05', 'NS004', 'MKH004'),
-	('BL008', N'008 Trả tiền học phí kì 2 năm 2021-2022', 'SV004', 1500000, '2022-04-05', N'Sinh viên 004', '2022-04-05', 'NS004', 'MKH005'),
-	('BL009', N'009 Trả tiền học phí kì 1 năm 2021-2022', 'SV005', 4000000, '2021-06-05', N'Sinh viên 005', '2021-06-05', 'NS004', 'MKH004'),
-	('BL010', N'010 Trả tiền học phí kì 1 năm 2020-2021', 'SV006', 2550000, '2020-06-05', N'Sinh viên 006', '2020-06-05', 'NS004', 'MKH001'),
-	('BL011', N'011 Trả tiền học phí kì 2 năm 2020-2021', 'SV006', 2550000, '2021-04-05', N'Sinh viên 006', '2021-04-05', 'NS004', 'MKH002'),
-	('BL012', N'012 Trả tiền học phí kì 1 năm 2021-2022', 'SV006', 2550000, '2021-06-05', N'Sinh viên 006', '2021-06-05', 'NS003', 'MKH004'),
-	('BL013', N'013 Trả tiền học phí kì 1 năm 2021-2022', 'SV008', 3150000, '2021-06-05', N'Sinh viên 006', '2021-06-05', 'NS003', 'MKH004'),
-	('BL014', N'014 Trả tiền học phí kì 1 năm 2020-2021', 'SV010', 6000000, '2020-06-05', N'Sinh viên 001', '2020-06-05', 'NS002', 'MKH001'),
-	('BL015', N'015 Trả tiền học phí kì 2 năm 2020-2021', 'SV010', 5600000, '2021-04-05', N'Sinh viên 001', '2021-04-05', 'NS002', 'MKH002'),
-	('BL016', N'016 Trả tiền học phí kì 1 năm 2021-2022', 'SV010', 5625000, '2021-06-05', N'Sinh viên 001', '2021-06-05', 'NS002', 'MKH004');
+	('BL001', N'001 Trả tiền học phí kì 1 năm 2020-2021', 'SV001', 4000000, '2020-06-05', N'Sinh viên 001', '2020-06-05', 'NS001', 'MKH001', 1),
+	('BL002', N'002 Trả tiền học phí kì 2 năm 2020-2021', 'SV001', 3000000, '2021-04-05', N'Sinh viên 001', '2021-04-05', 'NS001', 'MKH002', 1),
+	('BL003', N'003 Trả tiền học phí kì 1 năm 2021-2022', 'SV001', 2550000, '2021-06-05', N'Sinh viên 001', '2021-06-05', 'NS001', 'MKH004', 1),
+	('BL004', N'004 Trả tiền học phí kì 2 năm 2021-2022', 'SV001', 1275000, '2022-04-05', N'Sinh viên 001', '2022-04-05', 'NS001', 'MKH005', 2),
+	('BL005', N'005 Trả tiền học phí kì 2 năm 2021-2022', 'SV002', 3800000, '2022-04-05', N'Sinh viên 002', '2022-04-05', 'NS002', 'MKH005', 2),
+	('BL006', N'006 Trả tiền học phí kì 2 năm 2021-2022', 'SV003', 3800000, '2022-04-05', N'Sinh viên 003', '2022-04-05', 'NS003', 'MKH005', 2),
+	('BL007', N'007 Trả tiền học phí kì 1 năm 2021-2022', 'SV004', 3800000, '2021-06-05', N'Sinh viên 004', '2021-06-05', 'NS004', 'MKH004', 1),
+	('BL008', N'008 Trả tiền học phí kì 2 năm 2021-2022', 'SV004', 1500000, '2022-04-05', N'Sinh viên 004', '2022-04-05', 'NS004', 'MKH005', 2),
+	('BL009', N'009 Trả tiền học phí kì 1 năm 2021-2022', 'SV005', 4000000, '2021-06-05', N'Sinh viên 005', '2021-06-05', 'NS004', 'MKH004', 1),
+	('BL010', N'010 Trả tiền học phí kì 1 năm 2020-2021', 'SV006', 2550000, '2020-06-05', N'Sinh viên 006', '2020-06-05', 'NS004', 'MKH001', 1),
+	('BL011', N'011 Trả tiền học phí kì 2 năm 2020-2021', 'SV006', 2550000, '2021-04-05', N'Sinh viên 006', '2021-04-05', 'NS004', 'MKH002', 1),
+	('BL012', N'012 Trả tiền học phí kì 1 năm 2021-2022', 'SV006', 2550000, '2021-06-05', N'Sinh viên 006', '2021-06-05', 'NS003', 'MKH004', 1),
+	('BL013', N'013 Trả tiền học phí kì 1 năm 2021-2022', 'SV008', 3150000, '2021-06-05', N'Sinh viên 006', '2021-06-05', 'NS003', 'MKH004', 1),
+	('BL014', N'014 Trả tiền học phí kì 1 năm 2020-2021', 'SV010', 6000000, '2020-06-05', N'Sinh viên 001', '2020-06-05', 'NS002', 'MKH001', 1),
+	('BL015', N'015 Trả tiền học phí kì 2 năm 2020-2021', 'SV010', 5600000, '2021-04-05', N'Sinh viên 001', '2021-04-05', 'NS002', 'MKH002', 1),
+	('BL016', N'016 Trả tiền học phí kì 1 năm 2021-2022', 'SV010', 5625000, '2021-06-05', N'Sinh viên 001', '2021-06-05', 'NS002', 'MKH004', 1);
 -- select * from BIEN_LAI;
 
 -- insert table 'USER'
@@ -422,12 +423,13 @@ values
 --
 GO;
 -- insert into table 'KY_HOC_PHI'
+-- delete from KY_HOC_PHI
 insert into KY_HOC_PHI (MaKyHoc, MSV, HocPhi, CanDong, DaDong)
 select HOC_PHAN.MaKyHoc, 
 	SINH_VIEN.MSV, 
 	SUM(HOC_PHAN.SoTC * TIEN_TIN.TienTC) as 'HocPhi',
 	SUM(HOC_PHAN.SoTC * TIEN_TIN.TienTC * (1 - DOI_TUONG.MucGiam)) as 'CanDong',
-	SUM(HOC_PHAN.SoTC * TIEN_TIN.TienTC) as 'CanDong'
+	SUM(HOC_PHAN.SoTC * TIEN_TIN.TienTC * (1 - DOI_TUONG.MucGiam)) as 'DaDong'
 from HOC_TAP
 	join SINH_VIEN on SINH_VIEN.MSV = HOC_TAP.MSV
 	join HOC_PHAN on HOC_PHAN.MaHP = HOC_TAP.MaHP
@@ -439,24 +441,45 @@ where CT_DOI_TUONG.MaKyHoc = HOC_PHAN.MaKyHoc
 group by HOC_PHAN.MaKyHoc, SINH_VIEN.MSV
 -- select * from KY_HOC_PHI
 -- 
--- update value of DaDong
+-- update value of DaDong (xét ở kỳ cuối)
+-- Nợ = Tổng học phí - Tổng miễn giảm - Tổng đóng (tất cả xét ở kỳ cuối) = Tổng cần đóng - tổng đã đóng
+-- => Tổng đóng = Tổng học phí - Tổng miễn giảm - 
+-- Đã đóng = Cần Đóng - Tổng cần đóng + tổng nộp
+
+--UPDATE KY_HOC_PHI
+--SET DaDong = (select ((select CanDong 
+--							from KY_HOC_PHI
+--							where KY_HOC_PHI.MSV = SV.MSV 
+--							and MaKyHoc = (select MAX(MaKyHoc) from KY_HOC_PHI where KY_HOC_PHI.MSV = SV.MSV))
+--					- (SUM(HP.SoTC * TT.TienTC * (1 - DT.MucGiam)))
+--					+ (ISNULL((SELECT SUM(BIEN_LAI.TienNop) FROM BIEN_LAI WHERE BIEN_LAI.MSV = SV.MSV), 0))) as 'DaDong'
+--				from HOC_TAP AS HT
+--					join SINH_VIEN		AS SV	on SV.MSV = HT.MSV
+--					join HOC_PHAN		AS HP	on HP.MaHP = HT.MaHP
+--					join CT_DOI_TUONG	AS CTDT on CTDT.MSV = SV.MSV
+--					join DOI_TUONG		AS DT	on DT.MaDT = CTDT.MaDT
+--					join LOP			AS L	on L.MaL = SV.MaL
+--					join TIEN_TIN		AS TT	on TT.MaTT = L.MaTT
+--				where CTDT.MaKyHoc = HP.MaKyHoc
+--				and SV.MSV = KY_HOC_PHI.MSV
+--				group by SV.MSV)
+--WHERE MaKyHoc = (SELECT MAX(A1.MaKyHoc) 
+--					FROM KY_HOC_PHI AS A1
+--					WHERE A1.MSV = KY_HOC_PHI.MSV
+--					GROUP BY A1.MSV);
+---- select * from KY_HOC_PHI
+
 UPDATE KY_HOC_PHI
-SET DaDong = (select ((select CanDong 
-							from KY_HOC_PHI
-							where KY_HOC_PHI.MSV = SINH_VIEN.MSV 
-							and MaKyHoc = (select MAX(MaKyHoc) from KY_HOC_PHI where KY_HOC_PHI.MSV = SINH_VIEN.MSV))
-					- (SUM(HOC_PHAN.SoTC * TIEN_TIN.TienTC * (1 - DOI_TUONG.MucGiam)))
-					+ (ISNULL((SELECT SUM(BIEN_LAI.TienNop) FROM BIEN_LAI WHERE BIEN_LAI.MSV = SINH_VIEN.MSV), 0))) as 'DaDong'
-				from HOC_TAP
-					join SINH_VIEN on SINH_VIEN.MSV = HOC_TAP.MSV
-					join HOC_PHAN on HOC_PHAN.MaHP = HOC_TAP.MaHP
-					join CT_DOI_TUONG on CT_DOI_TUONG.MSV = SINH_VIEN.MSV
-					join DOI_TUONG on DOI_TUONG.MaDT = CT_DOI_TUONG.MaDT
-					join LOP on LOP.MaL = SINH_VIEN.MaL
-					join TIEN_TIN on TIEN_TIN.MaTT = LOP.MaTT
-				where CT_DOI_TUONG.MaKyHoc = HOC_PHAN.MaKyHoc
-				and SINH_VIEN.MSV = KY_HOC_PHI.MSV
-				group by SINH_VIEN.MSV);
--- select * from KY_HOC_PHI
+SET DaDong = ((SELECT CanDong 
+					FROM KY_HOC_PHI AS KHP
+					WHERE KHP.MSV = KY_HOC_PHI.MSV 
+					AND KHP.MaKyHoc = (SELECT MAX(A1.MaKyHoc) FROM KY_HOC_PHI AS A1 WHERE A1.MSV = KY_HOC_PHI.MSV))
+			- ((SELECT SUM(A2.CanDong) FROM KY_HOC_PHI AS A2 WHERE A2.MSV = KY_HOC_PHI.MSV) - 
+				(ISNULL((SELECT SUM(BIEN_LAI.TienNop) FROM BIEN_LAI WHERE BIEN_LAI.MSV = KY_HOC_PHI.MSV AND BIEN_LAI.Status != 2), 0))))
+WHERE MaKyHoc = (SELECT MAX(A1.MaKyHoc) FROM KY_HOC_PHI AS A1 WHERE A1.MSV = KY_HOC_PHI.MSV);
+-- SELECT * FROM KY_HOC_PHI;
 GO;
 
+--SELECT SUM(CanDong), MSV FROM KY_HOC_PHI GROUP BY MSV
+--SELECT SUM(TienNop), MSV FROM BIEN_LAI WHERE BIEN_LAI.Status != 2 GROUP BY MSV
+--SELECT * FROM KY_HOC_PHI;
