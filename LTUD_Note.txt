@@ -1,3 +1,4 @@
+
 xét bảng KY_HOC_PHI
 - Giá trị của bảng này không được nhập thủ công, mà được điền tự động (do bảng HOC_TAP)
 ***
@@ -27,13 +28,24 @@ sẽ cập nhật.
 
 
 ***
+Nhà trường mở thêm học kỳ mới => INSERT KY_HOC => học sinh đăng ký tín chỉ
+Đăng ký tín chỉ thành công => INSERT HOC_TAP => INSERT KY_HOC_PHI
+Đến cuối kỳ, sinh viên đóng tiền học phí trong thời hạn 1 tháng
+	- SV đóng tiền: INSERT BIEN_LAI
+	-> NV xét duyệt: UPDATE BIEN_LAI
+	-> UPDATE KY_HOC_PHI
+Quá thời hạn xét duyệt, nhà trường k tiếp nhận yêu cầu sửa đổi bữa
+
+Sau khi đóng tiền và hoàn thành thi cử => nhà trường mở thêm học kỳ mới 
+
+
 - Khi INSERT BIEN_LAI (chỉ có thể insert biên lai trong năm mà nhà trường đang mở 
 tức năm hiện tại)
   Tại bảng KY_HOC_PHI:
      
      if BIEN_LAI.Status = 1:
      	-- Cập nhật bản ghi có KY_HOC_PHI.MaKyHoc = BIEN_LAI.MaKyHoc:
-	if BIEN_LAI.MaKyHoc = MaHocKy_Max: -- luôn đúng
+	if BIEN_LAI.MaKyHoc = MAX(KY_HOC.MaHocKy): -- luôn đúng
 	   DaDong = DaDong + BIEN_LAI.TienNop;
 	   
 
