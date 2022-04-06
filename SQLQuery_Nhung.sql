@@ -66,6 +66,97 @@ AS
 GO;
 EXEC SP_TIMKIEM_TongQuatHocPhi '2020-2021', '', '', N'';
 GO;
+---- TẠO TRIGGER CHO BẢNG BIEN_LAI (tác động đến bảng KY_HOC_PHI)
+--- Khi INSERT BIEN_LAI (chỉ có thể insert biên lai trong năm mà nhà trường đang mở 
+--tức năm hiện tại)
+--  Tại bảng KY_HOC_PHI:
+     
+--     if BIEN_LAI.Status = 1:
+--     	-- Cập nhật bản ghi có KY_HOC_PHI.MaKyHoc = BIEN_LAI.MaKyHoc:
+--	if BIEN_LAI.MaKyHoc = MAX(KY_HOC.MaHocKy): -- luôn đúng
+--	   DaDong = DaDong + BIEN_LAI.TienNop;
+CREATE TRIGGER trg_Insert_BienLai ON BIEN_LAI
+AFTER INSERT AS
+BEGIN
+	UPDATE KY_HOC_PHI SET DaDong = (DaDong + inserted.TienNop)
+	FROM KY_HOC_PHI
+		JOIN inserted ON inserted.MSV = KY_HOC_PHI.MSV
+	WHERE KY_HOC_PHI.MaKyHoc = inserted.MaKyHoc
+	AND inserted.Status = 1
+	AND inserted.MaKyHoc = (SELECT MAX(KY_HOC.MaKyHoc) FROM KY_HOC);
+END;
+
+SELECT * FROM KY_HOC_PHI ORDER BY MaKyHoc;
+ DELETE BIEN_LAI WHERE MaBL = 'BL017';
+insert into BIEN_LAI (MaBL, TenBL, MSV, TienNop, NgayNop, Mota, NgayCapNhat, MaKyHoc) 
+values 
+	('BL017', N'001 Trả tiền học phí kì 2 năm 2021-2022', 'SV008', 4000000, '2021-04-05', N'Sinh viên 008', '2021-06-05', 'MKH005');
+SELECT * FROM KY_HOC_PHI ORDER BY MaKyHoc;
+SELECT * FROM BIEN_LAI WHERE MaBL = 'BL017';
+
+
+GO;
+-- TRIGGER BIEN_LAI KHI UPDATE
+CREATE TRIGGER trg_Update_BienLai ON BIEN_LAI
+AFTER UPDATE AS
+BEGIN
+	DECLARE @stt_cu TINYINT, @stt_moi TINYINT;
+	DECLARE @tiennop_cu DECIMAL(12,0), @tiennop_moi DECIMAL(12,0);
+	DECLARE @makyhoc CHAR(10), @msv CHAR(10);
+
+	SET @makyhoc = (SELECT inserted.MaKyHoc FROM inserted);
+	SET @msv = (SELECT inserted.MSV FROM inserted);
+
+	SET @stt_cu = (SELECT deleted.Status FROM deleted);
+	SET @tiennop_cu = (SELECT deleted.TienNop FROM deleted);
+
+	SET @stt_moi = (SELECT inserted.Status FROM inserted);
+	SET @tiennop_moi = (SELECT inserted.TienNop FROM inserted);
+
+	IF @stt_cu = 2 AND @stt_moi = 1 -- duyệt biên lai
+	BEGIN
+		UPDATE KY_HOC_PHI SET DaDong = (DaDong + @tiennop_moi)
+		WHERE MSV = @msv
+		AND MaKyHoc = @makyhoc;
+	END
+	ELSE IF @tiennop_cu != @tiennop_moi AND @stt_cu = 1
+	BEGIN
+		UPDATE KY_HOC_PHI SET DaDong = (DaDong + @tiennop_moi - @tiennop_cu)
+		WHERE MSV = @msv
+		AND MaKyHoc = @makyhoc;
+	END;
+END;
+
+--SELECT * FROM KY_HOC_PHI ORDER BY MaKyHoc;
+---- DELETE BIEN_LAI WHERE MaBL = 'BL017';
+--UPDATE BIEN_LAI SET Status = 1 WHERE MaBL = 'BL017';
+---- UPDATE BIEN_LAI SET TienNop = 4000000 WHERE MaBL = 'BL017';
+--SELECT * FROM BIEN_LAI WHERE MaBL = 'BL017';
+--SELECT * FROM KY_HOC_PHI ORDER BY MaKyHoc;
+
+GO;
+-- TRIGGER BIEN_LAI KHI DELETE
+CREATE TRIGGER trg_Delete_BienLai ON BIEN_LAI
+FOR DELETE AS
+BEGIN
+	UPDATE KY_HOC_PHI SET DaDong = (DaDong - deleted.TienNop)
+	FROM KY_HOC_PHI
+		JOIN deleted ON deleted.MSV = KY_HOC_PHI.MSV
+	WHERE KY_HOC_PHI.MaKyHoc = deleted.MaKyHoc
+	AND deleted.Status != 2;
+END;
+--DELETE BIEN_LAI WHERE MaBL = 'BL017';
+--SELECT * FROM KY_HOC_PHI ORDER BY MaKyHoc;
+GO;
+
+SELECT * FROM KY_HOC ORDER BY MaKyHoc
+SELECT * FROM KY_HOC_PHI ORDER BY MaKyHoc
+SELECT * FROM BIEN_LAI ORDER BY MaKyHoc
+SELECT * FROM HOC_TAP, HOC_PHAN WHERE HOC_TAP.MaHP = HOC_PHAN.MaHP ORDER BY MaKyHoc
+SELECT * FROM CT_DOI_TUONG ORDER BY MaKyHoc
+
+
+
 -- View tổng quát tình trạng học phí của các sinh viên
 -- vw_TinhTrangHP (NamHoc, HocKy, MSV, HocPhi, MienGiam, CanDong, DaDong, ConNo)
 CREATE VIEW vw_TinhTrangHP AS
