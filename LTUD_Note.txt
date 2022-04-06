@@ -1,3 +1,24 @@
+Tạo 1 procedure
+- Input: MaKyHP
+- Proc:
+	While DaDong > 0
+	    IF DaDong > CanDong
+		ConNo = 0
+		DaDong = DaDong - CanDong
+	    ELSE
+		ConNo = CanDong - DaDong
+		DaDong = 0
+
+BIEN LAI => DUYỆT
+=> UPDATE KY_HOC_PHI (DaDong)
+=> UPDATE CT_HOC_PHI
+	PROCEDURE MaKyHP, 
+
+
+
+
+
+
 
 xét bảng KY_HOC_PHI
 - Giá trị của bảng này không được nhập thủ công, mà được điền tự động (do bảng HOC_TAP)

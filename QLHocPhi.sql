@@ -148,8 +148,9 @@ create table CT_HOC_PHI(
 	MaKyHP int not null foreign key (MaKyHP) references KY_HOC_PHI(MaKyHP),
 	MaHP char(10) not null foreign key (MaHP) references HOC_PHAN(MaHP),
 	TienHoc decimal (12,0) not null,
-	TienNop decimal (12,0) not null default 0,
-	NgayNop date not null,
+	CanDong decimal (12,0) not null,
+	ConNo decimal (12,0) not null default 0,
+	NgayNop date null,
 	constraint pk_cthocphi primary key(MaKyHP, MaHP)
 );
 
@@ -483,3 +484,60 @@ GO;
 --SELECT SUM(CanDong), MSV FROM KY_HOC_PHI GROUP BY MSV
 --SELECT SUM(TienNop), MSV FROM BIEN_LAI WHERE BIEN_LAI.Status != 2 GROUP BY MSV
 --SELECT * FROM KY_HOC_PHI;
+
+-- update value of CT_HOC_PHI
+GO;
+INSERT INTO CT_HOC_PHI (MaKyHP, MaHP, TienHoc, CanDong)
+SELECT DISTINCT
+	KHP.MaKyHP,
+	HP.MaHP,
+	TT.TienTC * HP.SoTC AS 'TienHoc',
+	TT.TienTC * HP.SoTC * (1 - DT.MucGiam) AS 'CanDong'
+FROM HOC_TAP AS HT
+	JOIN SINH_VIEN		AS SV	ON SV.MSV = HT.MSV
+	JOIN HOC_PHAN		AS HP	ON HP.MaHP = HT.MaHP
+	JOIN CT_DOI_TUONG	AS CTDT ON CTDT.MSV = SV.MSV
+	JOIN DOI_TUONG		AS DT	ON DT.MaDT = CTDT.MaDT
+	JOIN LOP			AS L	ON L.MaL = SV.MaL
+	JOIN TIEN_TIN		AS TT	ON TT.MaTT = L.MaTT
+	JOIN KY_HOC_PHI		AS KHP	ON KHP.MSV = SV.MSV
+WHERE CTDT.MaKyHoc = HP.MaKyHoc
+AND CTDT.MaKyHoc = KHP.MaKyHoc
+
+-- select * from CT_HOC_PHI
+-- Cập nhật giá trị CT_HOC_PHI.NgayNop
+GO;
+UPDATE CT_HOC_PHI
+SET NgayNop = BIEN_LAI.NgayNop
+FROM CT_HOC_PHI
+	JOIN KY_HOC_PHI ON KY_HOC_PHI.MaKyHP = CT_HOC_PHI.MaKyHP
+	JOIN BIEN_LAI ON BIEN_LAI.MSV = KY_HOC_PHI.MSV
+WHERE BIEN_LAI.MaKyHoc = KY_HOC_PHI.MaKyHoc
+
+-- select * from CT_HOC_PHI
+-- Cập nhật giá trị KY_HOC_PHI.ConNo
+GO;
+DECLARE @MaKyHP int;
+DECLARE cursorGetLastMKH CURSOR FOR
+	SELECT DISTINCT MaKyHP
+	FROM KY_HOC_PHI
+	WHERE MaKyHoc = (SELECT MAX(A.MaKyHoc) 
+						FROM KY_HOC_PHI AS A 
+						WHERE A.MSV = KY_HOC_PHI.MSV);
+OPEN cursorGetLastMKH;
+FETCH NEXT FROM cursorGetLastMKH INTO @MaKyHP;
+WHILE @@FETCH_STATUS = 0
+BEGIN
+	EXEC sp_update_CTHP @MaKyHP;
+	FETCH NEXT FROM cursorGetLastMKH INTO @MaKyHP;
+END;
+CLOSE cursorGetLastMKH;
+DEALLOCATE cursorGetLastMKH;
+--select * from CT_HOC_PHI
+--select *  from KY_HOC_PHI
+GO;
+--UPDATE CT_HOC_PHI
+--SET NgayNop = '2021-06-05'
+--WHERE MaKyHP = 147
+--AND MaHP = 'HP015'
+
