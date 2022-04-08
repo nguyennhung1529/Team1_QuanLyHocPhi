@@ -16,5 +16,38 @@ namespace QuanLyHocPhi
         {
             InitializeComponent();
         }
+
+        private void btnTimKiem_Click(object sender, EventArgs e)
+        {
+            DataTable data = new DataTable();
+            string namHoc = "";
+            string hocKy = "";
+            string maSv = "";
+            string tinhTrang = "";
+            if(chbNamHoc.Checked == true)
+            {
+                namHoc = txtNamHoc.Text;
+            }
+            if (chbMaSV.Checked == true)
+            {
+                maSv = txtMaSV.Text;
+            }
+            if (chbHocKy.Checked == true)
+            {
+                hocKy = cboHocKy.Text;
+
+            }
+            if (chbTinhTrang.Checked == true)
+            {
+                tinhTrang = cboTinhTrang.Text;
+
+            }
+
+        }
+
+        private void FrmBaoCaoThongKe_NV_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

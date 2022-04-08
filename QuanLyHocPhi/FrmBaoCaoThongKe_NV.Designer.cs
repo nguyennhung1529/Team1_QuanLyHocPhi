@@ -194,6 +194,7 @@ namespace QuanLyHocPhi
             this.Controls.Add(this.lblBaoCaoThongKeSV);
             this.Name = "FrmBaoCaoThongKe_NV";
             this.Text = "FrmBaoCaoThongKe_NV";
+            this.Load += new System.EventHandler(this.FrmBaoCaoThongKe_NV_Load);
             this.grbTimKiem.ResumeLayout(false);
             this.grbTimKiem.PerformLayout();
             this.ResumeLayout(false);
