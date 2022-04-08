@@ -1,27 +1,55 @@
 ﻿use QuanLyHocPhi;
+-- ============================ PROCEDURE ============================ --
+-- Tạo thủ tục PROCEDURE thực hiện cập nhật giá trị CT_HOC_PHI.ConNo
 GO;
--- tạo View cho form Tổng quát học phí sinh viên
-CREATE VIEW VW_TongQuatHocPhi
+CREATE PROCEDURE sp_update_CTHP
+	@MaKyHP int
 AS
-	SELECT DISTINCT KY_HOC.NamHoc AS 'Năm học',
-		KY_HOC.HocKy AS 'Học kỳ',
-		KY_HOC_PHI.MSV AS 'MSV',
-		SINH_VIEN.MaL AS 'Mã lớp',
-		DOI_TUONG.MucGiam AS 'Mức giảm',
-		KY_HOC_PHI.CanDong AS 'Cần đóng',
-		(KY_HOC_PHI.CanDong - KY_HOC_PHI.DaDong) AS 'Còn nợ'
-	FROM KY_HOC_PHI
-		JOIN KY_HOC ON KY_HOC.MaKyHoc = KY_HOC_PHI.MaKyHoc
-		JOIN SINH_VIEN ON SINH_VIEN.MSV = KY_HOC_PHI.MSV
-		JOIN CT_DOI_TUONG ON CT_DOI_TUONG.MSV = SINH_VIEN.MSV
-		JOIN DOI_TUONG ON DOI_TUONG.MaDT = CT_DOI_TUONG.MaDT;
-GO;
-SELECT * FROM VW_TongQuatHocPhi;
-SELECT * FROM KY_HOC;
-SELECT DISTINCT NamHoc FROM KY_HOC;
-SELECT DISTINCT HocKy FROM KY_HOC;
-GO;
+BEGIN
+	DECLARE @MaHP CHAR(10);
+	DECLARE @CanDong DECIMAL(12,0), @ConNo DECIMAL(12,0), @TongDaDong DECIMAL(12,0);
+	DECLARE @NgayNop DATE;
+	DECLARE @countRow INT, @i INT;
+
+	SET @TongDaDong = (SELECT DaDong FROM KY_HOC_PHI WHERE MaKyHP = @MaKyHP);
+	SET @countRow = (SELECT COUNT(MaHP) FROM CT_HOC_PHI WHERE MaKyHP = @MaKyHP);
+	SET @i = 0;
+
+	-- Khai báo con trỏ
+	DECLARE cursorCTHP CURSOR FOR
+		SELECT MaHP, CanDong, ConNo, NgayNop FROM CT_HOC_PHI WHERE MaKyHP = @MaKyHP;
+	OPEN cursorCTHP;
+	FETCH NEXT FROM cursorCTHP INTO @MaHP, @CanDong, @ConNo, @NgayNop;
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		SET @i = @i + 1;
+		IF @TongDaDong >= @CanDong
+		BEGIN
+			SET @ConNo = (CASE WHEN @i = @countRow THEN @CanDong - @TongDaDong ELSE 0 END);
+			SET @TongDaDong = @TongDaDong - @CanDong;
+		END
+		ELSE
+		BEGIN
+			SET @ConNo = @CanDong - @TongDaDong;
+			SET @TongDaDong = 0;
+		END;
+
+		UPDATE CT_HOC_PHI SET ConNo = @ConNo WHERE MaKyHP = @MaKyHP AND MaHP = @MaHP;
+		--PRINT @MaHP;
+		--PRINT @CanDong;
+		--PRINT @ConNo;
+		--PRINT @NgayNop;
+		--PRINT @TongDaDong;
+		--PRINT '==========';
+
+		FETCH NEXT FROM cursorCTHP INTO @MaHP, @CanDong, @ConNo, @NgayNop;
+	END;
+	CLOSE cursorCTHP;
+	DEALLOCATE cursorCTHP;
+END;
+
 -- tạo Procedure cho thao tác tìm kiếm tổng quát học phí
+GO;
 CREATE PROC SP_TIMKIEM_TongQuatHocPhi
 	@NamHoc char(10),
 	@HocKy char(5),
@@ -65,7 +93,118 @@ AS
 	END;
 GO;
 EXEC SP_TIMKIEM_TongQuatHocPhi '2020-2021', '', '', N'';
+
+-- tạo Procedure cho thao tác tìm kiếm chi tiết học phí theo năm học, học kỳ, msv, tình trạng
 GO;
+CREATE PROC SP_TIMKIEM_ChiTietHocPhi
+	@NamHoc char(10),
+	@HocKy char(5),
+	@MSV char(10),
+	@TinhTang nvarchar(20)
+AS
+	IF @TinhTang = N'Còn nợ'
+	BEGIN
+		SELECT  
+			A.MaKyHP, A.MSV, A.HoTen, A.MaL, A.MaHP, A.TenHP, A.TienHoc, 
+			A.MucGiam, A.CanDong, A.ConNo, A.NgayNop
+		FROM VW_ChiTietHocPhi AS A
+			JOIN KY_HOC_PHI ON KY_HOC_PHI.MaKyHP = A.MaKyHP
+			JOIN KY_HOC ON KY_HOC.MaKyHoc = KY_HOC_PHI.MaKyHoc
+		WHERE (KY_HOC.NamHoc = @NamHoc OR @NamHoc = '')
+		AND (KY_HOC.HocKy = @HocKy OR @HocKy = '')
+		AND (A.MSV = @MSV OR @MSV = '')
+		AND (A.ConNo > 0 OR @TinhTang = '');
+	END
+	ELSE IF @TinhTang = N'Đã đóng'
+	BEGIN
+		SELECT  
+			A.MaKyHP, A.MSV, A.HoTen, A.MaL, A.MaHP, A.TenHP, A.TienHoc, 
+			A.MucGiam, A.CanDong, A.ConNo, A.NgayNop
+		FROM VW_ChiTietHocPhi AS A
+			JOIN KY_HOC_PHI ON KY_HOC_PHI.MaKyHP = A.MaKyHP
+			JOIN KY_HOC ON KY_HOC.MaKyHoc = KY_HOC_PHI.MaKyHoc
+		WHERE (KY_HOC.NamHoc = @NamHoc OR @NamHoc = '')
+		AND (KY_HOC.HocKy = @HocKy OR @HocKy = '')
+		AND (A.MSV = @MSV OR @MSV = '')
+		AND (A.ConNo <= 0 OR @TinhTang = '');
+	END
+	ELSE IF @TinhTang = N'Dư tiền'
+	BEGIN
+		SELECT  
+			A.MaKyHP, A.MSV, A.HoTen, A.MaL, A.MaHP, A.TenHP, A.TienHoc, 
+			A.MucGiam, A.CanDong, A.ConNo, A.NgayNop
+		FROM VW_ChiTietHocPhi AS A
+			JOIN KY_HOC_PHI ON KY_HOC_PHI.MaKyHP = A.MaKyHP
+			JOIN KY_HOC ON KY_HOC.MaKyHoc = KY_HOC_PHI.MaKyHoc
+		WHERE (KY_HOC.NamHoc = @NamHoc OR @NamHoc = '')
+		AND (KY_HOC.HocKy = @HocKy OR @HocKy = '')
+		AND (A.MSV = @MSV OR @MSV = '')
+		AND (A.ConNo < 0 OR @TinhTang = '');
+	END
+	ELSE IF @TinhTang = ''
+	BEGIN
+		SELECT  
+			A.MaKyHP, A.MSV, A.HoTen, A.MaL, A.MaHP, A.TenHP, A.TienHoc, 
+			A.MucGiam, A.CanDong, A.ConNo, A.NgayNop
+		FROM VW_ChiTietHocPhi AS A
+			JOIN KY_HOC_PHI ON KY_HOC_PHI.MaKyHP = A.MaKyHP
+			JOIN KY_HOC ON KY_HOC.MaKyHoc = KY_HOC_PHI.MaKyHoc
+		WHERE (KY_HOC.NamHoc = @NamHoc OR @NamHoc = '')
+		AND (KY_HOC.HocKy = @HocKy OR @HocKy = '')
+		AND (A.MSV = @MSV OR @MSV = '')
+		AND (A.MSV = @MSV OR @MSV = '');
+	END;
+GO;
+EXEC SP_TIMKIEM_ChiTietHocPhi '2020-2021', '', 'SV001', N'';
+-- ============================ VIEW ============================ --
+-- tạo View cho form Tổng quát học phí sinh viên
+GO;
+CREATE VIEW VW_TongQuatHocPhi
+AS
+	SELECT DISTINCT KY_HOC.NamHoc AS 'Năm học',
+		KY_HOC.HocKy AS 'Học kỳ',
+		KY_HOC_PHI.MSV AS 'MSV',
+		SINH_VIEN.MaL AS 'Mã lớp',
+		DOI_TUONG.MucGiam AS 'Mức giảm',
+		KY_HOC_PHI.CanDong AS 'Cần đóng',
+		(KY_HOC_PHI.CanDong - KY_HOC_PHI.DaDong) AS 'Còn nợ'
+	FROM KY_HOC_PHI
+		JOIN KY_HOC ON KY_HOC.MaKyHoc = KY_HOC_PHI.MaKyHoc
+		JOIN SINH_VIEN ON SINH_VIEN.MSV = KY_HOC_PHI.MSV
+		JOIN CT_DOI_TUONG ON CT_DOI_TUONG.MSV = SINH_VIEN.MSV
+		JOIN DOI_TUONG ON DOI_TUONG.MaDT = CT_DOI_TUONG.MaDT;
+GO;
+SELECT * FROM VW_TongQuatHocPhi;
+SELECT * FROM KY_HOC;
+SELECT DISTINCT NamHoc FROM KY_HOC;
+SELECT DISTINCT HocKy FROM KY_HOC;
+
+-- tạo View cho form chi tiết học phí sinh viên
+GO;
+CREATE VIEW VW_ChiTietHocPhi
+AS
+	SELECT 
+		CT_HOC_PHI.MaKyHP,
+		SINH_VIEN.MSV,
+		SINH_VIEN.HoTen,
+		SINH_VIEN.MaL,
+		CT_HOC_PHI.MaHP,
+		HOC_PHAN.TenHP,
+		CT_HOC_PHI.TienHoc,
+		DOI_TUONG.MucGiam,
+		CT_HOC_PHI.CanDong,
+		CT_HOC_PHI.ConNo,
+		CT_HOC_PHI.NgayNop
+	FROM CT_HOC_PHI
+		JOIN KY_HOC_PHI ON KY_HOC_PHI.MaKyHP = CT_HOC_PHI.MaKyHP
+		JOIN SINH_VIEN ON SINH_VIEN.MSV = KY_HOC_PHI.MSV
+		JOIN HOC_PHAN ON HOC_PHAN.MaHP = CT_HOC_PHI.MaHP
+		JOIN CT_DOI_TUONG ON CT_DOI_TUONG.MSV = SINH_VIEN.MSV
+		JOIN DOI_TUONG ON DOI_TUONG.MaDT = CT_DOI_TUONG.MaDT
+	WHERE KY_HOC_PHI.MaKyHoc = HOC_PHAN.MaKyHoc
+	AND KY_HOC_PHI.MaKyHoc = CT_DOI_TUONG.MaKyHoc
+
+-- ============================ TRIGGER ============================ --
 ---- TẠO TRIGGER CHO BẢNG BIEN_LAI (tác động đến bảng KY_HOC_PHI)
 --- Khi INSERT BIEN_LAI (chỉ có thể insert biên lai trong năm mà nhà trường đang mở 
 --tức năm hiện tại)
@@ -75,6 +214,7 @@ GO;
 --     	-- Cập nhật bản ghi có KY_HOC_PHI.MaKyHoc = BIEN_LAI.MaKyHoc:
 --	if BIEN_LAI.MaKyHoc = MAX(KY_HOC.MaHocKy): -- luôn đúng
 --	   DaDong = DaDong + BIEN_LAI.TienNop;
+GO;
 CREATE TRIGGER trg_Insert_BienLai ON BIEN_LAI
 AFTER INSERT AS
 BEGIN
@@ -149,295 +289,28 @@ END;
 --SELECT * FROM KY_HOC_PHI ORDER BY MaKyHoc;
 GO;
 
-SELECT * FROM KY_HOC ORDER BY MaKyHoc
-SELECT * FROM KY_HOC_PHI ORDER BY MaKyHoc
-SELECT * FROM BIEN_LAI ORDER BY MaKyHoc
-SELECT * FROM HOC_TAP, HOC_PHAN WHERE HOC_TAP.MaHP = HOC_PHAN.MaHP ORDER BY MaKyHoc
-SELECT * FROM CT_DOI_TUONG ORDER BY MaKyHoc
-
-
-
--- View tổng quát tình trạng học phí của các sinh viên
--- vw_TinhTrangHP (NamHoc, HocKy, MSV, HocPhi, MienGiam, CanDong, DaDong, ConNo)
-CREATE VIEW vw_TinhTrangHP AS
-	SELECT sanpham.id_sanpham, sanpham.ten_sanpham, hangtonkho.chatluong
-	FROM sanpham
-	INNER JOIN hangtonkho
-	ON sanpham.id_sanpham = hangtonkho.id_sanpham
-	WHERE sanpham.id_sanpham >= 1000;
-
-
--- Hàm tính mức giảm theo các năm học của từng đối tượng sinh viên
--- Input: NamHoc, MSV
--- Output: MucGiam
+---- TẠO TRIGGER CHO BẢNG KY_HOC_PHI (tác động đến bảng CT_HOC_PHI)
+--- Khi INSERT KY_HOC_PHI 
+--	=> EXEC PROCEDURE sp_update_CTHP
+--- Khi UPDATE KY_HOC_PHI
+--	=> EXEC PROCEDURE sp_update_CTHP
 GO;
-CREATE FUNCTION func_TinhMucGiam
-(@NamHoc CHAR(10), @MSV CHAR(10))
-RETURNS FLOAT(2)
-AS
+CREATE TRIGGER trg_Insert_KyHocPhi ON KY_HOC_PHI
+AFTER INSERT, UPDATE AS
 BEGIN
-	DECLARE @MucGiam FLOAT(2);
-
-	SET @MucGiam = ISNULL((SELECT DOI_TUONG.MucGiam 
-							FROM SINH_VIEN
-								JOIN CT_DOI_TUONG ON SINH_VIEN.MSV = CT_DOI_TUONG.MSV
-								JOIN DOI_TUONG ON CT_DOI_TUONG.MaDT = DOI_TUONG.MaDT
-							WHERE SINH_VIEN.MSV = 'SV002'
-							AND CT_DOI_TUONG.NamHoc = '2021-2022'), 0);
-RETURN @MucGiam;
+	DECLARE @MaKyHP INT;
+	SET @MaKyHP = (SELECT MaKyHP FROM inserted);
+	EXEC sp_update_CTHP @MaKyHP;
 END;
-GO;
-
--- Hàm tính tiền nợ (nợ: +, dư: -) của sinh viên theo các học kỳ của năm học
--- Input: HocKy, NamHoc, MSV
--- Output: TienNo
-CREATE FUNCTION func_TinhTienNo
-(@HocKy CHAR(5), @NamHoc CHAR(10), @MSV CHAR(10))
-RETURNS DECIMAL(12,0)
-AS
-BEGIN
-	DECLARE @TienNo DECIMAL(12,0);
-	DECLARE @NamHoc_Max CHAR(10);
-	DECLARE @HocKy_Max CHAR(5);
-
-	-- set value for @NamHoc_Max and @HocKy_Max
-	SELECT DISTINCT TOP 1 @NamHoc_Max = HOC_PHAN.NamHoc, @HocKy_Max = HOC_PHAN.HocKy
-	FROM HOC_TAP
-		JOIN HOC_PHAN		ON HOC_TAP.MaHP = HOC_PHAN.MaHP
-		JOIN SINH_VIEN		ON HOC_TAP.MSV = SINH_VIEN.MSV
-	WHERE SINH_VIEN.MSV = 'SV002'
-	ORDER BY HOC_PHAN.NamHoc DESC, HOC_PHAN.HocKy DESC;
-
-	IF @NamHoc = @NamHoc_Max AND @HocKy = @HocKy_Max
-	BEGIN
-		SET @TienNo = 2;
-	END
-	ELSE
-	BEGIN
-		SET @TienNo = 0.0;
-	END;
-RETURN @TienNo;
-END;
-GO;
+---- TRIGGER BIEN_LAI KHI UPDATE
+--GO;
+--CREATE TRIGGER trg_Update_KyHocPhi ON KY_HOC_PHI
+--AFTER UPDATE AS
+--BEGIN
+--	DECLARE @MaKyHP INT;
+--	SET @MaKyHP = (SELECT MaKyHP FROM inserted);
+--	EXEC sp_update_CTHP @MaKyHP;
+--END;
 
 
 
--- tiền học phí theo năm A và học kỳ B
-SELECT SUM(HOC_PHAN.SoTC * TIEN_TIN.TienTC) AS 'TienHocPhi'
-FROM HOC_TAP, HOC_PHAN, SINH_VIEN, LOP, 
-	TIEN_TIN, BIEN_LAI
-WHERE
-    HOC_TAP.MaHP = HOC_PHAN.MaHP
-AND HOC_TAP.MSV = SINH_VIEN.MSV
-AND SINH_VIEN.MaL = LOP.MaL
-AND LOP.MaTT = TIEN_TIN.MaTT
-AND SINH_VIEN.MSV = 'SV001'
-AND HOC_PHAN.HocKy = '1'
-AND HOC_PHAN.NamHoc = '2020-2021'
-
--- Các học phần đã học và tiền tín
-SELECT 
-	SINH_VIEN.MSV, 
-	HOC_PHAN.MaHP, 
-	HOC_PHAN.SoTC, 
-	TIEN_TIN.TienTC, 
-	HOC_PHAN.HocKy, 
-	HOC_PHAN.NamHoc,
-	CT_DOI_TUONG.MaDT,
-	DOI_TUONG.MucGiam
-FROM HOC_TAP
-	JOIN HOC_PHAN		ON HOC_TAP.MaHP = HOC_PHAN.MaHP
-	JOIN SINH_VIEN		ON HOC_TAP.MSV = SINH_VIEN.MSV
-	JOIN LOP			ON SINH_VIEN.MaL = LOP.MaL
-	JOIN TIEN_TIN		ON LOP.MaTT = TIEN_TIN.MaTT
-	LEFT JOIN CT_DOI_TUONG	ON SINH_VIEN.MSV = CT_DOI_TUONG.MSV
-	JOIN DOI_TUONG		ON CT_DOI_TUONG.MaDT = DOI_TUONG.MaDT
-WHERE SINH_VIEN.MSV = 'SV002'
--- AND HOC_PHAN.HocKy = '1'
-AND HOC_PHAN.NamHoc <= '2021-2022'
-AND CT_DOI_TUONG.NamHoc = HOC_PHAN.NamHoc
-
-----
-SELECT COUNT(DOI_TUONG.MucGiam)
-FROM SINH_VIEN
-	JOIN CT_DOI_TUONG ON SINH_VIEN.MSV = CT_DOI_TUONG.MSV
-	JOIN DOI_TUONG ON CT_DOI_TUONG.MaDT = DOI_TUONG.MaDT
-WHERE SINH_VIEN.MSV = 'SV002'
-AND CT_DOI_TUONG.NamHoc = '2020-2021'
-----
-SELECT SINH_VIEN.MSV, 
-	HOC_PHAN.MaHP, 
-	HOC_PHAN.SoTC, 
-	TIEN_TIN.TienTC, 
-	HOC_PHAN.HocKy, 
-	HOC_PHAN.NamHoc
-FROM HOC_TAP
-	JOIN HOC_PHAN		ON HOC_TAP.MaHP = HOC_PHAN.MaHP
-	JOIN SINH_VIEN		ON HOC_TAP.MSV = SINH_VIEN.MSV
-	JOIN LOP			ON SINH_VIEN.MaL = LOP.MaL
-	JOIN TIEN_TIN		ON LOP.MaTT = TIEN_TIN.MaTT
-WHERE SINH_VIEN.MSV = 'SV002'
-AND HOC_PHAN.NamHoc = '2020-2021'
-----
-SELECT SINH_VIEN.MSV, 
-	HOC_PHAN.MaHP, 
-	HOC_PHAN.SoTC, 
-	HOC_PHAN.HocKy, 
-	HOC_PHAN.NamHoc,
-	CT_DOI_TUONG.MaDT
-FROM HOC_TAP
-	JOIN HOC_PHAN		ON HOC_TAP.MaHP = HOC_PHAN.MaHP
-	JOIN SINH_VIEN		ON HOC_TAP.MSV = SINH_VIEN.MSV
-	FULL JOIN CT_DOI_TUONG ON HOC_PHAN.NamHoc = CT_DOI_TUONG.NamHoc
-WHERE SINH_VIEN.MSV = 'SV002'
-AND CT_DOI_TUONG.MSV = SINH_VIEN.MSV
---
-SELECT HOC_PHAN.MaHP, 
-	HOC_PHAN.SoTC, 
-	HOC_PHAN.HocKy, 
-	HOC_PHAN.NamHoc,
-	CT_DOI_TUONG.MaDT
-FROM HOC_PHAN
-	LEFT JOIN CT_DOI_TUONG ON HOC_PHAN.NamHoc = CT_DOI_TUONG.NamHoc
-WHERE CT_DOI_TUONG.MSV = 'SV002'
-
-==========================================
-SELECT * FROM CT_DOI_TUONG
-WHERE MSV = 'SV002'
-
-SELECT * FROM CT_DOI_TUONG WHERE MSV = 'SV001'
-
-
-
-
-
--- Số tiền cần đóng trong học kỳ  
---	= số tiền tín học trong học kỳ 
---	  + Số tiền nợ trong học kỳ trước
---	  - Miễn giảm trong học kỳ
-SELECT (SUM(HOC_PHAN.SoTC * TIEN_TIN.TienTC) * (1 - DOI_TUONG.MucGiam)) AS 'SoTienCanDong'
-FROM HOC_TAP, HOC_PHAN, SINH_VIEN, LOP, 
-	TIEN_TIN, CT_DOI_TUONG, DOI_TUONG, BIEN_LAI
-WHERE
-    HOC_TAP.MaHP = HOC_PHAN.MaHP
-AND HOC_TAP.MSV = SINH_VIEN.MSV
-AND SINH_VIEN.MaL = LOP.MaL
-AND LOP.MaTT = TIEN_TIN.MaTT
-AND SINH_VIEN.MSV = CT_DOI_TUONG.MSV
-AND CT_DOI_TUONG.MaDT = DOI_TUONG.MaDT
-AND SINH_VIEN.MSV = 'SV001'
-AND HOC_PHAN.HocKy = '1'
-AND HOC_PHAN.NamHoc = '2020-2021'
-AND CT_DOI_TUONG.NamHoc = HOC_PHAN.NamHoc
-GROUP BY DOI_TUONG.MucGiam
-
--- Tổng số tiền đã đóng theo các học kỳ và năm học
-SELECT BIEN_LAI.TienNop, BIEN_LAI.NamHoc, BIEN_LAI.HocKy
-FROM BIEN_LAI
-WHERE BIEN_LAI.MSV = 'SV001'
-AND BIEN_LAI.NamHoc = '2020-2021'
-AND BIEN_LAI.HocKy = '1'
-
-SELECT SUM(BIEN_LAI.TienNop)
-FROM BIEN_LAI
-WHERE BIEN_LAI.MSV = 'SV001'
-
-
-
--- insert into table 'CT_HOC_PHI'
-insert into CT_HOC_PHI (MaKyHP, MaHP,TienHoc, TienNop, NgayNop)
-
-
-
-
-
-GO;
--- Some test, note for insert table CT_HOC_PHI
-select SINH_VIEN.MSV, 
-		HOC_TAP.MaHP, 
-		SUM(HOC_PHAN.SoTC * TIEN_TIN.TienTC) as 'TienHoc',
-		HOC_PHAN.MaKyHoc
-from HOC_TAP
-	join SINH_VIEN on SINH_VIEN.MSV = HOC_TAP.MSV
-	join HOC_PHAN on HOC_PHAN.MaHP = HOC_TAP.MaHP
-	join LOP on LOP.MaL = SINH_VIEN.MaL
-	join TIEN_TIN on TIEN_TIN.MaTT = LOP.MaTT
-group by SINH_VIEN.MSV, HOC_TAP.MaHP, HOC_PHAN.MaKyHoc
-
-select * from KY_HOC_PHI
-GO;
--- Some test, note for insert table KY_HOC_PHI
-select SINH_VIEN.MSV, 
-	SUM(HOC_PHAN.SoTC * TIEN_TIN.TienTC) as 'HocPhi',
-	SUM(HOC_PHAN.SoTC * TIEN_TIN.TienTC * (1 - DOI_TUONG.MucGiam)) as 'CanDong',
-	SUM(HOC_PHAN.SoTC * TIEN_TIN.TienTC) as 'CanDong'
-from HOC_TAP
-	join SINH_VIEN on SINH_VIEN.MSV = HOC_TAP.MSV
-	join HOC_PHAN on HOC_PHAN.MaHP = HOC_TAP.MaHP
-	join LOP on LOP.MaL = SINH_VIEN.MaL
-	join TIEN_TIN on TIEN_TIN.MaTT = LOP.MaTT
-	join CT_DOI_TUONG on CT_DOI_TUONG.MSV = SINH_VIEN.MSV
-	join DOI_TUONG on DOI_TUONG.MaDT = CT_DOI_TUONG.MaDT
-where  CT_DOI_TUONG.MaKyHoc = HOC_PHAN.MaKyHoc
-group by SINH_VIEN.MSV
---
-select SINH_VIEN.MSV, 
-	((select CanDong from KY_HOC_PHI where KY_HOC_PHI.MSV = SINH_VIEN.MSV and MaKyHoc = (select MAX(MaKyHoc) from KY_HOC_PHI where KY_HOC_PHI.MSV = SINH_VIEN.MSV))
-	- (SUM(HOC_PHAN.SoTC * TIEN_TIN.TienTC * (1 - DOI_TUONG.MucGiam)))
-	+ (ISNULL((SELECT SUM(BIEN_LAI.TienNop) FROM BIEN_LAI WHERE BIEN_LAI.MSV = SINH_VIEN.MSV), 0))) as 'DaDong'
-from HOC_TAP
-	join SINH_VIEN on SINH_VIEN.MSV = HOC_TAP.MSV
-	join HOC_PHAN on HOC_PHAN.MaHP = HOC_TAP.MaHP
-	join CT_DOI_TUONG on CT_DOI_TUONG.MSV = SINH_VIEN.MSV
-	join DOI_TUONG on DOI_TUONG.MaDT = CT_DOI_TUONG.MaDT
-	join LOP on LOP.MaL = SINH_VIEN.MaL
-	join TIEN_TIN on TIEN_TIN.MaTT = LOP.MaTT
-where CT_DOI_TUONG.MaKyHoc = HOC_PHAN.MaKyHoc
-group by SINH_VIEN.MSV
-
---
-select SINH_VIEN.MSV, 
-	(SUM(HOC_PHAN.SoTC * TIEN_TIN.TienTC * (1 - DOI_TUONG.MucGiam))) 'TongTienCanDong',
-	(ISNULL((SELECT SUM(BIEN_LAI.TienNop) FROM BIEN_LAI WHERE BIEN_LAI.MSV = SINH_VIEN.MSV), 0)) 'TongTienDaDong',
-
-	(select CanDong from KY_HOC_PHI where KY_HOC_PHI.MSV = SINH_VIEN.MSV and MaKyHoc = (select MAX(MaKyHoc) from KY_HOC_PHI where KY_HOC_PHI.MSV = SINH_VIEN.MSV)) 'CanDong',
-
-	((SUM(HOC_PHAN.SoTC * TIEN_TIN.TienTC * (1 - DOI_TUONG.MucGiam)))
-	- (ISNULL((SELECT SUM(BIEN_LAI.TienNop) FROM BIEN_LAI WHERE BIEN_LAI.MSV = SINH_VIEN.MSV), 0))) as 'ConNo',
-
-	((select CanDong from KY_HOC_PHI where KY_HOC_PHI.MSV = SINH_VIEN.MSV and MaKyHoc = (select MAX(MaKyHoc) from KY_HOC_PHI where KY_HOC_PHI.MSV = SINH_VIEN.MSV))
-	- (SUM(HOC_PHAN.SoTC * TIEN_TIN.TienTC * (1 - DOI_TUONG.MucGiam)))
-	+ (ISNULL((SELECT SUM(BIEN_LAI.TienNop) FROM BIEN_LAI WHERE BIEN_LAI.MSV = SINH_VIEN.MSV), 0))) as 'DaDong'
-from HOC_TAP
-	join SINH_VIEN on SINH_VIEN.MSV = HOC_TAP.MSV
-	join HOC_PHAN on HOC_PHAN.MaHP = HOC_TAP.MaHP
-	join CT_DOI_TUONG on CT_DOI_TUONG.MSV = SINH_VIEN.MSV
-	join DOI_TUONG on DOI_TUONG.MaDT = CT_DOI_TUONG.MaDT
-	join LOP on LOP.MaL = SINH_VIEN.MaL
-	join TIEN_TIN on TIEN_TIN.MaTT = LOP.MaTT
-where CT_DOI_TUONG.MaKyHoc = HOC_PHAN.MaKyHoc
-group by SINH_VIEN.MSV
-order by SINH_VIEN.MSV
---
--- Số tiền cần đóng của kỳ học gần đây nhất
-select CanDong 
-from KY_HOC_PHI 
-where MSV = 'SV001' 
-and MaKyHoc = (select MAX(MaKyHoc) from KY_HOC_PHI where MSV = 'SV001')
-
-GO;
-CREATE FUNCTION func_TinhTienDaDong
-(@MSV CHAR(10))
-RETURNS FLOAT(2)
-AS
-BEGIN
-	DECLARE @TienDaNop DECIMAL(12,0);
-
-	SET @TienDaNop = ISNULL((SELECT SUM(BIEN_LAI.TienNop)
-							FROM BIEN_LAI
-							WHERE MSV = 'SV001'), 0);
-	PRINT @TienDaNop;
-RETURN @TienDaNop;
-END;
-
-GO;

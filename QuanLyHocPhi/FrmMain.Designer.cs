@@ -71,6 +71,14 @@ namespace QuanLyHocPhi
             this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.qUẢNLÝHỌCPHÍToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuQuanLiTienTin_NV = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuTimKiemTienTin_NV = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuBienLai_NV = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuThongKeHocPhi_NV = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuChiTietHocPhi_NV = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuBaoCaoThongKe_NV = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuXemHocPhi_SV = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.newToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -83,14 +91,7 @@ namespace QuanLyHocPhi
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.qUẢNLÝHỌCPHÍToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuBienLai_NV = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuTimKiemTienTin_NV = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuThongKeHocPhi_NV = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuChiTietHocPhi_NV = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuBaoCaoThongKe_NV = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuXemHocPhi_SV = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuQuanLiTienTin_NV = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuLogout = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -438,6 +439,70 @@ namespace QuanLyHocPhi
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(207, 26);
             this.aboutToolStripMenuItem.Text = "&About ... ...";
             // 
+            // qUẢNLÝHỌCPHÍToolStripMenuItem
+            // 
+            this.qUẢNLÝHỌCPHÍToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuQuanLiTienTin_NV,
+            this.mnuTimKiemTienTin_NV,
+            this.mnuBienLai_NV,
+            this.mnuThongKeHocPhi_NV,
+            this.mnuChiTietHocPhi_NV,
+            this.mnuBaoCaoThongKe_NV,
+            this.mnuXemHocPhi_SV,
+            this.mnuLogout});
+            this.qUẢNLÝHỌCPHÍToolStripMenuItem.Name = "qUẢNLÝHỌCPHÍToolStripMenuItem";
+            this.qUẢNLÝHỌCPHÍToolStripMenuItem.Size = new System.Drawing.Size(145, 24);
+            this.qUẢNLÝHỌCPHÍToolStripMenuItem.Text = "QUẢN LÝ HỌC PHÍ";
+            // 
+            // mnuQuanLiTienTin_NV
+            // 
+            this.mnuQuanLiTienTin_NV.Name = "mnuQuanLiTienTin_NV";
+            this.mnuQuanLiTienTin_NV.Size = new System.Drawing.Size(267, 26);
+            this.mnuQuanLiTienTin_NV.Text = "Quản lý tiền tín";
+            this.mnuQuanLiTienTin_NV.Click += new System.EventHandler(this.mnuQuanLiTienTin_NV_Click);
+            // 
+            // mnuTimKiemTienTin_NV
+            // 
+            this.mnuTimKiemTienTin_NV.Name = "mnuTimKiemTienTin_NV";
+            this.mnuTimKiemTienTin_NV.Size = new System.Drawing.Size(267, 26);
+            this.mnuTimKiemTienTin_NV.Text = "Tìm kiếm tiền tín";
+            this.mnuTimKiemTienTin_NV.Click += new System.EventHandler(this.mnuTimKiemTienTin_NV_Click);
+            // 
+            // mnuBienLai_NV
+            // 
+            this.mnuBienLai_NV.Name = "mnuBienLai_NV";
+            this.mnuBienLai_NV.Size = new System.Drawing.Size(267, 26);
+            this.mnuBienLai_NV.Text = "Biên lai";
+            this.mnuBienLai_NV.Click += new System.EventHandler(this.mnuBienLai_NV_Click);
+            // 
+            // mnuThongKeHocPhi_NV
+            // 
+            this.mnuThongKeHocPhi_NV.Name = "mnuThongKeHocPhi_NV";
+            this.mnuThongKeHocPhi_NV.Size = new System.Drawing.Size(267, 26);
+            this.mnuThongKeHocPhi_NV.Text = "Thống kê học phí sinh viên";
+            this.mnuThongKeHocPhi_NV.Click += new System.EventHandler(this.mnuThongKeHocPhi_NV_Click);
+            // 
+            // mnuChiTietHocPhi_NV
+            // 
+            this.mnuChiTietHocPhi_NV.Name = "mnuChiTietHocPhi_NV";
+            this.mnuChiTietHocPhi_NV.Size = new System.Drawing.Size(267, 26);
+            this.mnuChiTietHocPhi_NV.Text = "Chi tiết học phí sinh viên";
+            this.mnuChiTietHocPhi_NV.Click += new System.EventHandler(this.mnuChiTietHocPhi_NV_Click);
+            // 
+            // mnuBaoCaoThongKe_NV
+            // 
+            this.mnuBaoCaoThongKe_NV.Name = "mnuBaoCaoThongKe_NV";
+            this.mnuBaoCaoThongKe_NV.Size = new System.Drawing.Size(267, 26);
+            this.mnuBaoCaoThongKe_NV.Text = "Báo cáo thống kê";
+            this.mnuBaoCaoThongKe_NV.Click += new System.EventHandler(this.mnuBaoCaoThongKe_NV_Click);
+            // 
+            // mnuXemHocPhi_SV
+            // 
+            this.mnuXemHocPhi_SV.Name = "mnuXemHocPhi_SV";
+            this.mnuXemHocPhi_SV.Size = new System.Drawing.Size(267, 26);
+            this.mnuXemHocPhi_SV.Text = "Xem học phí";
+            this.mnuXemHocPhi_SV.Click += new System.EventHandler(this.mnuXemHocPhi_SV_Click);
+            // 
             // toolStrip
             // 
             this.toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -540,68 +605,12 @@ namespace QuanLyHocPhi
             this.toolStripStatusLabel.Size = new System.Drawing.Size(49, 20);
             this.toolStripStatusLabel.Text = "Status";
             // 
-            // qUẢNLÝHỌCPHÍToolStripMenuItem
+            // mnuLogout
             // 
-            this.qUẢNLÝHỌCPHÍToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuQuanLiTienTin_NV,
-            this.mnuTimKiemTienTin_NV,
-            this.mnuBienLai_NV,
-            this.mnuThongKeHocPhi_NV,
-            this.mnuChiTietHocPhi_NV,
-            this.mnuBaoCaoThongKe_NV,
-            this.mnuXemHocPhi_SV});
-            this.qUẢNLÝHỌCPHÍToolStripMenuItem.Name = "qUẢNLÝHỌCPHÍToolStripMenuItem";
-            this.qUẢNLÝHỌCPHÍToolStripMenuItem.Size = new System.Drawing.Size(145, 24);
-            this.qUẢNLÝHỌCPHÍToolStripMenuItem.Text = "QUẢN LÝ HỌC PHÍ";
-            // 
-            // mnuBienLai_NV
-            // 
-            this.mnuBienLai_NV.Name = "mnuBienLai_NV";
-            this.mnuBienLai_NV.Size = new System.Drawing.Size(267, 26);
-            this.mnuBienLai_NV.Text = "Biên lai";
-            this.mnuBienLai_NV.Click += new System.EventHandler(this.mnuBienLai_NV_Click);
-            // 
-            // mnuTimKiemTienTin_NV
-            // 
-            this.mnuTimKiemTienTin_NV.Name = "mnuTimKiemTienTin_NV";
-            this.mnuTimKiemTienTin_NV.Size = new System.Drawing.Size(267, 26);
-            this.mnuTimKiemTienTin_NV.Text = "Tìm kiếm tiền tín";
-            this.mnuTimKiemTienTin_NV.Click += new System.EventHandler(this.mnuTimKiemTienTin_NV_Click);
-            // 
-            // mnuThongKeHocPhi_NV
-            // 
-            this.mnuThongKeHocPhi_NV.Name = "mnuThongKeHocPhi_NV";
-            this.mnuThongKeHocPhi_NV.Size = new System.Drawing.Size(267, 26);
-            this.mnuThongKeHocPhi_NV.Text = "Thống kê học phí sinh viên";
-            this.mnuThongKeHocPhi_NV.Click += new System.EventHandler(this.mnuThongKeHocPhi_NV_Click);
-            // 
-            // mnuChiTietHocPhi_NV
-            // 
-            this.mnuChiTietHocPhi_NV.Name = "mnuChiTietHocPhi_NV";
-            this.mnuChiTietHocPhi_NV.Size = new System.Drawing.Size(267, 26);
-            this.mnuChiTietHocPhi_NV.Text = "Chi tiết học phí sinh viên";
-            this.mnuChiTietHocPhi_NV.Click += new System.EventHandler(this.mnuChiTietHocPhi_NV_Click);
-            // 
-            // mnuBaoCaoThongKe_NV
-            // 
-            this.mnuBaoCaoThongKe_NV.Name = "mnuBaoCaoThongKe_NV";
-            this.mnuBaoCaoThongKe_NV.Size = new System.Drawing.Size(267, 26);
-            this.mnuBaoCaoThongKe_NV.Text = "Báo cáo thống kê";
-            this.mnuBaoCaoThongKe_NV.Click += new System.EventHandler(this.mnuBaoCaoThongKe_NV_Click);
-            // 
-            // mnuXemHocPhi_SV
-            // 
-            this.mnuXemHocPhi_SV.Name = "mnuXemHocPhi_SV";
-            this.mnuXemHocPhi_SV.Size = new System.Drawing.Size(267, 26);
-            this.mnuXemHocPhi_SV.Text = "Xem học phí";
-            this.mnuXemHocPhi_SV.Click += new System.EventHandler(this.mnuXemHocPhi_SV_Click);
-            // 
-            // mnuQuanLiTienTin_NV
-            // 
-            this.mnuQuanLiTienTin_NV.Name = "mnuQuanLiTienTin_NV";
-            this.mnuQuanLiTienTin_NV.Size = new System.Drawing.Size(267, 26);
-            this.mnuQuanLiTienTin_NV.Text = "Quản lý tiền tín";
-            this.mnuQuanLiTienTin_NV.Click += new System.EventHandler(this.mnuQuanLiTienTin_NV_Click);
+            this.mnuLogout.Name = "mnuLogout";
+            this.mnuLogout.Size = new System.Drawing.Size(267, 26);
+            this.mnuLogout.Text = "Đăng xuất";
+            this.mnuLogout.Click += new System.EventHandler(this.mnuLogout_Click);
             // 
             // FrmMain
             // 
@@ -614,7 +623,7 @@ namespace QuanLyHocPhi
             this.Controls.Add(this.menuStrip);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FrmMain";
             this.Text = "Hệ thống Quản lý học phí";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -691,6 +700,7 @@ namespace QuanLyHocPhi
         private System.Windows.Forms.ToolStripMenuItem mnuBaoCaoThongKe_NV;
         private System.Windows.Forms.ToolStripMenuItem mnuXemHocPhi_SV;
         private System.Windows.Forms.ToolStripMenuItem mnuQuanLiTienTin_NV;
+        private System.Windows.Forms.ToolStripMenuItem mnuLogout;
     }
 }
 
