@@ -116,7 +116,7 @@ create table BIEN_LAI(
 	Mota Ntext null,
 	NgayCapNhat date not null,
 	MaNguoiCapNhat char(10) not null,
-	Status tinyint default 2, -- 0: hủy, 1: đã duyệt, 2: chưa duyệt
+	Status tinyint default 2, -- 0: ẩn, 1: đã duyệt, 2: chưa duyệt
 	constraint fk_bienlai_msv foreign key (MSV) references SINH_VIEN(MSV),
 	constraint fk_bienlai_mans foreign key (MaNguoiCapNhat) references NHAN_SU(MaNS)
 );
