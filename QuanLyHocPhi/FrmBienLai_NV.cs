@@ -18,7 +18,6 @@ namespace QuanLyHocPhi
         }
 
         KetNoi_CSDL ketnoi = new KetNoi_CSDL();
-
         private void Lay_Dulieu()
         {
             DataTable dataTable = new DataTable();

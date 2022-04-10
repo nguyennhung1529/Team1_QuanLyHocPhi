@@ -21,7 +21,8 @@ AS
 		
 GO;
 SELECT SUM ([Số tín chỉ]) AS 'TongTinNo', SUM ([Còn nợ]) AS 'TongTienNo' FROM Xem_HocPhiSV
-WHERE [Còn nợ] > 0;
+WHERE [Còn nợ] > 0
+AND MSV = 'SV002';
 
 
 
@@ -58,32 +59,18 @@ go;
 CREATE PROC SP_TIMKIEM_XemHocPhiSV_TongKet
 	@MSV char(10),
 	@NamHoc char(10),
-	@HocKy char(5),
-	@TinConNo bit
+	@HocKy char(5)
 AS 
 BEGIN
-	IF @TinConNo = 1  -- Tìm kiếm xét tín còn nợ
-	BEGIN
-		SELECT ISNULL(SUM ([Số tín chỉ]), 0) AS 'TongTinNo', 
-				ISNULL(SUM ([Còn nợ]), 0) AS 'TongTienNo' 
-				FROM Xem_HocPhiSV
-		WHERE (@NamHoc = '' OR [Năm học] = @NamHoc )
-		AND (@HocKy = '' OR [Học kỳ] = @HocKy)
-		AND [Còn nợ]  > 0
-		AND MSV = @MSV;	
-	END
-	ELSE
-	BEGIN
-		SELECT ISNULL(SUM ([Số tín chỉ]), 0) AS 'TongTinNo', 
-				ISNULL(SUM ([Còn nợ]), 0) AS 'TongTienNo'
-		FROM Xem_HocPhiSV
-		WHERE (@NamHoc = '' OR [Năm học] = @NamHoc )
-		AND (@HocKy = '' OR [Học kỳ] = @HocKy)
-		AND MSV = @MSV;	
-	END;
+	SELECT ISNULL(SUM ([Số tín chỉ]), 0) AS 'TongTinNo', 
+			ISNULL(SUM ([Còn nợ]), 0) AS 'TongTienNo' 
+			FROM Xem_HocPhiSV
+	WHERE (@NamHoc = '' OR [Năm học] = @NamHoc )
+	AND (@HocKy = '' OR [Học kỳ] = @HocKy)
+	AND [Còn nợ]  > 0
+	AND MSV = @MSV;	
 END;
-EXEC SP_TIMKIEM_XemHocPhiSV_TongKet 'SV001', '', '', 0;
-
+EXEC SP_TIMKIEM_XemHocPhiSV_TongKet 'SV001', '', '';
 
 GO;
 

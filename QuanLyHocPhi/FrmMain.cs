@@ -173,11 +173,19 @@ namespace QuanLyHocPhi
             DialogResult rs = MessageBox.Show("Bạn có chắn chắn muốn thoát khỏi chương trình?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (rs == DialogResult.Yes)
+            {
+                Form frm1 = new FrmDangNhap();
                 this.Close();
+                frm1.Show();
+            }
         }
-
+        KetNoi_CSDL ketnoi = new KetNoi_CSDL();
         private void FrmMain_Load(object sender, EventArgs e)
         {
+            txtHomeName.Visible = false;
+            DataTable dta = new DataTable();
+            string sql = "";
+            
             if (this.status == 0)
             {
                 mnuQuanLiTienTin_NV.Visible = false;
@@ -186,11 +194,18 @@ namespace QuanLyHocPhi
                 mnuThongKeHocPhi_NV.Visible = false;
                 mnuChiTietHocPhi_NV.Visible = false;
                 mnuBaoCaoThongKe_NV.Visible = false;
+                sql = "SELECT HoTen AS Name FROM SINH_VIEN WHERE MSV = '" + this.username + "'";
             }
             else
             {
                 mnuXemHocPhi_SV.Visible = false;
+                sql = "SELECT TenNS AS Name FROM NHAN_SU WHERE MaNS = '" + this.username + "'";
             }
+
+            dta = ketnoi.Lay_DuLieu(sql);
+            txtHomeName.DataBindings.Clear();
+            txtHomeName.DataBindings.Add("Text", dta, "Name");
+            lblNameUser.Text = txtHomeName.Text;
         }
     }
 }

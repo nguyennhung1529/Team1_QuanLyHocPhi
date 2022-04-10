@@ -92,7 +92,9 @@ namespace QuanLyHocPhi
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.lblName = new System.Windows.Forms.Label();
+            this.lblHello = new System.Windows.Forms.Label();
+            this.txtHomeName = new System.Windows.Forms.TextBox();
+            this.lblNameUser = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -112,7 +114,7 @@ namespace QuanLyHocPhi
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.MdiWindowListItem = this.windowsMenu;
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(843, 30);
+            this.menuStrip.Size = new System.Drawing.Size(1215, 28);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "MenuStrip";
             // 
@@ -132,7 +134,7 @@ namespace QuanLyHocPhi
             this.exitToolStripMenuItem});
             this.fileMenu.ImageTransparentColor = System.Drawing.SystemColors.ActiveBorder;
             this.fileMenu.Name = "fileMenu";
-            this.fileMenu.Size = new System.Drawing.Size(46, 26);
+            this.fileMenu.Size = new System.Drawing.Size(46, 24);
             this.fileMenu.Text = "&File";
             // 
             // newToolStripMenuItem
@@ -228,7 +230,7 @@ namespace QuanLyHocPhi
             this.toolStripSeparator7,
             this.selectAllToolStripMenuItem});
             this.editMenu.Name = "editMenu";
-            this.editMenu.Size = new System.Drawing.Size(49, 26);
+            this.editMenu.Size = new System.Drawing.Size(49, 24);
             this.editMenu.Text = "&Edit";
             // 
             // undoToolStripMenuItem
@@ -302,7 +304,7 @@ namespace QuanLyHocPhi
             this.toolBarToolStripMenuItem,
             this.statusBarToolStripMenuItem});
             this.viewMenu.Name = "viewMenu";
-            this.viewMenu.Size = new System.Drawing.Size(55, 26);
+            this.viewMenu.Size = new System.Drawing.Size(55, 24);
             this.viewMenu.Text = "&View";
             // 
             // toolBarToolStripMenuItem
@@ -330,7 +332,7 @@ namespace QuanLyHocPhi
             this.toolsMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.optionsToolStripMenuItem});
             this.toolsMenu.Name = "toolsMenu";
-            this.toolsMenu.Size = new System.Drawing.Size(58, 26);
+            this.toolsMenu.Size = new System.Drawing.Size(58, 24);
             this.toolsMenu.Text = "&Tools";
             // 
             // optionsToolStripMenuItem
@@ -349,7 +351,7 @@ namespace QuanLyHocPhi
             this.closeAllToolStripMenuItem,
             this.arrangeIconsToolStripMenuItem});
             this.windowsMenu.Name = "windowsMenu";
-            this.windowsMenu.Size = new System.Drawing.Size(84, 26);
+            this.windowsMenu.Size = new System.Drawing.Size(84, 24);
             this.windowsMenu.Text = "&Windows";
             // 
             // newWindowToolStripMenuItem
@@ -403,7 +405,7 @@ namespace QuanLyHocPhi
             this.toolStripSeparator8,
             this.aboutToolStripMenuItem});
             this.helpMenu.Name = "helpMenu";
-            this.helpMenu.Size = new System.Drawing.Size(55, 26);
+            this.helpMenu.Size = new System.Drawing.Size(55, 24);
             this.helpMenu.Text = "&Help";
             // 
             // contentsToolStripMenuItem
@@ -452,7 +454,7 @@ namespace QuanLyHocPhi
             this.mnuXemHocPhi_SV,
             this.mnuLogout});
             this.qUẢNLÝHỌCPHÍToolStripMenuItem.Name = "qUẢNLÝHỌCPHÍToolStripMenuItem";
-            this.qUẢNLÝHỌCPHÍToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
+            this.qUẢNLÝHỌCPHÍToolStripMenuItem.Size = new System.Drawing.Size(145, 24);
             this.qUẢNLÝHỌCPHÍToolStripMenuItem.Text = "QUẢN LÝ HỌC PHÍ";
             // 
             // mnuQuanLiTienTin_NV
@@ -523,9 +525,9 @@ namespace QuanLyHocPhi
             this.printPreviewToolStripButton,
             this.toolStripSeparator2,
             this.helpToolStripButton});
-            this.toolStrip.Location = new System.Drawing.Point(0, 30);
+            this.toolStrip.Location = new System.Drawing.Point(0, 28);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(843, 31);
+            this.toolStrip.Size = new System.Drawing.Size(1215, 27);
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "ToolStrip";
             // 
@@ -535,7 +537,7 @@ namespace QuanLyHocPhi
             this.newToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripButton.Image")));
             this.newToolStripButton.ImageTransparentColor = System.Drawing.Color.Black;
             this.newToolStripButton.Name = "newToolStripButton";
-            this.newToolStripButton.Size = new System.Drawing.Size(29, 28);
+            this.newToolStripButton.Size = new System.Drawing.Size(29, 24);
             this.newToolStripButton.Text = "New";
             this.newToolStripButton.Click += new System.EventHandler(this.ShowNewForm);
             // 
@@ -545,7 +547,7 @@ namespace QuanLyHocPhi
             this.openToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripButton.Image")));
             this.openToolStripButton.ImageTransparentColor = System.Drawing.Color.Black;
             this.openToolStripButton.Name = "openToolStripButton";
-            this.openToolStripButton.Size = new System.Drawing.Size(29, 28);
+            this.openToolStripButton.Size = new System.Drawing.Size(29, 24);
             this.openToolStripButton.Text = "Open";
             this.openToolStripButton.Click += new System.EventHandler(this.OpenFile);
             // 
@@ -555,13 +557,13 @@ namespace QuanLyHocPhi
             this.saveToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("saveToolStripButton.Image")));
             this.saveToolStripButton.ImageTransparentColor = System.Drawing.Color.Black;
             this.saveToolStripButton.Name = "saveToolStripButton";
-            this.saveToolStripButton.Size = new System.Drawing.Size(29, 28);
+            this.saveToolStripButton.Size = new System.Drawing.Size(29, 24);
             this.saveToolStripButton.Text = "Save";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
             // 
             // printToolStripButton
             // 
@@ -569,7 +571,7 @@ namespace QuanLyHocPhi
             this.printToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripButton.Image")));
             this.printToolStripButton.ImageTransparentColor = System.Drawing.Color.Black;
             this.printToolStripButton.Name = "printToolStripButton";
-            this.printToolStripButton.Size = new System.Drawing.Size(29, 28);
+            this.printToolStripButton.Size = new System.Drawing.Size(29, 24);
             this.printToolStripButton.Text = "Print";
             // 
             // printPreviewToolStripButton
@@ -578,13 +580,13 @@ namespace QuanLyHocPhi
             this.printPreviewToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripButton.Image")));
             this.printPreviewToolStripButton.ImageTransparentColor = System.Drawing.Color.Black;
             this.printPreviewToolStripButton.Name = "printPreviewToolStripButton";
-            this.printPreviewToolStripButton.Size = new System.Drawing.Size(29, 28);
+            this.printPreviewToolStripButton.Size = new System.Drawing.Size(29, 24);
             this.printPreviewToolStripButton.Text = "Print Preview";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 31);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 27);
             // 
             // helpToolStripButton
             // 
@@ -592,7 +594,7 @@ namespace QuanLyHocPhi
             this.helpToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("helpToolStripButton.Image")));
             this.helpToolStripButton.ImageTransparentColor = System.Drawing.Color.Black;
             this.helpToolStripButton.Name = "helpToolStripButton";
-            this.helpToolStripButton.Size = new System.Drawing.Size(29, 28);
+            this.helpToolStripButton.Size = new System.Drawing.Size(29, 24);
             this.helpToolStripButton.Text = "Help";
             // 
             // statusStrip
@@ -603,7 +605,7 @@ namespace QuanLyHocPhi
             this.statusStrip.Location = new System.Drawing.Point(0, 532);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusStrip.Size = new System.Drawing.Size(843, 26);
+            this.statusStrip.Size = new System.Drawing.Size(1215, 26);
             this.statusStrip.TabIndex = 2;
             this.statusStrip.Text = "StatusStrip";
             // 
@@ -613,22 +615,43 @@ namespace QuanLyHocPhi
             this.toolStripStatusLabel.Size = new System.Drawing.Size(49, 20);
             this.toolStripStatusLabel.Text = "Status";
             // 
-            // lblName
+            // lblHello
             // 
-            this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(663, 9);
-            this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(45, 17);
-            this.lblName.TabIndex = 5;
-            this.lblName.Text = "Name";
+            this.lblHello.AutoSize = true;
+            this.lblHello.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.lblHello.Location = new System.Drawing.Point(582, 4);
+            this.lblHello.Name = "lblHello";
+            this.lblHello.Size = new System.Drawing.Size(70, 18);
+            this.lblHello.TabIndex = 7;
+            this.lblHello.Text = "Xin chào,";
+            // 
+            // txtHomeName
+            // 
+            this.txtHomeName.Location = new System.Drawing.Point(914, 5);
+            this.txtHomeName.Name = "txtHomeName";
+            this.txtHomeName.ReadOnly = true;
+            this.txtHomeName.Size = new System.Drawing.Size(289, 22);
+            this.txtHomeName.TabIndex = 8;
+            // 
+            // lblNameUser
+            // 
+            this.lblNameUser.AutoSize = true;
+            this.lblNameUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.lblNameUser.Location = new System.Drawing.Point(658, 4);
+            this.lblNameUser.Name = "lblNameUser";
+            this.lblNameUser.Size = new System.Drawing.Size(52, 18);
+            this.lblNameUser.TabIndex = 9;
+            this.lblNameUser.Text = "Name";
             // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(843, 558);
+            this.ClientSize = new System.Drawing.Size(1215, 558);
             this.ControlBox = false;
-            this.Controls.Add(this.lblName);
+            this.Controls.Add(this.lblNameUser);
+            this.Controls.Add(this.txtHomeName);
+            this.Controls.Add(this.lblHello);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.menuStrip);
@@ -713,7 +736,9 @@ namespace QuanLyHocPhi
         private System.Windows.Forms.ToolStripMenuItem mnuXemHocPhi_SV;
         private System.Windows.Forms.ToolStripMenuItem mnuQuanLiTienTin_NV;
         private System.Windows.Forms.ToolStripMenuItem mnuLogout;
-        private System.Windows.Forms.Label lblName;
+        private System.Windows.Forms.Label lblHello;
+        private System.Windows.Forms.TextBox txtHomeName;
+        private System.Windows.Forms.Label lblNameUser;
     }
 }
 

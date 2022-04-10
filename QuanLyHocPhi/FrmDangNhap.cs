@@ -47,10 +47,10 @@ namespace QuanLyHocPhi
         }
         private void btnThoat_Click(object sender, EventArgs e)
         {
-            DialogResult rs = MessageBox.Show("Bạn có chắn chắn muốn thoát khỏi form?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult rs = MessageBox.Show("Bạn có chắn chắn muốn thoát khỏi chương trình?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (rs == DialogResult.Yes)
-                this.Close();
+                Environment.Exit(0);
         }
     }
 }
