@@ -95,9 +95,9 @@ namespace QuanLyHocPhi
             // 
             this.cboHocKy.FormattingEnabled = true;
             this.cboHocKy.Items.AddRange(new object[] {
-            "Học kỳ 1",
-            "Học kỳ 2",
-            "Học kỳ 3"});
+            "1",
+            "2",
+            "3"});
             this.cboHocKy.Location = new System.Drawing.Point(641, 48);
             this.cboHocKy.Margin = new System.Windows.Forms.Padding(4);
             this.cboHocKy.Name = "cboHocKy";

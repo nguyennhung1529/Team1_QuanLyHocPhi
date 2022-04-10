@@ -35,7 +35,7 @@ namespace QuanLyHocPhi
             if (datRed.Read() == true)
             {
                 MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Form frmmain = new FrmMain();
+                Form frmmain = new FrmMain(status);
                 frmmain.Show();
                 this.Hide();
             }

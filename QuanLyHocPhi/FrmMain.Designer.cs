@@ -79,6 +79,7 @@ namespace QuanLyHocPhi
             this.mnuChiTietHocPhi_NV = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuBaoCaoThongKe_NV = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuXemHocPhi_SV = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuLogout = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.newToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -91,7 +92,6 @@ namespace QuanLyHocPhi
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.mnuLogout = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -503,6 +503,13 @@ namespace QuanLyHocPhi
             this.mnuXemHocPhi_SV.Text = "Xem học phí";
             this.mnuXemHocPhi_SV.Click += new System.EventHandler(this.mnuXemHocPhi_SV_Click);
             // 
+            // mnuLogout
+            // 
+            this.mnuLogout.Name = "mnuLogout";
+            this.mnuLogout.Size = new System.Drawing.Size(267, 26);
+            this.mnuLogout.Text = "Đăng xuất";
+            this.mnuLogout.Click += new System.EventHandler(this.mnuLogout_Click);
+            // 
             // toolStrip
             // 
             this.toolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -605,13 +612,6 @@ namespace QuanLyHocPhi
             this.toolStripStatusLabel.Size = new System.Drawing.Size(49, 20);
             this.toolStripStatusLabel.Text = "Status";
             // 
-            // mnuLogout
-            // 
-            this.mnuLogout.Name = "mnuLogout";
-            this.mnuLogout.Size = new System.Drawing.Size(267, 26);
-            this.mnuLogout.Text = "Đăng xuất";
-            this.mnuLogout.Click += new System.EventHandler(this.mnuLogout_Click);
-            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -627,6 +627,7 @@ namespace QuanLyHocPhi
             this.Name = "FrmMain";
             this.Text = "Hệ thống Quản lý học phí";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.FrmMain_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.toolStrip.ResumeLayout(false);

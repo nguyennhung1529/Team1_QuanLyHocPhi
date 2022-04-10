@@ -13,10 +13,17 @@ namespace QuanLyHocPhi
     public partial class FrmMain : Form
     {
         private int childFormNumber = 0;
+        private int status;
 
         public FrmMain()
         {
             InitializeComponent();
+        }
+
+        public FrmMain(int status)
+        {
+            InitializeComponent();
+            this.status = status;
         }
 
         private void ShowNewForm(object sender, EventArgs e)
@@ -26,6 +33,8 @@ namespace QuanLyHocPhi
             childForm.Text = "Window " + childFormNumber++;
             childForm.Show();
         }
+
+
 
         private void OpenFile(object sender, EventArgs e)
         {
@@ -157,6 +166,23 @@ namespace QuanLyHocPhi
 
             if (rs == DialogResult.Yes)
                 this.Close();
+        }
+
+        private void FrmMain_Load(object sender, EventArgs e)
+        {
+            if (this.status == 0)
+            {
+                mnuQuanLiTienTin_NV.Visible = false;
+                mnuTimKiemTienTin_NV.Visible = false;
+                mnuBienLai_NV.Visible = false;
+                mnuThongKeHocPhi_NV.Visible = false;
+                mnuChiTietHocPhi_NV.Visible = false;
+                mnuBaoCaoThongKe_NV.Visible = false;
+            }
+            else
+            {
+                mnuXemHocPhi_SV.Visible = false;
+            }
         }
     }
 }
