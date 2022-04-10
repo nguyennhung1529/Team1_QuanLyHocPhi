@@ -14,6 +14,7 @@ namespace QuanLyHocPhi
     {
         private int childFormNumber = 0;
         private int status;
+        private string username;
 
         public FrmMain()
         {
@@ -23,6 +24,13 @@ namespace QuanLyHocPhi
         public FrmMain(int status)
         {
             InitializeComponent();
+            this.status = status;
+        }
+
+        public FrmMain(string username, int status)
+        {
+            InitializeComponent();
+            this.username = username;
             this.status = status;
         }
 
@@ -156,7 +164,7 @@ namespace QuanLyHocPhi
 
         private void mnuXemHocPhi_SV_Click(object sender, EventArgs e)
         {
-            Form frm1 = new FrmXemHocPhi_SV();
+            Form frm1 = new FrmXemHocPhi_SV(this.username);
             frm1.Show();
         }
 

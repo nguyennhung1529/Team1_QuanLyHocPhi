@@ -12,20 +12,38 @@ namespace QuanLyHocPhi
 {
     public partial class FrmXemHocPhi_SV : Form
     {
+        private string username;
         public FrmXemHocPhi_SV()
         {
             InitializeComponent();
         }
 
-        KetNoi_CSDL ketnoi = new KetNoi_CSDL();
+        public FrmXemHocPhi_SV(string username)
+        {
+            InitializeComponent();
+            this.username = username;
+        }
 
+        KetNoi_CSDL ketnoi = new KetNoi_CSDL();
         public void LayBang_TongQuat() 
         {
             DataTable dta = new DataTable();
-            string sql = "select * from Xem_HocPhiSV";
-            dta = ketnoi.Lay_DuLieu(sql);
+            string sqlBc = string.Format("EXEC SP_TIMKIEM_XemHocPhiSV '{0}','{1}','{2}', '{3}'", this.username, "", "", 0);
+            dta = ketnoi.Lay_DuLieu(sqlBc);
             dataGrid_HocPhiSV.DataSource = dta;
             HienThi_DuLieu();
+        }
+
+        public void Lay_TongKet()
+        {
+            DataTable dta = new DataTable();
+            string sql = "SELECT ISNULL(SUM ([Số tín chỉ]),0) AS 'TongTinNo', ISNULL(SUM ([Còn nợ]),0) AS 'TongTienNo' FROM Xem_HocPhiSV WHERE[Còn nợ] > 0 AND MSV = '" + this.username + "'";
+            dta = ketnoi.Lay_DuLieu(sql);
+            txtTinNo.DataBindings.Clear();
+            txtTinNo.DataBindings.Add("Text", dta, "TongTinNo");
+
+            txtTienNo.DataBindings.Clear();
+            txtTienNo.DataBindings.Add("Text", dta, "TongTienNo");
         }
 
         private void HienThi_DuLieu()
@@ -62,12 +80,14 @@ namespace QuanLyHocPhi
         private void FrmXemHocPhi_SV_Load(object sender, EventArgs e)
         {
             LayBang_TongQuat();
+            Lay_TongKet();
         }
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
             DataTable dta = new DataTable();
             string NamHoc = "";
             string HocKy = "";
+            int sttTinNo = 0;
             
 
             if (chbNamHoc.Checked == true)
@@ -77,8 +97,21 @@ namespace QuanLyHocPhi
                 HocKy = cboHocKy.Text;
 
             if (chbTinConNo.Checked == true)
-                ;
+                sttTinNo = 1;
 
+            string sqlBc = string.Format("EXEC SP_TIMKIEM_XemHocPhiSV '{0}','{1}','{2}','{3}'", this.username, NamHoc, HocKy, sttTinNo);
+            dta = ketnoi.Lay_DuLieu(sqlBc);
+            dataGrid_HocPhiSV.DataSource = dta;
+            HienThi_DuLieu();
+
+
+            string sql = string.Format("EXEC SP_TIMKIEM_XemHocPhiSV_TongKet '{0}','{1}','{2}'", this.username, NamHoc, HocKy);
+            dta = ketnoi.Lay_DuLieu(sql);
+            txtTinNo.DataBindings.Clear();
+            txtTinNo.DataBindings.Add("Text", dta, "TongTinNo");
+
+            txtTienNo.DataBindings.Clear();
+            txtTienNo.DataBindings.Add("Text", dta, "TongTienNo");
         }
 
         

@@ -27,7 +27,15 @@ namespace QuanLyHocPhi
             this.HocKy = HocKy;
             this.MSV = MSV;
         }
+
+        public FrmChiTietHocPhi_NV(string username)
+        {
+            this.username = username;
+        }
+
         KetNoi_CSDL ketnoi = new KetNoi_CSDL();
+        private string username;
+
         private void FrmChiTietHocPhi_NV_Load(object sender, EventArgs e)
         {
             Lay_HocKy();

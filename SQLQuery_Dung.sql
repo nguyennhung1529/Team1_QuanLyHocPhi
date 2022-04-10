@@ -3,7 +3,8 @@ GO;
 -- tạo View cho form Xem học phí sinh viên
 CREATE VIEW Xem_HocPhiSV
 AS
-	SELECT DISTINCT KY_HOC.NamHoc AS 'Năm học',
+	SELECT DISTINCT SINH_VIEN.MSV AS 'MSV',
+		KY_HOC.NamHoc AS 'Năm học',
 		KY_HOC.HocKy AS 'Học kỳ',
 		HOC_PHAN.MaHP AS 'Mã học phần',
 		HOC_PHAN.TenHP AS 'Tên học phần',
@@ -14,44 +15,76 @@ AS
 		(KY_HOC_PHI.CanDong - KY_HOC_PHI.DaDong) AS 'Còn nợ'
 	FROM KY_HOC_PHI
 		JOIN KY_HOC ON KY_HOC.MaKyHoc = KY_HOC_PHI.MaKyHoc
+		JOIN SINH_VIEN ON SINH_VIEN.MSV = KY_HOC_PHI.MSV
 		JOIN CT_HOC_PHI ON CT_HOC_PHI.MaKyHP = KY_HOC_PHI.MaKyHP
-		JOIN HOC_PHAN ON HOC_PHAN.MaHP = CT_HOC_PHI.MaHP;
+		JOIN HOC_PHAN ON HOC_PHAN.MaHP = CT_HOC_PHI.MaHP
 		
 GO;
-SELECT * FROM Xem_HocPhiSV;
-SELECT * FROM KY_HOC;
-SELECT DISTINCT NamHoc FROM KY_HOC;
-SELECT DISTINCT HocKy FROM KY_HOC;
-GO;
+SELECT SUM ([Số tín chỉ]) AS 'TongTinNo', SUM ([Còn nợ]) AS 'TongTienNo' FROM Xem_HocPhiSV
+WHERE [Còn nợ] > 0;
 
---Tổng kết
-CREATE FUNCTION func_TinNo
-(@TinNo int, @CanDong decimal (12,0), @DaDong decimal (12,0))
-RETURNS int
-AS
-BEGIN
-	RETURN 
-		(IF (@CanDong -@DaDong) > 0
-		) 
-END;
 
--- thao tác tìm kiếm form Xem học phí sinh viên
+
+-- SP loc hoc phi SV form XemHocPhiSV
+go;
 CREATE PROC SP_TIMKIEM_XemHocPhiSV
+	@MSV char(10),
 	@NamHoc char(10),
 	@HocKy char(5),
-	@TinConNo char(5)
-AS
-	
+	@TinConNo bit
+AS 
+BEGIN
+	IF @TinConNo = 1  -- Tìm kiếm xét tín còn nợ
 	BEGIN
-		SELECT DISTINCT *
-		FROM Xem_HocPhiSV
-		WHERE ([Năm học] = @NamHoc OR @NamHoc = '')
-		AND ([Học kỳ] = @HocKy OR @HocKy = '')
-		
+		SELECT * FROM Xem_HocPhiSV
+		WHERE (@NamHoc = '' OR [Năm học] = @NamHoc )
+		AND (@HocKy = '' OR [Học kỳ] = @HocKy)
+		AND [Còn nợ]  > 0
+		AND MSV = @MSV;	
 	END
-	
-GO;
-EXEC SP_TIMKIEM_XemHocPhiSV '2020-2021', '', '';
+	ELSE
+	BEGIN
+		SELECT * FROM Xem_HocPhiSV
+		WHERE (@NamHoc = '' OR [Năm học] = @NamHoc )
+		AND (@HocKy = '' OR [Học kỳ] = @HocKy)
+		AND MSV = @MSV;
+	END;
+END;
+EXEC SP_TIMKIEM_XemHocPhiSV 'SV001', '', '', 0;
+
+
+-- SP loc hoc phi SV form XemHocPhiSV
+go;
+CREATE PROC SP_TIMKIEM_XemHocPhiSV_TongKet
+	@MSV char(10),
+	@NamHoc char(10),
+	@HocKy char(5),
+	@TinConNo bit
+AS 
+BEGIN
+	IF @TinConNo = 1  -- Tìm kiếm xét tín còn nợ
+	BEGIN
+		SELECT ISNULL(SUM ([Số tín chỉ]), 0) AS 'TongTinNo', 
+				ISNULL(SUM ([Còn nợ]), 0) AS 'TongTienNo' 
+				FROM Xem_HocPhiSV
+		WHERE (@NamHoc = '' OR [Năm học] = @NamHoc )
+		AND (@HocKy = '' OR [Học kỳ] = @HocKy)
+		AND [Còn nợ]  > 0
+		AND MSV = @MSV;	
+	END
+	ELSE
+	BEGIN
+		SELECT ISNULL(SUM ([Số tín chỉ]), 0) AS 'TongTinNo', 
+				ISNULL(SUM ([Còn nợ]), 0) AS 'TongTienNo'
+		FROM Xem_HocPhiSV
+		WHERE (@NamHoc = '' OR [Năm học] = @NamHoc )
+		AND (@HocKy = '' OR [Học kỳ] = @HocKy)
+		AND MSV = @MSV;	
+	END;
+END;
+EXEC SP_TIMKIEM_XemHocPhiSV_TongKet 'SV001', '', '', 0;
+
+
 GO;
 
 --Tìm kiếm biên lai

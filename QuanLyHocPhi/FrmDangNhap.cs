@@ -13,6 +13,7 @@ namespace QuanLyHocPhi
 {
     public partial class FrmDangNhap : Form
     {
+
         public FrmDangNhap()
         {
             InitializeComponent();
@@ -35,7 +36,7 @@ namespace QuanLyHocPhi
             if (datRed.Read() == true)
             {
                 MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Form frmmain = new FrmMain(status);
+                Form frmmain = new FrmMain(username, status);
                 frmmain.Show();
                 this.Hide();
             }
