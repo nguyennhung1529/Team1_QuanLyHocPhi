@@ -149,10 +149,6 @@ namespace QuanLyHocPhi
             // 
             this.cboNamHoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboNamHoc.FormattingEnabled = true;
-            this.cboNamHoc.Items.AddRange(new object[] {
-            "Học kỳ 1",
-            "Học kỳ 2",
-            "Học kỳ 3"});
             this.cboNamHoc.Location = new System.Drawing.Point(141, 35);
             this.cboNamHoc.Name = "cboNamHoc";
             this.cboNamHoc.Size = new System.Drawing.Size(135, 23);

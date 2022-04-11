@@ -81,7 +81,7 @@ namespace QuanLyHocPhi
             // txtTKNgayNop
             // 
             this.txtTKNgayNop.CustomFormat = "dd/mm/yyyy";
-            this.txtTKNgayNop.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.txtTKNgayNop.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.txtTKNgayNop.Location = new System.Drawing.Point(198, 110);
             this.txtTKNgayNop.Margin = new System.Windows.Forms.Padding(2);
             this.txtTKNgayNop.Name = "txtTKNgayNop";
@@ -222,7 +222,7 @@ namespace QuanLyHocPhi
             // txtNgayCapNhat
             // 
             this.txtNgayCapNhat.CustomFormat = "dd/mm/yyyy";
-            this.txtNgayCapNhat.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.txtNgayCapNhat.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.txtNgayCapNhat.Location = new System.Drawing.Point(460, 136);
             this.txtNgayCapNhat.Margin = new System.Windows.Forms.Padding(2);
             this.txtNgayCapNhat.Name = "txtNgayCapNhat";
@@ -276,7 +276,7 @@ namespace QuanLyHocPhi
             // txtTTNgayNop
             // 
             this.txtTTNgayNop.CustomFormat = "dd/mm/yyyy";
-            this.txtTTNgayNop.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.txtTTNgayNop.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.txtTTNgayNop.Location = new System.Drawing.Point(166, 167);
             this.txtTTNgayNop.Margin = new System.Windows.Forms.Padding(2);
             this.txtTTNgayNop.Name = "txtTTNgayNop";

@@ -16,5 +16,10 @@ namespace QuanLyHocPhi
         {
             InitializeComponent();
         }
+
+        private void FrmBaoCaoThongKe_NV_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

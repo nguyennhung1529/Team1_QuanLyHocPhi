@@ -45,7 +45,7 @@ namespace QuanLyHocPhi
             cboTrangThai.Items.Add("Hủy");
             cboTrangThai.Items.Add("Đã duyệt");
             cboTrangThai.Items.Add("Chưa duyệt");
-            cboTrangThai.SelectedItem = "Chưa duyệt";
+            //cboTrangThai.SelectedItem = "Chưa duyệt";
         }
 
         private void HIENTHI_DULIEU()
@@ -120,11 +120,11 @@ namespace QuanLyHocPhi
         {
             string sql = "INSERT INTO BIEN_LAI VALUES('" + txtMaBL.Text + "'," +
                 "'" + txtTTMaSV.Text + "'," +
-                "" + txtTTNgayNop.Value + "," +
+                "" + txtTTNgayNop.Value.ToString("dd/mm/yyyy") + "," +
                 "’" + txtTienNop.Text + "'," +
                 "'" + txtMoTa.Text + "'," +
                 "'" + txtTenBL.Text + "'," +
-                "" + txtNgayCapNhat.Value + "," +
+                "" + txtNgayCapNhat.Value.ToString("dd/mm/yyyy") + "," +
                 "’" + txtNguoiCapNhat.Text + "'," +
                 "'" + cboTrangThai.Text + "')";
             ketnoi.ThucThi(sql);
@@ -135,11 +135,11 @@ namespace QuanLyHocPhi
         private void btnSua_Click(object sender, EventArgs e)
         {
             string sqlUpdate = "UPDATE BIEN_LAI SET MSV = '" + txtTTMaSV.Text + "'," +
-                         "NgayNop = " + txtTTNgayNop.Value + "," +
+                         "NgayNop = " + txtTTNgayNop.Value.ToString("dd/mm/yyyy") + "," +
                          "TienNop = '" + txtTienNop.Text + "', " +
                          "Mota = '" + txtMoTa.Text + "', " +
                          "TenBL = '" + txtTenBL.Text + "', " +
-                         "NgayCapNhat = " + txtNgayCapNhat.Value + ", " +
+                         "NgayCapNhat = " + txtNgayCapNhat.Value.ToString("dd/mm/yyyy") + ", " +
                          "MaNguoiCapNhat = '" + txtNguoiCapNhat.Text + "' " +
                          "Status = '" + cboTrangThai.Text + "' " +
                          "WHERE MaBL = '" + txtMaBL.Text + "' ";
@@ -169,36 +169,32 @@ namespace QuanLyHocPhi
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
             DataTable dta = new DataTable();
+            string NamHoc = "";
+            string HocKy = "";
+            string MSV = "";
+            string NgayNop = txtTKNgayNop.Value.ToString("dd/mm/yyyy");
 
 
             if (chbNamHoc.Checked == true)
-            {
-                String sql = string.Format("EXECUTE SP_TIMBIENLAI '{0}'", cboTKNamHoc.Text);
-                dta = ketnoi.Lay_DuLieu(sql);
-            }
+                NamHoc = chbNamHoc.Text;
 
             if (chbHocKi.Checked == true)
-            {
-                String sql = string.Format("EXECUTE SP_TIMBIENLAI '{0}'", cboTKHocKy.Text);
-                dta = ketnoi.Lay_DuLieu(sql);
-            }
+                HocKy = chbHocKi.Text;
 
             if (chbMaSV.Checked == true)
-            {
-                String sql = string.Format("EXECUTE SP_TIMBIENLAI '{0}'", txtTKMaSV.Text);
-                dta = ketnoi.Lay_DuLieu(sql);
-            }
+                MSV = chbMaSV.Text;
+
 
             if (chbNgayNop.Checked == true)
-            {
-                String sql = string.Format("EXECUTE SP_TIMBIENLAI '{0}'", txtTKNgayNop.Value.ToString());
-                dta = ketnoi.Lay_DuLieu(sql);
-            }
+                NgayNop = chbNgayNop.Text;
 
-            
-
+            string sql_tk = string.Format("EXEC SP_TIMKIEM_BIENLAI '{0}', '{1}', '{2}', '{3}'", NamHoc, HocKy, MSV, NgayNop);
+            dta = ketnoi.Lay_DuLieu(sql_tk);
             dataGrid_BienLai.DataSource = dta;
             HIENTHI_DULIEU();
+
+
+
         }
     }
 }

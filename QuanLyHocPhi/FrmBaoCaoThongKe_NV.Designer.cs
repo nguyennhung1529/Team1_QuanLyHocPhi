@@ -56,11 +56,9 @@ namespace QuanLyHocPhi
             this.grbTimKiem.Controls.Add(this.chbTinhTrang);
             this.grbTimKiem.Controls.Add(this.chbMaSV);
             this.grbTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grbTimKiem.Location = new System.Drawing.Point(57, 92);
-            this.grbTimKiem.Margin = new System.Windows.Forms.Padding(4);
+            this.grbTimKiem.Location = new System.Drawing.Point(43, 75);
             this.grbTimKiem.Name = "grbTimKiem";
-            this.grbTimKiem.Padding = new System.Windows.Forms.Padding(4);
-            this.grbTimKiem.Size = new System.Drawing.Size(1089, 147);
+            this.grbTimKiem.Size = new System.Drawing.Size(817, 119);
             this.grbTimKiem.TabIndex = 7;
             this.grbTimKiem.TabStop = false;
             this.grbTimKiem.Text = "Tìm kiếm";
@@ -69,10 +67,9 @@ namespace QuanLyHocPhi
             // 
             this.btnTimKiem.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnTimKiem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnTimKiem.Location = new System.Drawing.Point(899, 50);
-            this.btnTimKiem.Margin = new System.Windows.Forms.Padding(4);
+            this.btnTimKiem.Location = new System.Drawing.Point(674, 41);
             this.btnTimKiem.Name = "btnTimKiem";
-            this.btnTimKiem.Size = new System.Drawing.Size(107, 36);
+            this.btnTimKiem.Size = new System.Drawing.Size(80, 29);
             this.btnTimKiem.TabIndex = 8;
             this.btnTimKiem.Text = "Tìm kiếm";
             this.btnTimKiem.UseVisualStyleBackColor = false;
@@ -84,10 +81,9 @@ namespace QuanLyHocPhi
             "Còn nợ",
             "Đã đóng",
             "Dư tiền"});
-            this.cboTinhTrang.Location = new System.Drawing.Point(641, 90);
-            this.cboTinhTrang.Margin = new System.Windows.Forms.Padding(4);
+            this.cboTinhTrang.Location = new System.Drawing.Point(481, 73);
             this.cboTinhTrang.Name = "cboTinhTrang";
-            this.cboTinhTrang.Size = new System.Drawing.Size(196, 26);
+            this.cboTinhTrang.Size = new System.Drawing.Size(148, 23);
             this.cboTinhTrang.TabIndex = 7;
             // 
             // cboHocKy
@@ -97,35 +93,31 @@ namespace QuanLyHocPhi
             "Học kỳ 1",
             "Học kỳ 2",
             "Học kỳ 3"});
-            this.cboHocKy.Location = new System.Drawing.Point(641, 48);
-            this.cboHocKy.Margin = new System.Windows.Forms.Padding(4);
+            this.cboHocKy.Location = new System.Drawing.Point(481, 39);
             this.cboHocKy.Name = "cboHocKy";
-            this.cboHocKy.Size = new System.Drawing.Size(196, 26);
+            this.cboHocKy.Size = new System.Drawing.Size(148, 23);
             this.cboHocKy.TabIndex = 6;
             // 
             // txtMaSV
             // 
-            this.txtMaSV.Location = new System.Drawing.Point(244, 90);
-            this.txtMaSV.Margin = new System.Windows.Forms.Padding(4);
+            this.txtMaSV.Location = new System.Drawing.Point(183, 73);
             this.txtMaSV.Name = "txtMaSV";
-            this.txtMaSV.Size = new System.Drawing.Size(196, 24);
+            this.txtMaSV.Size = new System.Drawing.Size(148, 21);
             this.txtMaSV.TabIndex = 5;
             // 
             // txtNamHoc
             // 
-            this.txtNamHoc.Location = new System.Drawing.Point(244, 48);
-            this.txtNamHoc.Margin = new System.Windows.Forms.Padding(4);
+            this.txtNamHoc.Location = new System.Drawing.Point(183, 39);
             this.txtNamHoc.Name = "txtNamHoc";
-            this.txtNamHoc.Size = new System.Drawing.Size(196, 24);
+            this.txtNamHoc.Size = new System.Drawing.Size(148, 21);
             this.txtNamHoc.TabIndex = 4;
             // 
             // chbNamHoc
             // 
             this.chbNamHoc.AutoSize = true;
-            this.chbNamHoc.Location = new System.Drawing.Point(83, 50);
-            this.chbNamHoc.Margin = new System.Windows.Forms.Padding(4);
+            this.chbNamHoc.Location = new System.Drawing.Point(62, 41);
             this.chbNamHoc.Name = "chbNamHoc";
-            this.chbNamHoc.Size = new System.Drawing.Size(95, 22);
+            this.chbNamHoc.Size = new System.Drawing.Size(79, 19);
             this.chbNamHoc.TabIndex = 3;
             this.chbNamHoc.Text = "Năm học:";
             this.chbNamHoc.UseVisualStyleBackColor = true;
@@ -133,10 +125,9 @@ namespace QuanLyHocPhi
             // chbHocKy
             // 
             this.chbHocKy.AutoSize = true;
-            this.chbHocKy.Location = new System.Drawing.Point(502, 50);
-            this.chbHocKy.Margin = new System.Windows.Forms.Padding(4);
+            this.chbHocKy.Location = new System.Drawing.Point(376, 41);
             this.chbHocKy.Name = "chbHocKy";
-            this.chbHocKy.Size = new System.Drawing.Size(81, 22);
+            this.chbHocKy.Size = new System.Drawing.Size(65, 19);
             this.chbHocKy.TabIndex = 2;
             this.chbHocKy.Text = "Học kỳ:";
             this.chbHocKy.UseVisualStyleBackColor = true;
@@ -144,10 +135,9 @@ namespace QuanLyHocPhi
             // chbTinhTrang
             // 
             this.chbTinhTrang.AutoSize = true;
-            this.chbTinhTrang.Location = new System.Drawing.Point(502, 92);
-            this.chbTinhTrang.Margin = new System.Windows.Forms.Padding(4);
+            this.chbTinhTrang.Location = new System.Drawing.Point(376, 75);
             this.chbTinhTrang.Name = "chbTinhTrang";
-            this.chbTinhTrang.Size = new System.Drawing.Size(99, 22);
+            this.chbTinhTrang.Size = new System.Drawing.Size(84, 19);
             this.chbTinhTrang.TabIndex = 1;
             this.chbTinhTrang.Text = "Tình trạng:";
             this.chbTinhTrang.UseVisualStyleBackColor = true;
@@ -155,10 +145,9 @@ namespace QuanLyHocPhi
             // chbMaSV
             // 
             this.chbMaSV.AutoSize = true;
-            this.chbMaSV.Location = new System.Drawing.Point(83, 92);
-            this.chbMaSV.Margin = new System.Windows.Forms.Padding(4);
+            this.chbMaSV.Location = new System.Drawing.Point(62, 75);
             this.chbMaSV.Name = "chbMaSV";
-            this.chbMaSV.Size = new System.Drawing.Size(116, 22);
+            this.chbMaSV.Size = new System.Drawing.Size(98, 19);
             this.chbMaSV.TabIndex = 0;
             this.chbMaSV.Text = "Mã sinh viên:";
             this.chbMaSV.UseVisualStyleBackColor = true;
@@ -167,10 +156,9 @@ namespace QuanLyHocPhi
             // 
             this.lblBaoCaoThongKeSV.AutoSize = true;
             this.lblBaoCaoThongKeSV.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBaoCaoThongKeSV.Location = new System.Drawing.Point(276, 45);
-            this.lblBaoCaoThongKeSV.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblBaoCaoThongKeSV.Location = new System.Drawing.Point(207, 37);
             this.lblBaoCaoThongKeSV.Name = "lblBaoCaoThongKeSV";
-            this.lblBaoCaoThongKeSV.Size = new System.Drawing.Size(651, 29);
+            this.lblBaoCaoThongKeSV.Size = new System.Drawing.Size(524, 24);
             this.lblBaoCaoThongKeSV.TabIndex = 8;
             this.lblBaoCaoThongKeSV.Text = "BÁO CÁO THỐNG KÊ TÌNH HÌNH HỌC PHÍ SINH VIÊN";
             // 
@@ -179,21 +167,25 @@ namespace QuanLyHocPhi
             this.CRVBaoCaoThongKe.ActiveViewIndex = -1;
             this.CRVBaoCaoThongKe.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.CRVBaoCaoThongKe.Cursor = System.Windows.Forms.Cursors.Default;
-            this.CRVBaoCaoThongKe.Location = new System.Drawing.Point(12, 246);
+            this.CRVBaoCaoThongKe.Location = new System.Drawing.Point(9, 200);
+            this.CRVBaoCaoThongKe.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.CRVBaoCaoThongKe.Name = "CRVBaoCaoThongKe";
-            this.CRVBaoCaoThongKe.Size = new System.Drawing.Size(1178, 470);
+            this.CRVBaoCaoThongKe.Size = new System.Drawing.Size(884, 382);
             this.CRVBaoCaoThongKe.TabIndex = 9;
+            this.CRVBaoCaoThongKe.ToolPanelWidth = 150;
             // 
             // FrmBaoCaoThongKe_NV
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1202, 728);
+            this.ClientSize = new System.Drawing.Size(902, 592);
             this.Controls.Add(this.CRVBaoCaoThongKe);
             this.Controls.Add(this.grbTimKiem);
             this.Controls.Add(this.lblBaoCaoThongKeSV);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FrmBaoCaoThongKe_NV";
             this.Text = "FrmBaoCaoThongKe_NV";
+            this.Load += new System.EventHandler(this.FrmBaoCaoThongKe_NV_Load);
             this.grbTimKiem.ResumeLayout(false);
             this.grbTimKiem.PerformLayout();
             this.ResumeLayout(false);

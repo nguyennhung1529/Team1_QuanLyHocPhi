@@ -68,6 +68,7 @@ namespace QuanLyHocPhi
             DataTable dta = new DataTable();
             string NamHoc = "";
             string HocKy = "";
+            int sttTinNo = 0;
             
 
             if (chbNamHoc.Checked == true)
@@ -77,7 +78,12 @@ namespace QuanLyHocPhi
                 HocKy = cboHocKy.Text;
 
             if (chbTinConNo.Checked == true)
-                ;
+                sttTinNo = 1;
+
+            string sql_tk = string.Format("EXEC SP_TIMKIEM_XemHocPhiSV '{0}', '{1}', '{2}'", NamHoc, HocKy, sttTinNo);
+            dta = ketnoi.Lay_DuLieu(sql_tk);
+            dataGrid_HocPhiSV.DataSource = dta;
+            HienThi_DuLieu();
 
         }
 
