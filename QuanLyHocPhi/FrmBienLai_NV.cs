@@ -45,7 +45,7 @@ namespace QuanLyHocPhi
             cboTrangThai.Items.Add("Hủy");
             cboTrangThai.Items.Add("Đã duyệt");
             cboTrangThai.Items.Add("Chưa duyệt");
-            //cboTrangThai.SelectedItem = "Chưa duyệt";
+            cboTrangThai.SelectedItem = "Chưa duyệt";
         }
 
         private void HIENTHI_DULIEU()
@@ -99,6 +99,7 @@ namespace QuanLyHocPhi
             Lay_Dulieu();
             LAYBANG_BIENLAI();
             Lay_HocKy();
+            Lay_TinhTrang();
 
         }
 
