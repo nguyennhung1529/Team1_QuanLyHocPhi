@@ -31,6 +31,7 @@ namespace QuanLyHocPhi
         {
             this.cboTKHocKy = new System.Windows.Forms.ComboBox();
             this.grpBoxTimKiem = new System.Windows.Forms.GroupBox();
+            this.cboTKNamHoc = new System.Windows.Forms.ComboBox();
             this.cboTKTinhTrang = new System.Windows.Forms.ComboBox();
             this.txtTKMaSV = new System.Windows.Forms.TextBox();
             this.chkTKTinhTrang = new System.Windows.Forms.CheckBox();
@@ -56,7 +57,6 @@ namespace QuanLyHocPhi
             this.dataGVThongKeHocPhi = new System.Windows.Forms.DataGridView();
             this.lbltkhp = new System.Windows.Forms.Label();
             this.btnThoat = new System.Windows.Forms.Button();
-            this.cboTKNamHoc = new System.Windows.Forms.ComboBox();
             this.grpBoxTimKiem.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGVThongKeHocPhi)).BeginInit();
             this.SuspendLayout();
@@ -69,7 +69,7 @@ namespace QuanLyHocPhi
             "1",
             "2",
             "3"});
-            this.cboTKHocKy.Location = new System.Drawing.Point(166, 87);
+            this.cboTKHocKy.Location = new System.Drawing.Point(149, 81);
             this.cboTKHocKy.Name = "cboTKHocKy";
             this.cboTKHocKy.Size = new System.Drawing.Size(165, 24);
             this.cboTKHocKy.TabIndex = 35;
@@ -85,12 +85,25 @@ namespace QuanLyHocPhi
             this.grpBoxTimKiem.Controls.Add(this.chkTKHocKy);
             this.grpBoxTimKiem.Controls.Add(this.chkTKNamHoc);
             this.grpBoxTimKiem.Controls.Add(this.btnTimkiem);
-            this.grpBoxTimKiem.Location = new System.Drawing.Point(820, 325);
+            this.grpBoxTimKiem.Location = new System.Drawing.Point(835, 325);
             this.grpBoxTimKiem.Name = "grpBoxTimKiem";
-            this.grpBoxTimKiem.Size = new System.Drawing.Size(350, 287);
+            this.grpBoxTimKiem.Size = new System.Drawing.Size(335, 287);
             this.grpBoxTimKiem.TabIndex = 57;
             this.grpBoxTimKiem.TabStop = false;
             this.grpBoxTimKiem.Text = "Tìm kiếm";
+            // 
+            // cboTKNamHoc
+            // 
+            this.cboTKNamHoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTKNamHoc.FormattingEnabled = true;
+            this.cboTKNamHoc.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3"});
+            this.cboTKNamHoc.Location = new System.Drawing.Point(149, 38);
+            this.cboTKNamHoc.Name = "cboTKNamHoc";
+            this.cboTKNamHoc.Size = new System.Drawing.Size(165, 24);
+            this.cboTKNamHoc.TabIndex = 37;
             // 
             // cboTKTinhTrang
             // 
@@ -100,14 +113,14 @@ namespace QuanLyHocPhi
             "Còn nợ",
             "Đã đóng",
             "Dư tiền"});
-            this.cboTKTinhTrang.Location = new System.Drawing.Point(166, 191);
+            this.cboTKTinhTrang.Location = new System.Drawing.Point(149, 169);
             this.cboTKTinhTrang.Name = "cboTKTinhTrang";
             this.cboTKTinhTrang.Size = new System.Drawing.Size(165, 24);
             this.cboTKTinhTrang.TabIndex = 36;
             // 
             // txtTKMaSV
             // 
-            this.txtTKMaSV.Location = new System.Drawing.Point(166, 140);
+            this.txtTKMaSV.Location = new System.Drawing.Point(149, 126);
             this.txtTKMaSV.Name = "txtTKMaSV";
             this.txtTKMaSV.Size = new System.Drawing.Size(165, 22);
             this.txtTKMaSV.TabIndex = 32;
@@ -115,7 +128,7 @@ namespace QuanLyHocPhi
             // chkTKTinhTrang
             // 
             this.chkTKTinhTrang.AutoSize = true;
-            this.chkTKTinhTrang.Location = new System.Drawing.Point(47, 192);
+            this.chkTKTinhTrang.Location = new System.Drawing.Point(30, 171);
             this.chkTKTinhTrang.Name = "chkTKTinhTrang";
             this.chkTKTinhTrang.Size = new System.Drawing.Size(99, 21);
             this.chkTKTinhTrang.TabIndex = 31;
@@ -125,7 +138,7 @@ namespace QuanLyHocPhi
             // chkTKMaSV
             // 
             this.chkTKMaSV.AutoSize = true;
-            this.chkTKMaSV.Location = new System.Drawing.Point(47, 140);
+            this.chkTKMaSV.Location = new System.Drawing.Point(30, 128);
             this.chkTKMaSV.Name = "chkTKMaSV";
             this.chkTKMaSV.Size = new System.Drawing.Size(113, 21);
             this.chkTKMaSV.TabIndex = 30;
@@ -135,7 +148,7 @@ namespace QuanLyHocPhi
             // chkTKHocKy
             // 
             this.chkTKHocKy.AutoSize = true;
-            this.chkTKHocKy.Location = new System.Drawing.Point(47, 88);
+            this.chkTKHocKy.Location = new System.Drawing.Point(30, 83);
             this.chkTKHocKy.Name = "chkTKHocKy";
             this.chkTKHocKy.Size = new System.Drawing.Size(77, 21);
             this.chkTKHocKy.TabIndex = 29;
@@ -145,7 +158,7 @@ namespace QuanLyHocPhi
             // chkTKNamHoc
             // 
             this.chkTKNamHoc.AutoSize = true;
-            this.chkTKNamHoc.Location = new System.Drawing.Point(47, 36);
+            this.chkTKNamHoc.Location = new System.Drawing.Point(30, 38);
             this.chkTKNamHoc.Name = "chkTKNamHoc";
             this.chkTKNamHoc.Size = new System.Drawing.Size(90, 21);
             this.chkTKNamHoc.TabIndex = 27;
@@ -154,12 +167,14 @@ namespace QuanLyHocPhi
             // 
             // btnTimkiem
             // 
-            this.btnTimkiem.Location = new System.Drawing.Point(225, 235);
+            this.btnTimkiem.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnTimkiem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnTimkiem.Location = new System.Drawing.Point(208, 216);
             this.btnTimkiem.Name = "btnTimkiem";
-            this.btnTimkiem.Size = new System.Drawing.Size(106, 36);
+            this.btnTimkiem.Size = new System.Drawing.Size(106, 40);
             this.btnTimkiem.TabIndex = 8;
             this.btnTimkiem.Text = "Tìm kiếm";
-            this.btnTimkiem.UseVisualStyleBackColor = true;
+            this.btnTimkiem.UseVisualStyleBackColor = false;
             this.btnTimkiem.Click += new System.EventHandler(this.btnTimkiem_Click);
             // 
             // txtConNo
@@ -266,12 +281,14 @@ namespace QuanLyHocPhi
             // 
             // btnXemchitiet
             // 
-            this.btnXemchitiet.Location = new System.Drawing.Point(999, 220);
+            this.btnXemchitiet.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnXemchitiet.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnXemchitiet.Location = new System.Drawing.Point(1043, 203);
             this.btnXemchitiet.Name = "btnXemchitiet";
-            this.btnXemchitiet.Size = new System.Drawing.Size(106, 36);
+            this.btnXemchitiet.Size = new System.Drawing.Size(106, 40);
             this.btnXemchitiet.TabIndex = 39;
             this.btnXemchitiet.Text = "Xem chi tiết";
-            this.btnXemchitiet.UseVisualStyleBackColor = true;
+            this.btnXemchitiet.UseVisualStyleBackColor = false;
             this.btnXemchitiet.Click += new System.EventHandler(this.btnXemchitiet_Click);
             // 
             // txtHocKy
@@ -298,7 +315,7 @@ namespace QuanLyHocPhi
             this.dataGVThongKeHocPhi.Name = "dataGVThongKeHocPhi";
             this.dataGVThongKeHocPhi.RowHeadersWidth = 51;
             this.dataGVThongKeHocPhi.RowTemplate.Height = 24;
-            this.dataGVThongKeHocPhi.Size = new System.Drawing.Size(802, 278);
+            this.dataGVThongKeHocPhi.Size = new System.Drawing.Size(817, 278);
             this.dataGVThongKeHocPhi.TabIndex = 38;
             // 
             // lbltkhp
@@ -313,26 +330,14 @@ namespace QuanLyHocPhi
             // 
             // btnThoat
             // 
-            this.btnThoat.Location = new System.Drawing.Point(999, 262);
+            this.btnThoat.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnThoat.Location = new System.Drawing.Point(1043, 250);
             this.btnThoat.Name = "btnThoat";
-            this.btnThoat.Size = new System.Drawing.Size(106, 36);
+            this.btnThoat.Size = new System.Drawing.Size(106, 40);
             this.btnThoat.TabIndex = 58;
             this.btnThoat.Text = "Thoát";
-            this.btnThoat.UseVisualStyleBackColor = true;
+            this.btnThoat.UseVisualStyleBackColor = false;
             this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
-            // 
-            // cboTKNamHoc
-            // 
-            this.cboTKNamHoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboTKNamHoc.FormattingEnabled = true;
-            this.cboTKNamHoc.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3"});
-            this.cboTKNamHoc.Location = new System.Drawing.Point(166, 36);
-            this.cboTKNamHoc.Name = "cboTKNamHoc";
-            this.cboTKNamHoc.Size = new System.Drawing.Size(165, 24);
-            this.cboTKNamHoc.TabIndex = 37;
             // 
             // FrmThongKeHocPhi_NV
             // 

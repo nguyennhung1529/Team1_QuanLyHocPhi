@@ -61,6 +61,7 @@ namespace QuanLyHocPhi
             this.lblTenHocPhan = new System.Windows.Forms.Label();
             this.grbTongKet = new System.Windows.Forms.GroupBox();
             this.lblHocPhiSV = new System.Windows.Forms.Label();
+            this.btnThoat = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_HocPhiSV)).BeginInit();
             this.grbTimKiem.SuspendLayout();
             this.grbTongKet.SuspendLayout();
@@ -68,30 +69,32 @@ namespace QuanLyHocPhi
             // 
             // btnTimKiem
             // 
-            this.btnTimKiem.Location = new System.Drawing.Point(267, 164);
+            this.btnTimKiem.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnTimKiem.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnTimKiem.Location = new System.Drawing.Point(259, 179);
             this.btnTimKiem.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnTimKiem.Name = "btnTimKiem";
-            this.btnTimKiem.Size = new System.Drawing.Size(101, 28);
+            this.btnTimKiem.Size = new System.Drawing.Size(109, 37);
             this.btnTimKiem.TabIndex = 25;
             this.btnTimKiem.Text = "Tìm kiếm";
-            this.btnTimKiem.UseVisualStyleBackColor = true;
+            this.btnTimKiem.UseVisualStyleBackColor = false;
             this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click);
             // 
             // dataGrid_HocPhiSV
             // 
             this.dataGrid_HocPhiSV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGrid_HocPhiSV.Location = new System.Drawing.Point(61, 325);
-            this.dataGrid_HocPhiSV.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGrid_HocPhiSV.Location = new System.Drawing.Point(12, 353);
+            this.dataGrid_HocPhiSV.Margin = new System.Windows.Forms.Padding(4);
             this.dataGrid_HocPhiSV.Name = "dataGrid_HocPhiSV";
             this.dataGrid_HocPhiSV.RowHeadersWidth = 51;
-            this.dataGrid_HocPhiSV.Size = new System.Drawing.Size(875, 330);
+            this.dataGrid_HocPhiSV.Size = new System.Drawing.Size(875, 242);
             this.dataGrid_HocPhiSV.TabIndex = 45;
             // 
             // chbNamHoc
             // 
             this.chbNamHoc.AutoSize = true;
-            this.chbNamHoc.Location = new System.Drawing.Point(33, 48);
-            this.chbNamHoc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chbNamHoc.Location = new System.Drawing.Point(33, 47);
+            this.chbNamHoc.Margin = new System.Windows.Forms.Padding(4);
             this.chbNamHoc.Name = "chbNamHoc";
             this.chbNamHoc.Size = new System.Drawing.Size(95, 22);
             this.chbNamHoc.TabIndex = 19;
@@ -106,8 +109,8 @@ namespace QuanLyHocPhi
             "1",
             "2",
             "3"});
-            this.cboHocKy.Location = new System.Drawing.Point(189, 79);
-            this.cboHocKy.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cboHocKy.Location = new System.Drawing.Point(189, 87);
+            this.cboHocKy.Margin = new System.Windows.Forms.Padding(4);
             this.cboHocKy.Name = "cboHocKy";
             this.cboHocKy.Size = new System.Drawing.Size(179, 26);
             this.cboHocKy.TabIndex = 18;
@@ -115,8 +118,8 @@ namespace QuanLyHocPhi
             // chbHocKy
             // 
             this.chbHocKy.AutoSize = true;
-            this.chbHocKy.Location = new System.Drawing.Point(33, 81);
-            this.chbHocKy.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chbHocKy.Location = new System.Drawing.Point(33, 91);
+            this.chbHocKy.Margin = new System.Windows.Forms.Padding(4);
             this.chbHocKy.Name = "chbHocKy";
             this.chbHocKy.Size = new System.Drawing.Size(81, 22);
             this.chbHocKy.TabIndex = 20;
@@ -126,8 +129,8 @@ namespace QuanLyHocPhi
             // chbTinConNo
             // 
             this.chbTinConNo.AutoSize = true;
-            this.chbTinConNo.Location = new System.Drawing.Point(33, 114);
-            this.chbTinConNo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chbTinConNo.Location = new System.Drawing.Point(33, 136);
+            this.chbTinConNo.Margin = new System.Windows.Forms.Padding(4);
             this.chbTinConNo.Name = "chbTinConNo";
             this.chbTinConNo.Size = new System.Drawing.Size(100, 22);
             this.chbTinConNo.TabIndex = 21;
@@ -143,11 +146,11 @@ namespace QuanLyHocPhi
             this.grbTimKiem.Controls.Add(this.chbHocKy);
             this.grbTimKiem.Controls.Add(this.chbTinConNo);
             this.grbTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grbTimKiem.Location = new System.Drawing.Point(957, 325);
-            this.grbTimKiem.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grbTimKiem.Location = new System.Drawing.Point(908, 353);
+            this.grbTimKiem.Margin = new System.Windows.Forms.Padding(4);
             this.grbTimKiem.Name = "grbTimKiem";
-            this.grbTimKiem.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grbTimKiem.Size = new System.Drawing.Size(404, 222);
+            this.grbTimKiem.Padding = new System.Windows.Forms.Padding(4);
+            this.grbTimKiem.Size = new System.Drawing.Size(404, 242);
             this.grbTimKiem.TabIndex = 46;
             this.grbTimKiem.TabStop = false;
             this.grbTimKiem.Text = "Tìm kiếm";
@@ -160,15 +163,15 @@ namespace QuanLyHocPhi
             "2020-2021",
             "2021-2022"});
             this.cboNamHoc.Location = new System.Drawing.Point(188, 43);
-            this.cboNamHoc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cboNamHoc.Margin = new System.Windows.Forms.Padding(4);
             this.cboNamHoc.Name = "cboNamHoc";
             this.cboNamHoc.Size = new System.Drawing.Size(179, 26);
             this.cboNamHoc.TabIndex = 26;
             // 
             // txtHocKy
             // 
-            this.txtHocKy.Location = new System.Drawing.Point(475, 149);
-            this.txtHocKy.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtHocKy.Location = new System.Drawing.Point(426, 177);
+            this.txtHocKy.Margin = new System.Windows.Forms.Padding(4);
             this.txtHocKy.Name = "txtHocKy";
             this.txtHocKy.ReadOnly = true;
             this.txtHocKy.Size = new System.Drawing.Size(49, 22);
@@ -177,8 +180,8 @@ namespace QuanLyHocPhi
             // txtConNo
             // 
             this.txtConNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtConNo.Location = new System.Drawing.Point(699, 240);
-            this.txtConNo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtConNo.Location = new System.Drawing.Point(650, 292);
+            this.txtConNo.Margin = new System.Windows.Forms.Padding(4);
             this.txtConNo.Name = "txtConNo";
             this.txtConNo.ReadOnly = true;
             this.txtConNo.Size = new System.Drawing.Size(235, 24);
@@ -187,8 +190,8 @@ namespace QuanLyHocPhi
             // txtNgayDong
             // 
             this.txtNgayDong.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNgayDong.Location = new System.Drawing.Point(699, 208);
-            this.txtNgayDong.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNgayDong.Location = new System.Drawing.Point(650, 252);
+            this.txtNgayDong.Margin = new System.Windows.Forms.Padding(4);
             this.txtNgayDong.Name = "txtNgayDong";
             this.txtNgayDong.ReadOnly = true;
             this.txtNgayDong.Size = new System.Drawing.Size(235, 24);
@@ -197,8 +200,8 @@ namespace QuanLyHocPhi
             // txtDaDong
             // 
             this.txtDaDong.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDaDong.Location = new System.Drawing.Point(699, 176);
-            this.txtDaDong.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDaDong.Location = new System.Drawing.Point(650, 212);
+            this.txtDaDong.Margin = new System.Windows.Forms.Padding(4);
             this.txtDaDong.Name = "txtDaDong";
             this.txtDaDong.ReadOnly = true;
             this.txtDaDong.Size = new System.Drawing.Size(235, 24);
@@ -207,8 +210,8 @@ namespace QuanLyHocPhi
             // txtCanDong
             // 
             this.txtCanDong.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCanDong.Location = new System.Drawing.Point(699, 144);
-            this.txtCanDong.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCanDong.Location = new System.Drawing.Point(650, 172);
+            this.txtCanDong.Margin = new System.Windows.Forms.Padding(4);
             this.txtCanDong.Name = "txtCanDong";
             this.txtCanDong.ReadOnly = true;
             this.txtCanDong.Size = new System.Drawing.Size(235, 24);
@@ -216,8 +219,8 @@ namespace QuanLyHocPhi
             // 
             // txtSoTinChi
             // 
-            this.txtSoTinChi.Location = new System.Drawing.Point(227, 245);
-            this.txtSoTinChi.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSoTinChi.Location = new System.Drawing.Point(178, 294);
+            this.txtSoTinChi.Margin = new System.Windows.Forms.Padding(4);
             this.txtSoTinChi.Name = "txtSoTinChi";
             this.txtSoTinChi.ReadOnly = true;
             this.txtSoTinChi.Size = new System.Drawing.Size(297, 22);
@@ -225,8 +228,8 @@ namespace QuanLyHocPhi
             // 
             // txtTenHocPhan
             // 
-            this.txtTenHocPhan.Location = new System.Drawing.Point(227, 213);
-            this.txtTenHocPhan.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTenHocPhan.Location = new System.Drawing.Point(178, 254);
+            this.txtTenHocPhan.Margin = new System.Windows.Forms.Padding(4);
             this.txtTenHocPhan.Name = "txtTenHocPhan";
             this.txtTenHocPhan.ReadOnly = true;
             this.txtTenHocPhan.Size = new System.Drawing.Size(297, 22);
@@ -234,8 +237,8 @@ namespace QuanLyHocPhi
             // 
             // txtMaHocPhan
             // 
-            this.txtMaHocPhan.Location = new System.Drawing.Point(227, 181);
-            this.txtMaHocPhan.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtMaHocPhan.Location = new System.Drawing.Point(178, 214);
+            this.txtMaHocPhan.Margin = new System.Windows.Forms.Padding(4);
             this.txtMaHocPhan.Name = "txtMaHocPhan";
             this.txtMaHocPhan.ReadOnly = true;
             this.txtMaHocPhan.Size = new System.Drawing.Size(297, 22);
@@ -245,7 +248,7 @@ namespace QuanLyHocPhi
             // 
             this.lblMaHocPhan.AutoSize = true;
             this.lblMaHocPhan.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaHocPhan.Location = new System.Drawing.Point(85, 182);
+            this.lblMaHocPhan.Location = new System.Drawing.Point(36, 218);
             this.lblMaHocPhan.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMaHocPhan.Name = "lblMaHocPhan";
             this.lblMaHocPhan.Size = new System.Drawing.Size(98, 18);
@@ -256,7 +259,7 @@ namespace QuanLyHocPhi
             // 
             this.lblNgayDong.AutoSize = true;
             this.lblNgayDong.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNgayDong.Location = new System.Drawing.Point(567, 212);
+            this.lblNgayDong.Location = new System.Drawing.Point(518, 258);
             this.lblNgayDong.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNgayDong.Name = "lblNgayDong";
             this.lblNgayDong.Size = new System.Drawing.Size(83, 18);
@@ -267,7 +270,7 @@ namespace QuanLyHocPhi
             // 
             this.lblNgayNo.AutoSize = true;
             this.lblNgayNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNgayNo.Location = new System.Drawing.Point(567, 244);
+            this.lblNgayNo.Location = new System.Drawing.Point(518, 298);
             this.lblNgayNo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNgayNo.Name = "lblNgayNo";
             this.lblNgayNo.Size = new System.Drawing.Size(61, 18);
@@ -278,7 +281,7 @@ namespace QuanLyHocPhi
             // 
             this.lblHocKy.AutoSize = true;
             this.lblHocKy.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHocKy.Location = new System.Drawing.Point(397, 150);
+            this.lblHocKy.Location = new System.Drawing.Point(348, 178);
             this.lblHocKy.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblHocKy.Name = "lblHocKy";
             this.lblHocKy.Size = new System.Drawing.Size(59, 18);
@@ -289,7 +292,7 @@ namespace QuanLyHocPhi
             // 
             this.lblSoTinChi.AutoSize = true;
             this.lblSoTinChi.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSoTinChi.Location = new System.Drawing.Point(85, 245);
+            this.lblSoTinChi.Location = new System.Drawing.Point(36, 298);
             this.lblSoTinChi.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSoTinChi.Name = "lblSoTinChi";
             this.lblSoTinChi.Size = new System.Drawing.Size(73, 18);
@@ -300,7 +303,7 @@ namespace QuanLyHocPhi
             // 
             this.lblCanDong.AutoSize = true;
             this.lblCanDong.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCanDong.Location = new System.Drawing.Point(567, 148);
+            this.lblCanDong.Location = new System.Drawing.Point(518, 176);
             this.lblCanDong.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCanDong.Name = "lblCanDong";
             this.lblCanDong.Size = new System.Drawing.Size(76, 18);
@@ -311,7 +314,7 @@ namespace QuanLyHocPhi
             // 
             this.lblDaDong.AutoSize = true;
             this.lblDaDong.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDaDong.Location = new System.Drawing.Point(567, 180);
+            this.lblDaDong.Location = new System.Drawing.Point(518, 218);
             this.lblDaDong.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDaDong.Name = "lblDaDong";
             this.lblDaDong.Size = new System.Drawing.Size(68, 18);
@@ -322,7 +325,7 @@ namespace QuanLyHocPhi
             // 
             this.lblNamHoc.AutoSize = true;
             this.lblNamHoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNamHoc.Location = new System.Drawing.Point(85, 150);
+            this.lblNamHoc.Location = new System.Drawing.Point(36, 178);
             this.lblNamHoc.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNamHoc.Name = "lblNamHoc";
             this.lblNamHoc.Size = new System.Drawing.Size(73, 18);
@@ -331,8 +334,8 @@ namespace QuanLyHocPhi
             // 
             // txtNamHoc
             // 
-            this.txtNamHoc.Location = new System.Drawing.Point(227, 148);
-            this.txtNamHoc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNamHoc.Location = new System.Drawing.Point(178, 176);
+            this.txtNamHoc.Margin = new System.Windows.Forms.Padding(4);
             this.txtNamHoc.Name = "txtNamHoc";
             this.txtNamHoc.ReadOnly = true;
             this.txtNamHoc.Size = new System.Drawing.Size(143, 22);
@@ -341,7 +344,7 @@ namespace QuanLyHocPhi
             // lblTienNo
             // 
             this.lblTienNo.AutoSize = true;
-            this.lblTienNo.Location = new System.Drawing.Point(29, 75);
+            this.lblTienNo.Location = new System.Drawing.Point(29, 70);
             this.lblTienNo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTienNo.Name = "lblTienNo";
             this.lblTienNo.Size = new System.Drawing.Size(115, 18);
@@ -351,7 +354,7 @@ namespace QuanLyHocPhi
             // lblTinNo
             // 
             this.lblTinNo.AutoSize = true;
-            this.lblTinNo.Location = new System.Drawing.Point(29, 34);
+            this.lblTinNo.Location = new System.Drawing.Point(30, 38);
             this.lblTinNo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTinNo.Name = "lblTinNo";
             this.lblTinNo.Size = new System.Drawing.Size(100, 18);
@@ -360,8 +363,8 @@ namespace QuanLyHocPhi
             // 
             // txtTienNo
             // 
-            this.txtTienNo.Location = new System.Drawing.Point(189, 71);
-            this.txtTienNo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTienNo.Location = new System.Drawing.Point(189, 67);
+            this.txtTienNo.Margin = new System.Windows.Forms.Padding(4);
             this.txtTienNo.Name = "txtTienNo";
             this.txtTienNo.ReadOnly = true;
             this.txtTienNo.Size = new System.Drawing.Size(179, 24);
@@ -370,7 +373,7 @@ namespace QuanLyHocPhi
             // txtTinNo
             // 
             this.txtTinNo.Location = new System.Drawing.Point(189, 34);
-            this.txtTinNo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtTinNo.Margin = new System.Windows.Forms.Padding(4);
             this.txtTinNo.Name = "txtTinNo";
             this.txtTinNo.ReadOnly = true;
             this.txtTinNo.Size = new System.Drawing.Size(179, 24);
@@ -380,7 +383,7 @@ namespace QuanLyHocPhi
             // 
             this.lblTenHocPhan.AutoSize = true;
             this.lblTenHocPhan.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTenHocPhan.Location = new System.Drawing.Point(85, 213);
+            this.lblTenHocPhan.Location = new System.Drawing.Point(36, 258);
             this.lblTenHocPhan.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTenHocPhan.Name = "lblTenHocPhan";
             this.lblTenHocPhan.Size = new System.Drawing.Size(102, 18);
@@ -394,11 +397,11 @@ namespace QuanLyHocPhi
             this.grbTongKet.Controls.Add(this.txtTienNo);
             this.grbTongKet.Controls.Add(this.txtTinNo);
             this.grbTongKet.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grbTongKet.Location = new System.Drawing.Point(957, 144);
-            this.grbTongKet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grbTongKet.Location = new System.Drawing.Point(908, 163);
+            this.grbTongKet.Margin = new System.Windows.Forms.Padding(4);
             this.grbTongKet.Name = "grbTongKet";
-            this.grbTongKet.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.grbTongKet.Size = new System.Drawing.Size(404, 123);
+            this.grbTongKet.Padding = new System.Windows.Forms.Padding(4);
+            this.grbTongKet.Size = new System.Drawing.Size(404, 153);
             this.grbTongKet.TabIndex = 26;
             this.grbTongKet.TabStop = false;
             this.grbTongKet.Text = "Tổng kết";
@@ -407,18 +410,31 @@ namespace QuanLyHocPhi
             // 
             this.lblHocPhiSV.AutoSize = true;
             this.lblHocPhiSV.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.lblHocPhiSV.Location = new System.Drawing.Point(573, 47);
+            this.lblHocPhiSV.Location = new System.Drawing.Point(539, 79);
             this.lblHocPhiSV.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblHocPhiSV.Name = "lblHocPhiSV";
             this.lblHocPhiSV.Size = new System.Drawing.Size(292, 32);
             this.lblHocPhiSV.TabIndex = 25;
             this.lblHocPhiSV.Text = "HỌC PHÍ SINH VIÊN";
             // 
+            // btnThoat
+            // 
+            this.btnThoat.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.btnThoat.Location = new System.Drawing.Point(1166, 267);
+            this.btnThoat.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnThoat.Name = "btnThoat";
+            this.btnThoat.Size = new System.Drawing.Size(109, 33);
+            this.btnThoat.TabIndex = 27;
+            this.btnThoat.Text = "Thoát";
+            this.btnThoat.UseVisualStyleBackColor = false;
+            this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
+            // 
             // FrmXemHocPhi_SV
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1371, 703);
+            this.ClientSize = new System.Drawing.Size(1325, 636);
+            this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.dataGrid_HocPhiSV);
             this.Controls.Add(this.grbTimKiem);
             this.Controls.Add(this.txtHocKy);
@@ -489,5 +505,6 @@ namespace QuanLyHocPhi
         private System.Windows.Forms.GroupBox grbTongKet;
         private System.Windows.Forms.Label lblHocPhiSV;
         private System.Windows.Forms.ComboBox cboNamHoc;
+        private System.Windows.Forms.Button btnThoat;
     }
 }

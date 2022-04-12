@@ -13,25 +13,10 @@ namespace QuanLyHocPhi
     public partial class FrmMain : Form
     {
         private int childFormNumber = 0;
-        private int status;
-        private string username;
 
         public FrmMain()
         {
             InitializeComponent();
-        }
-
-        public FrmMain(int status)
-        {
-            InitializeComponent();
-            this.status = status;
-        }
-
-        public FrmMain(string username, int status)
-        {
-            InitializeComponent();
-            this.username = username;
-            this.status = status;
         }
 
         private void ShowNewForm(object sender, EventArgs e)
@@ -41,8 +26,6 @@ namespace QuanLyHocPhi
             childForm.Text = "Window " + childFormNumber++;
             childForm.Show();
         }
-
-
 
         private void OpenFile(object sender, EventArgs e)
         {
@@ -121,11 +104,6 @@ namespace QuanLyHocPhi
             }
         }
 
-        private void quảnLýTiềnTínToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void mnuQuanLiTienTin_NV_Click(object sender, EventArgs e)
         {
             Form frm1 = new FrmQuanLyTienTin_NV();
@@ -164,7 +142,7 @@ namespace QuanLyHocPhi
 
         private void mnuXemHocPhi_SV_Click(object sender, EventArgs e)
         {
-            Form frm1 = new FrmXemHocPhi_SV(this.username);
+            Form frm1 = new FrmXemHocPhi_SV();
             frm1.Show();
         }
 
@@ -186,7 +164,7 @@ namespace QuanLyHocPhi
             DataTable dta = new DataTable();
             string sql = "";
             
-            if (this.status == 0)
+            if (Globals.STATUS == 0)
             {
                 mnuQuanLiTienTin_NV.Visible = false;
                 mnuTimKiemTienTin_NV.Visible = false;
@@ -194,12 +172,12 @@ namespace QuanLyHocPhi
                 mnuThongKeHocPhi_NV.Visible = false;
                 mnuChiTietHocPhi_NV.Visible = false;
                 mnuBaoCaoThongKe_NV.Visible = false;
-                sql = "SELECT HoTen AS Name FROM SINH_VIEN WHERE MSV = '" + this.username + "'";
+                sql = "SELECT HoTen AS Name FROM SINH_VIEN WHERE MSV = '" + Globals.USER_ID + "'";
             }
             else
             {
                 mnuXemHocPhi_SV.Visible = false;
-                sql = "SELECT TenNS AS Name FROM NHAN_SU WHERE MaNS = '" + this.username + "'";
+                sql = "SELECT TenNS AS Name FROM NHAN_SU WHERE MaNS = '" + Globals.USER_ID + "'";
             }
 
             dta = ketnoi.Lay_DuLieu(sql);

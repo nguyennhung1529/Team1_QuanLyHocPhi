@@ -115,13 +115,11 @@ create table BIEN_LAI(
 	NgayNop date not null,
 	Mota Ntext null,
 	NgayCapNhat date not null,
-	MaNguoiCapNhat char(10) not null,
+	MaNguoiCapNhat char(10) null,
 	Status tinyint default 2, -- 0: ẩn, 1: đã duyệt, 2: chưa duyệt
 	constraint fk_bienlai_msv foreign key (MSV) references SINH_VIEN(MSV),
 	constraint fk_bienlai_mans foreign key (MaNguoiCapNhat) references NHAN_SU(MaNS)
 );
-ALTER TABLE BIEN_LAI
-ALTER COLUMN MaNguoiCapNhat char(10) null;
 
 -- drop table [USER];
 create table [USER](
@@ -170,8 +168,7 @@ values
 	('MKH002', N'Năm 2020-2021, Học kỳ 2', '2020-2021', '2'),
 	('MKH003', N'Năm 2020-2021, Học kỳ 3', '2020-2021', '3'),
 	('MKH004', N'Năm 2021-2022, Học kỳ 1', '2021-2022', '1'),
-	('MKH005', N'Năm 2021-2022, Học kỳ 2', '2021-2022', '2'),
-	('MKH006', N'Năm 2021-2022, Học kỳ 3', '2021-2022', '3');
+	('MKH005', N'Năm 2021-2022, Học kỳ 2', '2021-2022', '2');
 -- select * from KY_HOC;
 
 -- insert table 'KHOA_VIEN'
@@ -251,10 +248,8 @@ values
 	('DT001', 'SV001', 'MKH003'),
 	('DT001', 'SV001', 'MKH004'),
 	('DT001', 'SV001', 'MKH005'),
-	('DT002', 'SV001', 'MKH006'),
 	('DT002', 'SV002', 'MKH004'),
-	('DT002', 'SV002', 'MKH005'),
-	('DT002', 'SV002', 'MKH006');
+	('DT002', 'SV002', 'MKH005');
 
 insert into CT_DOI_TUONG (MaKyHoc, MSV, MaDT)
 values
@@ -300,15 +295,7 @@ values
 	('MKH005', 'SV007', 'DT000'),
 	('MKH005', 'SV008', 'DT000'),
 	('MKH005', 'SV009', 'DT000'),
-	('MKH005', 'SV010', 'DT000'),
-	('MKH006', 'SV003', 'DT000'),
-	('MKH006', 'SV004', 'DT000'),
-	('MKH006', 'SV005', 'DT000'),
-	('MKH006', 'SV006', 'DT000'),
-	('MKH006', 'SV007', 'DT000'),
-	('MKH006', 'SV008', 'DT000'),
-	('MKH006', 'SV009', 'DT000'),
-	('MKH006', 'SV010', 'DT000');
+	('MKH005', 'SV010', 'DT000');
 -- select * from CT_DOI_TUONG;
 
 -- insert table 'HOC_TAP'
@@ -409,22 +396,13 @@ values
 	('SV007', 'SV007123456789', 0),
 	('SV008', 'SV008123456789', 0),
 	('SV009', 'SV009123456789', 0),
-	('SV010', 'SV010123456789', 0)
+	('SV010', 'SV010123456789', 0);
 -- select * from [USER]
-
----- create table 'CT_BIEN_LAI'
---insert into CT_BIEN_LAI (MaBL, MaHP, SoTien) values ('BL001','HP001',1275000);
---insert into CT_BIEN_LAI (MaBL, MaHP, SoTien) values ('BL001','HP003',1275000);
---insert into CT_BIEN_LAI (MaBL, MaHP, SoTien) values ('BL001','HP011',1275000);
---insert into CT_BIEN_LAI (MaBL, MaHP, SoTien) values ('BL001','HP015',1275000);
---insert into CT_BIEN_LAI (MaBL, MaHP, SoTien) values ('BL002','HP001',1275000);
---insert into CT_BIEN_LAI (MaBL, MaHP, SoTien) values ('BL002','HP005',1275000);
---insert into CT_BIEN_LAI (MaBL, MaHP, SoTien) values ('BL002','HP002',1250000);
----- select * from CT_BIEN_LAI
---
+-- 
 GO;
 -- insert into table 'KY_HOC_PHI'
--- delete from KY_HOC_PHI
+delete from KY_HOC_PHI;
+GO;
 insert into KY_HOC_PHI (MaKyHoc, MSV, HocPhi, CanDong, DaDong)
 select HOC_PHAN.MaKyHoc, 
 	SINH_VIEN.MSV, 
@@ -439,7 +417,7 @@ from HOC_TAP
 	join CT_DOI_TUONG on CT_DOI_TUONG.MSV = SINH_VIEN.MSV
 	join DOI_TUONG on DOI_TUONG.MaDT = CT_DOI_TUONG.MaDT
 where CT_DOI_TUONG.MaKyHoc = HOC_PHAN.MaKyHoc
-group by HOC_PHAN.MaKyHoc, SINH_VIEN.MSV
+group by HOC_PHAN.MaKyHoc, SINH_VIEN.MSV;
 -- select * from KY_HOC_PHI
 -- 
 -- update value of DaDong (xét ở kỳ cuối)
@@ -471,10 +449,10 @@ group by HOC_PHAN.MaKyHoc, SINH_VIEN.MSV
 ---- select * from KY_HOC_PHI
 
 UPDATE KY_HOC_PHI
-SET DaDong = ((SELECT CanDong 
+SET DaDong = ((SELECT DISTINCT CanDong 
 					FROM KY_HOC_PHI AS KHP
 					WHERE KHP.MSV = KY_HOC_PHI.MSV 
-					AND KHP.MaKyHoc = (SELECT MAX(A1.MaKyHoc) FROM KY_HOC_PHI AS A1 WHERE A1.MSV = KY_HOC_PHI.MSV))
+					AND KHP.MaKyHoc = (SELECT MAX(A1.MaKyHoc) FROM KY_HOC_PHI AS A1 WHERE A1.MSV = KHP.MSV))
 			- ((SELECT SUM(A2.CanDong) FROM KY_HOC_PHI AS A2 WHERE A2.MSV = KY_HOC_PHI.MSV) - 
 				(ISNULL((SELECT SUM(BIEN_LAI.TienNop) FROM BIEN_LAI WHERE BIEN_LAI.MSV = KY_HOC_PHI.MSV AND BIEN_LAI.Status != 2), 0))))
 WHERE MaKyHoc = (SELECT MAX(A1.MaKyHoc) FROM KY_HOC_PHI AS A1 WHERE A1.MSV = KY_HOC_PHI.MSV);
@@ -535,9 +513,3 @@ CLOSE cursorGetLastMKH;
 DEALLOCATE cursorGetLastMKH;
 --select * from CT_HOC_PHI
 --select *  from KY_HOC_PHI
-GO;
---UPDATE CT_HOC_PHI
---SET NgayNop = '2021-06-05'
---WHERE MaKyHP = 147
---AND MaHP = 'HP015'
-

@@ -114,6 +114,7 @@
     <Compile Include="FrmXemHocPhi_SV.Designer.cs">
       <DependentUpon>FrmXemHocPhi_SV.cs</DependentUpon>
     </Compile>
+    <Compile Include="Globals.cs" />
     <Compile Include="KetNoi_CSDL.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
