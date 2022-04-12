@@ -389,7 +389,8 @@ CREATE PROC SP_TIMBIENLAI
 	@HocKy char(5),
 	@MSV char(10),
 	@NgayNop date,
-	@MaBL char(10)
+	@MaBL char(10),
+	@status int
 AS
 BEGIN
 	SELECT BIEN_LAI.MaBL, BIEN_LAI.TenBL, BIEN_LAI.MSV, BIEN_LAI.MaKyHoc, BIEN_LAI.TienNop, BIEN_LAI.NgayNop, BIEN_LAI.Mota, BIEN_LAI.NgayCapNhat, BIEN_LAI.MaNguoiCapNhat, BIEN_LAI.Status
@@ -399,5 +400,6 @@ BEGIN
 	AND (KY_HOC.HocKy = @HocKy OR @HocKy = '')
 	AND (BIEN_LAI.MSV = @MSV OR @MSV = '')
 	AND (NgayNop = @NgayNop OR @NgayNop = '')
-	AND (MaBL = @MaBL OR @MaBL = '');
+	AND (MaBL = @MaBL OR @MaBL = '')
+	AND (BIEN_LAI.Status = @status OR @status = -1);
 END;
